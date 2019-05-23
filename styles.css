@@ -1,7 +1,27 @@
-div {
-  width: 300px;
-  border: 15px solid green;
-  padding: 50px;
-  margin: 20px;
-  text-align: center;
+body{
+	background-color: #66E61C;
+	padding: 5%;
+}
+
+#informacionCentral {
+	padding:20px;
+	margin:auto;
+	text-align: center;
+	background-color: #38800F;
+	border-style: solid;
+	border-width: 4px;
+	border-radius: 15px;
+	border-color: rgb(0,0,0);
+}
+
+.clear{
+	clear: left;
+}
+
+.areasTexto{
+  width: 400px;
+  margin: 2%;
+	border-radius: 10px;
+	height: 30px;
+	text-align: center;
 }

@@ -24,48 +24,59 @@ function sumar()
 
 function fijarEstructuraOperador(operador)
 {
-	var msj = "";
-	tipoOperador = TipoOperador.NOT;
-	switch(operador)
-	{
-		case TipoOperador.NOT:
-			msj = "\u00AC()";
-			tipoOperador = TipoOperador.NOT;
-			break;
-		case TipoOperador.OR:
-			tipoOperador = TipoOperador.OR;
-			msj = "()V()";
-			break;
-		case TipoOperador.AND:
-			tipoOperador = TipoOperador.AND;
-			msj = "()\u0245()";
-			break;
-		case TipoOperador.COND:
-			tipoOperador = TipoOperador.COND;
-			msj = "()=>()";
-			break;
-		case TipoOperador.BICOND:
-			tipoOperador = TipoOperador.BICOND;
-			msj = "()<=>()"
-			break;
-	}
+	//Primero verificar que la posicion donde se pretende insertar el operador, si es valida.
 	txtField = document.getElementById("textFomula");
-	selStar = txtField.selectionStart;
-	txtField.value = txtField.value.substring(0, txtField.selectionStart) + msj 
-		+ txtField.value.substring(txtField.selectionStart, txtField.value.length);
-	if(tipoOperador == TipoOperador.NOT)
+	
+	if(verificarPosicionCursor(txtField) || txtField.value == "")
 	{
-		txtField.selectionStart = selStar + 2;
-	}
+
+		var msj = "";
+		tipoOperador = TipoOperador.NOT;
+		switch(operador)
+		{
+			case TipoOperador.NOT:
+				msj = "\u00AC()";
+				tipoOperador = TipoOperador.NOT;
+				break;
+			case TipoOperador.OR:
+				tipoOperador = TipoOperador.OR;
+				msj = "()V()";
+				break;
+			case TipoOperador.AND:
+				tipoOperador = TipoOperador.AND;
+				msj = "()\u0245()";
+				break;
+			case TipoOperador.COND:
+				tipoOperador = TipoOperador.COND;
+				msj = "()=>()";
+				break;
+			case TipoOperador.BICOND:
+				tipoOperador = TipoOperador.BICOND;
+				msj = "()<=>()"
+				break;
+		}
+		
+		selStar = txtField.selectionStart;
+		txtField.value = txtField.value.substring(0, txtField.selectionStart) + msj 
+			+ txtField.value.substring(txtField.selectionStart, txtField.value.length);
+		if(tipoOperador == TipoOperador.NOT)
+		{
+			txtField.selectionStart = selStar + 2;
+		}
+		else
+		{
+			txtField.selectionStart = selStar + 1;
+		}
+		posicionarCursor(txtField, txtField.selectionStart);
+	}	
 	else
 	{
-		txtField.selectionStart = selStar + 1;
-	}
-	selectText(txtField, txtField.selectionStart);
+		alert("Posicion no valida, por favor seleccione otra");
+	}	
 
 }
 
-function selectText(txtField, inicio)
+function posicionarCursor(txtField, inicio)
 {
 	txtField = document.getElementById("textFomula");
 	txtField.setSelectionRange(inicio, inicio);
@@ -77,8 +88,17 @@ function keyPressed()
 	txtFieldV = document.getElementById("textFormula");
 	if(keyCode === UP_ARROW)
 	{
-		selectText(txtField, buscarCampoVacio(txtField));
+		posicionarCursor(txtField, buscarCampoVacio(txtField));
 	}
+}
+
+function verificarPosicionCursor(textField)
+{	
+	var valida = false;
+	var escudoValido = "()";
+	var escudoActual = textField.value.substring(textField.selectionStart-1,textField.selectionStart+1);	
+
+	return escudoActual == escudoValido ? true : false;
 }
 
 function buscarCampoVacio(txtField)
