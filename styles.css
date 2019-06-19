@@ -81,8 +81,6 @@ body{
 	text-align: center;
 }
 
-
-
 /* Style the tab */
 .tab {
 	overflow: hidden;
@@ -117,6 +115,7 @@ body{
 	padding: 6px 12px;
 	border: 1px solid #ccc;
 	border-top: none;
+
   }
 
   h1{
@@ -130,4 +129,5 @@ body{
 hr{
 	color: rgb(128, 88, 15);
 }
+
 
