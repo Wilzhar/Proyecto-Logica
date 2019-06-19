@@ -1,5 +1,18 @@
 function setup() {
   // put setup code here
+
+  let x1 = [1, 1, 0, 1, 0, 0, 1];
+  let x2 = [1, 0, 0, 0, 1, 1, 1, 1];
+
+  //var x = operacionBinaria(x1, x2, TipoOperador.BICOND);
+  let y = operacionUnaria(x2);
+
+  let arbol = new ArbolBinario();
+  arbol.setRaiz(new Nodo('', null));
+
+  algoritmoDescomposicion(arbol.getRaiz(), '((p)'+TipoOperadorString.COND+'(q))'+TipoOperadorString.AND+'(r)');
+
+  console.log(arbol.getRaiz().getElemento())
 }
 
 function draw() {
@@ -14,45 +27,61 @@ const TipoOperador = {
 	BICOND: 4,
 };
 
+const TipoOperadorString = {
+	NOT: '\u00AC',
+	OR: 'V',
+	AND: '\u0245',
+	COND: '\u2192',
+	BICOND: '\u2194',
+};
+
 function sumar()
 {
-	var a = parseInt(document.getElementById("numA").value, 10);
-	var b = parseInt(document.getElementById("numB").value, 10);
-	var res = a + b;
+	let a = parseInt(document.getElementById("numA").value, 10);
+	let b = parseInt(document.getElementById("numB").value, 10);
+	let res = a + b;
 	document.getElementById('result').value = res;
+}
+
+function inicializarArgumento()
+{
+	
+	 strArgumento = document.getElementById("formulasValidas").innerHTML;
+	 arregloFormulas = strArgumento.split("<br>");
+	console.log(arregloFormulas);
 }
 
 function fijarEstructuraOperador(operador)
 {
 	//Primero verificar que la posicion donde se pretende insertar el operador, si es valida.
-	txtField = document.getElementById("textFomula");
+	txtField = document.getElementById("textFormula");
 	
 	if(verificarPosicionCursor(txtField) || txtField.value == "")
 	{
 
-		var msj = "";
+		let msj = "";
 		tipoOperador = TipoOperador.NOT;
 		switch(operador)
 		{
 			case TipoOperador.NOT:
-				msj = "\u00AC()";
+				msj = TipoOperadorString.NOT+"()";
 				tipoOperador = TipoOperador.NOT;
 				break;
 			case TipoOperador.OR:
 				tipoOperador = TipoOperador.OR;
-				msj = "()V()";
+				msj = "()"+TipoOperadorString.OR+"()";
 				break;
 			case TipoOperador.AND:
 				tipoOperador = TipoOperador.AND;
-				msj = "()\u0245()";
+				msj = "()"+TipoOperadorString.AND+"()";
 				break;
 			case TipoOperador.COND:
 				tipoOperador = TipoOperador.COND;
-				msj = "()=>()";
+				msj = "()"+TipoOperadorString.COND+"()";
 				break;
 			case TipoOperador.BICOND:
 				tipoOperador = TipoOperador.BICOND;
-				msj = "()<=>()"
+				msj = "()"+TipoOperadorString.BICOND+"()"
 				break;
 		}
 		
@@ -77,7 +106,6 @@ function fijarEstructuraOperador(operador)
 }
 function posicionarCursor(txtField, inicio)
 {
-	txtField = document.getElementById("textFomula");
 	txtField.setSelectionRange(inicio, inicio);
 	txtField.focus();
 }
@@ -93,9 +121,9 @@ function keyPressed()
 
 function verificarPosicionCursor(textField)
 {	
-	var valida = false;
-	var escudoValido = "()";
-	var escudoActual = textField.value.substring(textField.selectionStart-1,textField.selectionStart+1);	
+	let valida = false;
+	let escudoValido = "()";
+	let escudoActual = textField.value.substring(textField.selectionStart-1,textField.selectionStart+1);	
 
 	return escudoActual == escudoValido ? true : false;
 }
@@ -116,9 +144,32 @@ function buscarCampoVacio(txtField)
 	return 0;
 }
 
+function guardarFormula()
+{
+	let fNueva = document.getElementById("textFormula").value;
+	let antigua =  document.getElementById("formulasValidas").innerHTML;
+	if(fNueva!="")
+	{
+		if(document.getElementById("cbConclusion").checked)
+		{
+			document.getElementById("conclusion").innerHTML = fNueva;
+		}
+		else
+		{
+			document.getElementById("formulasValidas").innerHTML = antigua+'<br>'+fNueva;
+		
+		}
+	}
+	else{
+		alert("Por favor ingrese una formula correcta.");
+	}
+	
+}
 function openCity(evt, cityName) {
 	// Declare all variables
-	var i, tabcontent, tablinks;
+
+	let i, tabcontent, tablinks;
+
   
 	// Get all elements with class="tabcontent" and hide them
 	tabcontent = document.getElementsByClassName("tabcontent");
@@ -136,8 +187,148 @@ function openCity(evt, cityName) {
 	document.getElementById(cityName).style.display = "block";
 	evt.currentTarget.className += " active";
   }
-
   function definirNumeroCamposProposicionlales()
   {
 	  comboBoxNForms = document.getElementById("comboBoxNForms");
   }
+  /**
+  *	Metodo para operar dos atomos con la operacion AND
+  */
+  function operarAtomosAnd(atomo1, atomo2){
+
+  	if(atomo1 == atomo2 && atomo1 == 1){
+  		return 1;
+  	}else{
+  		return 0;
+  	}
+
+  }
+
+  /**
+  *	Metodo para operar dos atomos con la operacion OR
+  */
+  function operarAtomosOr(atomo1, atomo2){
+
+  	if(atomo1 == atomo2 && atomo1 == 0){
+  		return 0;
+  	}else{
+  		return 1;
+  	}
+
+  }
+
+  /**
+  *	Metodo para operar dos atomos con la operacion CONDICIONAL
+  */
+  function operarAtomoCond(atomo1, atomo2){
+
+  	if(atomo1 == 1 && atomo2 == 0){
+  		return 0;
+  	}else{
+  		return 1;
+  	}
+
+  }
+
+  /**
+  *	Metodo para operar dos atomos con la operacion BICONDICIONAL
+  */
+  function operarAtomosBicon(atomo1, atomo2){
+
+  	if(atomo1 == atomo2){
+  		return 1;
+  	}else{
+  		return 0;
+  	}
+
+  }
+
+/**
+  *	Metodo para operar dos arreglos de unos (valor de verdad) y ceros (valor de falsedad)
+  */
+function operacionBinaria(arreglo1, arreglo2, operador){
+
+	if(arreglo1.length != arreglo2.length){
+  		throw new Error("Error al operar dos funciones");
+  	}
+
+	var arregloSalida = new Array(arreglo1.length);
+
+	arreglo1.forEach(function(elemento, indice){
+		switch(operador){
+			case TipoOperador.AND : arregloSalida[indice] = (operarAtomosAnd(elemento, arreglo2[indice]));
+			break;
+
+			case TipoOperador.OR : arregloSalida[indice] = (operarAtomosOr(elemento, arreglo2[indice]));
+			break;
+
+			case TipoOperador.COND : arregloSalida[indice] = (operarAtomoCond(elemento, arreglo2[indice]));
+			break;
+
+			case TipoOperador.BICOND : arregloSalida[indice] = (operarAtomosBicon(elemento, arreglo2[indice]));
+			break;
+		}
+	});
+
+	return arregloSalida;
+}
+
+/**
+  *	Metodo obtener la negacion de un arreglo de unos (valor de verdad) y ceros (valor de falsedad) 
+  */
+function operacionUnaria(arreglo){
+
+	let arregloSalida = new Array(arreglo.length);
+
+	arreglo.forEach(function(elemento, indice){
+		if(elemento == 1){
+			arregloSalida.push(0);
+		}else{
+			arregloSalida.push(1);
+		}
+	});
+
+	return arregloSalida;
+}
+
+function posicionRaiz(formula){
+
+	let posicion = 0;
+	for(let i=0; i<formula.length; i++){
+	
+		//console.log(formula[i]);
+
+		if(formula[i] == '('){
+			console.log('sumo');
+			posicion++;
+		}else if(formula[i] == ')'){
+			console.log('resto');
+			posicion--;
+		}
+
+		if(posicion == 0){
+			return i+1;
+		}
+	}
+
+	return 0;
+}
+
+function algoritmoDescomposicion(nodo, formula){
+
+	if(formula.length > 1){
+		let nodoAux;
+		let posRaiz = posicionRaiz(formula);
+
+		nodoAux = new Nodo(formula.substring(1, posRaiz-1));
+		nodo.setIzquierdo(nodoAux);
+		algoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
+
+		nodoAux = new Nodo(formula.substring(posRaiz+2, formula.length-1));
+		nodo.setDerecho(nodoAux);
+		algoritmoDescomposicion(nodo.getDerecho, nodoAux.getElemento());
+
+		nodo.setElemento(formula[posRaiz]);
+	}
+
+}
