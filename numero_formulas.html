@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p5.js example</title>
+    <style> body {padding: 0; margin: 0;} </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="../p5.min.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+  </head>
+  <body>
+    <container>
+     <content>
+      <div id = "informacionCentral">
+        <p>Seleccione el número de formulas</p>
+        <select name="cars" id="comboBoxNForms">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <br>
+        <p>Seleccione el número de letras proposicionales</p>
+        <select name="cars" id="comboBoxFormAtoms">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <br>
+        <br>
+        <input type = "button" id = "btnManual" onclick = "definirNumeroCamposProposicionlales(); location.href='./index.html';" value = "Aceptar"><br>
+      </div>
+     </content> 
+    </container>
+  </body>
+</html>

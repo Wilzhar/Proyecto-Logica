@@ -75,7 +75,6 @@ function fijarEstructuraOperador(operador)
 	}	
 
 }
-
 function posicionarCursor(txtField, inicio)
 {
 	txtField = document.getElementById("textFomula");
@@ -117,9 +116,6 @@ function buscarCampoVacio(txtField)
 	return 0;
 }
 
-
-
-
 function openCity(evt, cityName) {
 	// Declare all variables
 	var i, tabcontent, tablinks;
@@ -141,8 +137,7 @@ function openCity(evt, cityName) {
 	evt.currentTarget.className += " active";
   }
 
-
-
-
-
-
+  function definirNumeroCamposProposicionlales()
+  {
+	  comboBoxNForms = document.getElementById("comboBoxNForms");
+  }
