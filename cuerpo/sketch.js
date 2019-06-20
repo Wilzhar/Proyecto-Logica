@@ -1,18 +1,26 @@
 function setup() {
   // put setup code here
 
-  let x1 = [1, 1, 0, 1, 0, 0, 1];
-  let x2 = [1, 0, 0, 0, 1, 1, 1, 1];
+//   let x1 = [1, 1, 0, 1, 0, 0, 1];
+//   let x2 = [1, 0, 0, 0, 1, 1, 1, 1];
 
-  //var x = operacionBinaria(x1, x2, TipoOperador.BICOND);
-  let y = operacionUnaria(x2);
+//   //var x = operacionBinaria(x1, x2, TipoOperador.BICOND);
+//   let y = operacionUnaria(x2);
 
-  let arbol = new ArbolBinario();
-  arbol.setRaiz(new Nodo('', null));
+//   let arbol = new ArbolBinario();
+//   arbol.setRaiz(new Nodo('', null));
 
-  algoritmoDescomposicion(arbol.getRaiz(), '((p)'+TipoOperadorString.COND+'(q))'+TipoOperadorString.AND+'(r)');
+//   algoritmoDescomposicion(arbol.getRaiz(), '((p)'+TipoOperadorString.COND+'(q))'+TipoOperadorString.AND+'(r)');
 
-  console.log(arbol.getRaiz().getElemento())
+//   console.log(arbol.getRaiz().getElemento())
+	let arbol = new ArbolBinario();
+	arbol.setRaiz(new Nodo('', null));
+  
+	// algoritmoDescomposicion(arbol.getRaiz(), '('+TipoOperadorString.NOT+'((p)'+TipoOperadorString.COND+'(q)))'+TipoOperadorString.AND+'(r)');
+	let fbf = "¬((((p)↔((¬(¬(p)))→((p)V(p))))Ʌ(¬((p)V(p))))V(¬(p)))"
+	console.log(fbf); 
+	algoritmoDescomposicion(arbol.getRaiz(), fbf);
+	mostrarArbol(arbol);
 }
 
 function draw() {
@@ -276,44 +284,8 @@ function openCity(evt, cityName) {
 	document.getElementById(cityName).style.display = "block";
 	evt.currentTarget.className += " active";
   }
-  function definirNumeroCamposProposicionlales()
+  function mostrarArbol(arbol)
   {
-	arbol = new ArbolBinario();
-
-	arbol.agregar(16);
-	arbol.agregar(8);
-	arbol.agregar(24);
-	arbol.agregar(4);
-	arbol.agregar(12);
-	arbol.agregar(2);
-	arbol.agregar(1);
-	arbol.agregar(3);
-	arbol.agregar(1);
-	arbol.agregar(6);
-	arbol.agregar(5);
-	arbol.agregar(7);
-	arbol.agregar(10);
-	arbol.agregar(8);
-	arbol.agregar(9);
-	arbol.agregar(14);
-	arbol.agregar(13);
-	arbol.agregar(11);
-	arbol.agregar(15);
-	arbol.agregar(20);
-	arbol.agregar(28);
-	arbol.agregar(22);
-	arbol.agregar(26);
-	arbol.agregar(18);
-	arbol.agregar(17);
-	arbol.agregar(19);
-	arbol.agregar(21);
-	arbol.agregar(23);
-	arbol.agregar(25);
-	arbol.agregar(27);
-	arbol.agregar(30);
-	arbol.agregar(31);
-	arbol.agregar(29);
-
 	arbolView = new ArbolView(arbol, 80);
 	arbolView.show();
   }
@@ -421,15 +393,13 @@ function posicionRaiz(formula){
 
 	let posicion = 0;
 	for(let i=0; i<formula.length; i++){
-	
-		//console.log(formula[i]);
 
 		if(formula[i] == '('){
-			console.log('sumo');
 			posicion++;
 		}else if(formula[i] == ')'){
-			console.log('resto');
 			posicion--;
+		}else if(formula[0] == TipoOperadorString.NOT){
+			return 0;
 		}
 
 		if(posicion == 0){
@@ -442,19 +412,26 @@ function posicionRaiz(formula){
 
 function algoritmoDescomposicion(nodo, formula){
 
-	if(formula.length > 1){
-		let nodoAux;
+	if(formula.length > 1){		
+		let nodoAux = null;
 		let posRaiz = posicionRaiz(formula);
 
-		nodoAux = new Nodo(formula.substring(1, posRaiz-1));
-		nodo.setIzquierdo(nodoAux);
-		algoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
+		if(posRaiz == 0){
+			nodoAux = new Nodo(formula.substring(2, formula.length-1));
+			nodo.setIzquierdo(nodoAux);
+			algoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
 
-		nodoAux = new Nodo(formula.substring(posRaiz+2, formula.length-1));
-		nodo.setDerecho(nodoAux);
-		algoritmoDescomposicion(nodo.getDerecho, nodoAux.getElemento());
+			nodo.setElemento(formula[posRaiz]);
+		}else{
+			nodoAux = new Nodo(formula.substring(1, posRaiz-1));
+			nodo.setIzquierdo(nodoAux);
+			algoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
 
-		nodo.setElemento(formula[posRaiz]);
+			nodoAux = new Nodo(formula.substring(posRaiz+2, formula.length-1));
+			nodo.setDerecho(nodoAux);
+			algoritmoDescomposicion(nodo.getDerecho(), nodoAux.getElemento());
+
+			nodo.setElemento(formula[posRaiz]);
+		}	
 	}
-
 }
