@@ -18,7 +18,7 @@
     <container>
       <div id = "informacionIzquierda">
         <h1>INGRESO DE FORMULAS</h1>
-        <form>
+        <form action="arbol_procedimientos.html">
         <div id = "cajaCentral">
           <input type = "text"   id = "textFormula" class="areasTexto"><br>
           <h5>Seleccione esta casilla si desea ingresar la conclusion:</h5>
@@ -33,6 +33,8 @@
          <input type = "button" id = "btnFtBICOND" class="boton" onclick = "fijarEstructuraOperador(TipoOperador.BICOND)" value = &#8596><br>
          <input type = "button" id = "btnGuardarFormula" class="boton" onclick = "guardarFormula()" value = "GUARDAR FORMULA"><br>
          <input type = "button" id = "btnManual" class="boton" onclick = "location.href='./manualAyuda.html';" value = "MANUAL"><br>
+          <button type ="submit">Ver arbol</button>
+
         </div>
        </form>
       </div>

@@ -13,20 +13,22 @@ function setup() {
 //   algoritmoDescomposicion(arbol.getRaiz(), '((p)'+TipoOperadorString.COND+'(q))'+TipoOperadorString.AND+'(r)');
 
 //   console.log(arbol.getRaiz().getElemento())
-	let arbol = new ArbolBinario();
-	arbol.setRaiz(new Nodo('', null));
+	
   
 	// algoritmoDescomposicion(arbol.getRaiz(), '('+TipoOperadorString.NOT+'((p)'+TipoOperadorString.COND+'(q)))'+TipoOperadorString.AND+'(r)');
-	let fbf = "¬((((p)↔((¬(¬(p)))→((p)V(p))))Ʌ(¬((p)V(p))))V(¬(p)))"
-	console.log(fbf); 
-	ejecutarAlgoritmoDescomposicion(arbol.getRaiz(), fbf);
-	mostrarArbol(arbol);
+	// let fbf = "¬((((p)↔((¬(¬(p)))→((p)V(p))))Ʌ(¬((p)V(p))))V(¬(p)))"
+	// console.log(fbf); 
+	// algoritmoDescomposicion(arbol.getRaiz(), fbf);
+	// mostrarArbol(arbol);
 }
 
 function draw() {
 	// put drawing code here
 }
 
+/**
+ * Esta enumeracion contiene los operadores binarios y unarios.
+ */
 const TipoOperador = {
 	NOT: 0,
 	OR: 1,
@@ -35,6 +37,9 @@ const TipoOperador = {
 	BICOND: 4,
 };
 
+/**
+ * Esta enumeracion contiene todas las representaciones de los operadores binarios y unarios en UNICODE
+ */
 const TipoOperadorString = {
 	NOT: '\u00AC',
 	OR: 'V',
@@ -51,6 +56,12 @@ function sumar()
 	document.getElementById('result').value = res;
 }
 
+/**
+ * Este metodo busca los parrafos que estan en el html. EL de premisas y el de conclusion. Una vez los tiene, 
+ * hace split a la cadena de premisas, estas quedan en un arreglo de premisas. Se unen por medio de disyunciones y al final se 
+ * une por medio de una disyuncion la negacion de la conclusion.
+ * Para quedar una formula con exceso de parentesis.
+ */
 function inicializarArgumento()
 {
 	
@@ -62,7 +73,16 @@ function inicializarArgumento()
 
 	for(var premisaTemp of arregloFormulas)
 	{
-		strFormulaCorolario+= premisaTemp+'\u0245';
+		if(premisaTemp.length == 1 )
+		{
+			strFormulaCorolario += "("+premisaTemp+")"+'\u0245';
+		}
+		else
+		{
+			strFormulaCorolario+= premisaTemp+'\u0245';
+		}
+
+		
 	}
 	
 	console.log(strFormulaCorolario);
@@ -71,14 +91,20 @@ function inicializarArgumento()
 
 	console.log(strFormulaCorolario);
 
-	strFormulaCorolario+= '\u00AC'+strConsecuencia;
+	strFormulaCorolario+= "("+'\u00AC'+"("+strConsecuencia+"))";
 	
 	strFormulaCorolario = strFormulaCorolario.substring(1,strFormulaCorolario.length)
 
 	console.log(strFormulaCorolario);
+
+	construirArbol(strFormulaCorolario);
 }
 
-
+/**
+ * Este metodo recibe la formula de solo premisas y hace parejas de subformulas (las proteje con parentesis), ya que
+ * el metodo ejecutarAlgoritmoDescomposicion solo opera de a dos subformulas por vez.
+ * @param {*} formula 
+ */
 function construirFormulaPremisas(formula)
 {
 	let posicion = 0;
@@ -132,6 +158,27 @@ function construirFormulaPremisas(formula)
 	return formula;
 }
 
+/**
+ * Metodo de interfaz entre el ingreso de datos y el algoritmo de descomposicion.
+ * Este metodo toma la formula bien formada (con exceso de parentesis) y se la manda al algoritmo de descomposicion
+ * @param {String} strFormula 
+ */
+function construirArbol(strFormula)
+{
+	let arbol = new ArbolBinario();
+	arbol.setRaiz(new Nodo('', null));
+	algoritmoDescomposicion(arbol.getRaiz(),strFormula);
+	mostrarArbol(arbol);
+}
+
+
+/**
+ * Este metodo recibe el operador presionado en el panel de botones, posteriormente, toma toda la cadena previa
+ * y lo adiciona en el lugar (valido) donde estuviera el cursor al momento de presionarlo.
+ * Crea una nueva cadena con todo eso y lo setea nuevamente en el campo de texto.
+ * 
+ * @param {*} operador 
+ */
 function fijarEstructuraOperador(operador)
 {
 	//Primero verificar que la posicion donde se pretende insertar el operador, si es valida.
@@ -185,12 +232,21 @@ function fijarEstructuraOperador(operador)
 	}	
 
 }
+
+/**
+ * Este metodo posiciona el cursor en el campo de texto justo en la posicion indicada por parametros
+ * @param {*} txtField 
+ * @param {*} inicio 
+ */
 function posicionarCursor(txtField, inicio)
 {
 	txtField.setSelectionRange(inicio, inicio);
 	txtField.focus();
 }
 
+/**
+ * Este metodo permitira pasar de un escudo valido a otro sin pasar por sus intermedios.
+ */
 function keyPressed()
 {
 	txtFieldV = document.getElementById("textFormula");
@@ -200,15 +256,10 @@ function keyPressed()
 	}
 }
 
-function verificarPosicionCursor(textField)
-{	
-	let valida = false;
-	let escudoValido = "()";
-	let escudoActual = textField.value.substring(textField.selectionStart-1,textField.selectionStart+1);	
-
-	return escudoActual == escudoValido ? true : false;
-}
-
+/**
+ * Este metodo está relacionado con el metodo keyPressed para buscar un escudo vacio.
+ * @param {*} txtField 
+ */
 function buscarCampoVacio(txtField)
 {	
 	txtFieldV = txtField.value;
@@ -225,6 +276,26 @@ function buscarCampoVacio(txtField)
 	return 0;
 }
 
+
+/**
+ * Este metodo determina si la posicion actual del cursor es una posicion valida para insertar un operador.
+ * 
+ * @param {*} textField 
+ */
+function verificarPosicionCursor(textField)
+{	
+	let valida = false;
+	let escudoValido = "()";
+	let escudoActual = textField.value.substring(textField.selectionStart-1,textField.selectionStart+1);	
+
+	return escudoActual == escudoValido ? true : false;
+}
+
+
+/**
+ * Este metodo se dispara cuando se presiona el boton guardar formula e indica que el usuario esta listo para 
+ * almacenar una premisa en el parrafo de premisas y una conclusion en el parrafo de conclusiones del html. 
+ */
 function guardarFormula()
 {
 	let fNueva = document.getElementById("textFormula").value;
@@ -253,6 +324,12 @@ function guardarFormula()
 	}
 	
 }
+
+/**
+ * Este metodo es para el correcto funcionamiento de las TABS
+ * @param {*} evt 
+ * @param {*} cityName 
+ */
 function openCity(evt, cityName) {
 	// Declare all variables
 
@@ -275,11 +352,17 @@ function openCity(evt, cityName) {
 	document.getElementById(cityName).style.display = "block";
 	evt.currentTarget.className += " active";
   }
+
+ /**
+  * Metodo simple que grafica el arbol en el html.
+  * @param {*} arbol 
+  */ 
   function mostrarArbol(arbol)
   {
 	arbolView = new ArbolView(arbol, 80);
 	arbolView.show();
   }
+
   /**
   *	Metodo para operar dos atomos con la operacion AND
   */
@@ -380,6 +463,11 @@ function operacionUnaria(arreglo){
 	return arregloSalida;
 }
 
+
+/**
+ * Este metodo encuentra la posicion del operador principal dada una subformula.
+ * @param {*} formula 
+ */
 function posicionRaiz(formula){
 
 	let posicion = 0;
@@ -401,6 +489,14 @@ function posicionRaiz(formula){
 	return 0;
 }
 
+/**
+ * Este metodo ejecuta el algoritmo de descomposicion dada una formula.
+ * Como parametros se le manda una formula con exceso de parentesis y un nodo nulo para empezar a adherirle mas 
+ * nodos.
+ * 
+ * @param {*} nodo 
+ * @param {*} formula 
+ */
 function ejecutarAlgoritmoDescomposicion(nodo, formula){
 
 	if(formula.length > 1){		
