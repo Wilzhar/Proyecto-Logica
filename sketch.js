@@ -54,7 +54,16 @@ function inicializarArgumento()
 
 	for(var premisaTemp of arregloFormulas)
 	{
-		strFormulaCorolario+= premisaTemp+'\u0245';
+		if(premisaTemp.length == 1 )
+		{
+			strFormulaCorolario += "("+premisaTemp+")"+'\u0245';
+		}
+		else
+		{
+			strFormulaCorolario+= premisaTemp+'\u0245';
+		}
+
+		
 	}
 	
 	console.log(strFormulaCorolario);
@@ -63,7 +72,7 @@ function inicializarArgumento()
 
 	console.log(strFormulaCorolario);
 
-	strFormulaCorolario+= '\u00AC'+strConsecuencia;
+	strFormulaCorolario+= "("+'\u00AC'+"("+strConsecuencia+"))";
 	
 	strFormulaCorolario = strFormulaCorolario.substring(1,strFormulaCorolario.length)
 
