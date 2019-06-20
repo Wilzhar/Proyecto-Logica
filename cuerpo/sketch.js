@@ -19,7 +19,7 @@ function setup() {
 	// algoritmoDescomposicion(arbol.getRaiz(), '('+TipoOperadorString.NOT+'((p)'+TipoOperadorString.COND+'(q)))'+TipoOperadorString.AND+'(r)');
 	let fbf = "¬((((p)↔((¬(¬(p)))→((p)V(p))))Ʌ(¬((p)V(p))))V(¬(p)))"
 	console.log(fbf); 
-	algoritmoDescomposicion(arbol.getRaiz(), fbf);
+	ejecutarAlgoritmoDescomposicion(arbol.getRaiz(), fbf);
 	mostrarArbol(arbol);
 }
 
@@ -401,7 +401,7 @@ function posicionRaiz(formula){
 	return 0;
 }
 
-function algoritmoDescomposicion(nodo, formula){
+function ejecutarAlgoritmoDescomposicion(nodo, formula){
 
 	if(formula.length > 1){		
 		let nodoAux = null;
@@ -410,19 +410,32 @@ function algoritmoDescomposicion(nodo, formula){
 		if(posRaiz == 0){
 			nodoAux = new Nodo(formula.substring(2, formula.length-1));
 			nodo.setIzquierdo(nodoAux);
-			algoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
+			ejecutarAlgoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
 
 			nodo.setElemento(formula[posRaiz]);
 		}else{
 			nodoAux = new Nodo(formula.substring(1, posRaiz-1));
 			nodo.setIzquierdo(nodoAux);
-			algoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
+			ejecutarAlgoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
 
 			nodoAux = new Nodo(formula.substring(posRaiz+2, formula.length-1));
 			nodo.setDerecho(nodoAux);
-			algoritmoDescomposicion(nodo.getDerecho(), nodoAux.getElemento());
+			ejecutarAlgoritmoDescomposicion(nodo.getDerecho(), nodoAux.getElemento());
 
 			nodo.setElemento(formula[posRaiz]);
 		}	
 	}
+}
+
+/**
+ * Metodo que me dice si un operador es de tipo binario o no
+ * @param {String} operador 
+ */
+function isOperadorBinario(operador)
+{
+	if(operador == TipoOperadorString.OR || operador == TipoOperadorString.AND || operador == TipoOperadorString.COND || operador == TipoOperadorString.BICOND)
+	{
+		return true;
+	}
+	return false;
 }
