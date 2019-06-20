@@ -177,7 +177,6 @@ function fijarEstructuraOperador(operador)
 	}	
 
 }
-
 function posicionarCursor(txtField, inicio)
 {
 	txtField.setSelectionRange(inicio, inicio);
@@ -218,7 +217,6 @@ function buscarCampoVacio(txtField)
 	return 0;
 }
 
-
 function guardarFormula()
 {
 	let fNueva = document.getElementById("textFormula").value;
@@ -247,8 +245,6 @@ function guardarFormula()
 	}
 	
 }
-
-
 function openCity(evt, cityName) {
 	// Declare all variables
 
@@ -271,7 +267,47 @@ function openCity(evt, cityName) {
 	document.getElementById(cityName).style.display = "block";
 	evt.currentTarget.className += " active";
   }
+  function definirNumeroCamposProposicionlales()
+  {
+	arbol = new ArbolBinario();
 
+	arbol.agregar(16);
+	arbol.agregar(8);
+	arbol.agregar(24);
+	arbol.agregar(4);
+	arbol.agregar(12);
+	arbol.agregar(2);
+	arbol.agregar(1);
+	arbol.agregar(3);
+	arbol.agregar(1);
+	arbol.agregar(6);
+	arbol.agregar(5);
+	arbol.agregar(7);
+	arbol.agregar(10);
+	arbol.agregar(8);
+	arbol.agregar(9);
+	arbol.agregar(14);
+	arbol.agregar(13);
+	arbol.agregar(11);
+	arbol.agregar(15);
+	arbol.agregar(20);
+	arbol.agregar(28);
+	arbol.agregar(22);
+	arbol.agregar(26);
+	arbol.agregar(18);
+	arbol.agregar(17);
+	arbol.agregar(19);
+	arbol.agregar(21);
+	arbol.agregar(23);
+	arbol.agregar(25);
+	arbol.agregar(27);
+	arbol.agregar(30);
+	arbol.agregar(31);
+	arbol.agregar(29);
+
+	arbolView = new ArbolView(arbol, 80);
+	arbolView.show();
+  }
   /**
   *	Metodo para operar dos atomos con la operacion AND
   */
@@ -413,4 +449,3 @@ function algoritmoDescomposicion(nodo, formula){
 	}
 
 }
-
