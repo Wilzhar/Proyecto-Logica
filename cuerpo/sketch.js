@@ -73,7 +73,7 @@ function inicializarArgumento()
 
 	for(var premisaTemp of arregloFormulas)
 	{
-		if(premisaTemp.length == 1 )
+		if(premisaTemp.length == 1 || premisaTemp[0] == TipoOperadorString.NOT )
 		{
 			strFormulaCorolario += "("+premisaTemp+")"+'\u0245';
 		}
@@ -318,6 +318,8 @@ function guardarFormula()
 			}
 		
 		}
+
+		document.getElementById("textFormula").value = "";
 	}
 	else{
 		alert("Por favor ingrese una formula correcta.");
@@ -521,5 +523,40 @@ function algoritmoDescomposicion(nodo, formula){
 
 			nodo.setElemento(formula[posRaiz]);
 		}	
+	}
+}
+
+
+/**
+ * Metodo en construccion que va a apilar lo que hay en el arbol
+ * @param {*} matriz Matriz que contiene las combinaciones de 1 y 0 de todas las formas atomicas que hay en la fbf 
+ * @param {String} formulaPosOrden 
+ */
+function apilarYOperar(matriz, formulaPosOrden)
+{
+	for(let i = 0 ; i < formulaPosOrden.length ; i++)
+	{	
+		pila.push(formulaPosOrden[i]);
+		
+		if(pila.length == 3)
+		{	
+			operador = pila.pop();
+			arreglo1 = null;
+			arreglo2 = null;
+			
+			for(let i = 0 ; i < matriz.length ; i++)
+			{
+				if(matriz[0][i] == pila.pop())
+				{
+
+				}
+			}
+
+			operacionBinaria()
+		}
+		if(pila[1] == TipoOperadorString.NOT)
+		{
+			
+		}
 	}
 }

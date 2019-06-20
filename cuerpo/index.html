@@ -18,11 +18,12 @@
     <container>
       <div id = "informacionIzquierda">
         <h1>INGRESO DE FORMULAS</h1>
-        <form action="arbol_procedimientos.html">
+        <form action="arbol_procedimientos.php">
         <div id = "cajaCentral">
           <input type = "text"   id = "textFormula" class="areasTexto"><br>
-          <h5>Seleccione esta casilla si desea ingresar la conclusion:</h5>
-          <input type = "checkbox" id="cbConclusion"> </input>
+          <input type = "button" id = "btnGuardarFormula" class="boton" onclick = "guardarFormula()" value = "GUARDAR FORMULA"><br>
+          <input type = "checkbox" id="cbConclusion">Seleccione esta casilla si desea ingresar la conclusion: </input>
+          
         </div>
          <div class="clear"></div>
          <div class="panelBotones">
@@ -31,9 +32,8 @@
          <input type = "button" id = "btnFtAND" class="boton" onclick = "fijarEstructuraOperador(TipoOperador.AND)" value = &#94>
          <input type = "button" id = "btnFtCOND" class="boton" onclick = "fijarEstructuraOperador(TipoOperador.COND)" value = &#8594>
          <input type = "button" id = "btnFtBICOND" class="boton" onclick = "fijarEstructuraOperador(TipoOperador.BICOND)" value = &#8596><br>
-         <input type = "button" id = "btnGuardarFormula" class="boton" onclick = "guardarFormula()" value = "GUARDAR FORMULA"><br>
+         
          <input type = "button" id = "btnManual" class="boton" onclick = "location.href='./manualAyuda.html';" value = "MANUAL"><br>
-          <button type ="submit">Ver arbol</button>
 
         </div>
        </form>
