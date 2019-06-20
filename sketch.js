@@ -46,9 +46,82 @@ function sumar()
 function inicializarArgumento()
 {
 	
-	 strArgumento = document.getElementById("formulasValidas").innerHTML;
-	 arregloFormulas = strArgumento.split("<br>");
-	console.log(arregloFormulas);
+	strPremisas = document.getElementById("formulasValidas").innerHTML;
+	strConsecuencia = document.getElementById("conclusion").innerHTML;
+	arregloFormulas = strPremisas.split("<br>");
+	strFormulaCorolario = "";
+	console.log(strPremisas);
+
+	for(var premisaTemp of arregloFormulas)
+	{
+		strFormulaCorolario+= premisaTemp+'\u0245';
+	}
+	
+	console.log(strFormulaCorolario);
+
+	strFormulaCorolario = construirFormulaPremisas(strFormulaCorolario);
+
+	console.log(strFormulaCorolario);
+
+	strFormulaCorolario+= '\u00AC'+strConsecuencia;
+	
+	strFormulaCorolario = strFormulaCorolario.substring(1,strFormulaCorolario.length)
+
+	console.log(strFormulaCorolario);
+}
+
+
+function construirFormulaPremisas(formula)
+{
+	let posicion = 0;
+	segundoUno = 0;
+	formula = "("+formula;
+	tamVariable = formula.length;
+	console.log("Formula antes del for: "+formula+" su tamanio: "+tamVariable);
+	for(let i=0; i<tamVariable; i++){
+	
+		
+
+		if(formula[i] == '('){
+			console.log('sumo');
+			posicion++;
+			
+		}else if(formula[i] == ')'){
+			console.log('resto');
+			posicion--;
+
+			if(posicion == 1)
+			{
+				segundoUno+=1;
+				console.log("parentesis con 1 "+ segundoUno );
+			}
+		}
+
+		
+
+		if(posicion == 1 && segundoUno == 2){
+
+			console.log("ENTRO!!!!");
+			console.log("Posicion: "+posicion);
+			console.log("Segundo uno"+segundoUno);
+			//Aca se toma la formula y se dividira en tres partes, se agregara un parentesis de cierre a la primera parte
+			//y se agregara un parentesis de apertura antes de la segunda parte
+			parte1Formula = formula.substring(0,i+1);	//Captura de la primera parte (hasta el segundo uno) y el Op principal
+			
+			parte2Formula = formula.substring(i+1,formula.length+1);
+			console.log("parte1: "+parte1Formula+" parte2: "+parte2Formula);
+
+			formula = "("+parte1Formula+")"+parte2Formula;
+
+			console.log(formula);
+			i = 0;
+			tamVariable+=2;
+			segundoUno = 0;
+		}
+		
+	}
+
+	return formula;
 }
 
 function fijarEstructuraOperador(operador)
@@ -158,7 +231,14 @@ function guardarFormula()
 		}
 		else
 		{
-			document.getElementById("formulasValidas").innerHTML = antigua+'<br>'+fNueva;
+			if(antigua!="")
+			{
+				document.getElementById("formulasValidas").innerHTML = antigua+'<br>'+fNueva;
+			}
+			else
+			{
+				document.getElementById("formulasValidas").innerHTML = fNueva;
+			}
 		
 		}
 	}
