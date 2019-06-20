@@ -25,7 +25,6 @@ class Nodo
 
     show()
     {
-        
         fill(color("Green"));
         ellipse(this.x, this.y, this.radio + 15);
         textAlign(CENTER, CENTER);
