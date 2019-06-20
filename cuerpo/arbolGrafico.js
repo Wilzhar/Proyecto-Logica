@@ -11,8 +11,16 @@ class ArbolView
     show()
     {
         this.altura = this.arbol.calcularAltura(this.arbol.getRaiz(), 0, 0);
-        this.altura--;
-        createCanvas(pow(2, this.altura - 1) * (this.scale + (this.scale / 2)) , this.altura * this.scale * 2);
+        if(this.arbol.getRaiz() == TipoOperadorString.NOT)
+        {
+            this.altura= this.altura - 3;
+        }
+        else
+        {
+            this.altura= this.altura - 2;
+        }
+        // createCanvas(pow(2, this.altura - 1) * (this.scale + (this.scale / 2)) , this.altura * this.scale * 2);
+        createCanvas(pow(2, this.altura) * (3*this.scale/4) , this.altura * this.scale * 1.5);
         background(100);
         this.showNodes(this.arbol.getRaiz(), 0, width, null);
         this.drawLines(this.arbol.getRaiz());
@@ -33,29 +41,34 @@ class ArbolView
     {
         if (nodoActual != null) 
         {
-            // if(nodoActual.getElemento() == TipoOperadorString.NOT)
-            // {
-            //     if(nodoActual.getIzquierdo() != null)
-            //     {
-            //         if(nodoActual.getIzquierdo().getElemento() )
-            //     }
-            // }
-            nodoActual.radio = this.scale / 2;
             let padre;
-            switch (tipo) {
-                default:
-                    nodoActual.x = ancho / 2;
-                    break;
-
-                case "left":	
-                    padre = nodoActual.getPadre();
-                    nodoActual.x = padre.x - ancho / 2;
-                    break;
-
-                case "right":
-                    padre = nodoActual.getPadre();
-                    nodoActual.x = padre.x + ancho / 2;
-                    break;
+            nodoActual.radio = this.scale / 2;
+            padre = nodoActual.getPadre();
+            if(padre != null)
+            {
+                if(padre.getElemento() == TipoOperadorString.NOT && isOperadorBinario(nodoActual.getElemento()))
+                {
+                    nodoActual.x = padre.x;
+                }
+                else
+                {
+                    switch (tipo) {
+                               
+                        case "left":	
+                            padre = nodoActual.getPadre();
+                            nodoActual.x = padre.x - ancho / 2;
+                            break;
+        
+                        case "right":
+                            padre = nodoActual.getPadre();
+                            nodoActual.x = padre.x + ancho / 2;
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                nodoActual.x = ancho / 2;
             }
             
             nodoActual.y = this.scale * level + this.scale / 2;
@@ -69,6 +82,5 @@ class ArbolView
             this.showNodes(nodoIzquierdo, nivelHijo, ancho / 2, "left");
             this.showNodes(nodoDerecho, nivelHijo, ancho / 2, "right");
         }
-
     }
 }

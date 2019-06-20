@@ -491,7 +491,6 @@ function posicionRaiz(formula){
 	return 0;
 }
 
-
 /**
  * Este metodo ejecuta el algoritmo de descomposicion dada una formula.
  * Como parametros se le manda una formula con exceso de parentesis y un nodo nulo para empezar a adherirle mas 
@@ -500,7 +499,7 @@ function posicionRaiz(formula){
  * @param {*} nodo 
  * @param {*} formula 
  */
-function algoritmoDescomposicion(nodo, formula){
+function ejecutarAlgoritmoDescomposicion(nodo, formula){
 
 	if(formula.length > 1){		
 		let nodoAux = null;
@@ -509,22 +508,23 @@ function algoritmoDescomposicion(nodo, formula){
 		if(posRaiz == 0){
 			nodoAux = new Nodo(formula.substring(2, formula.length-1));
 			nodo.setIzquierdo(nodoAux);
-			algoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
+			ejecutarAlgoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
 
 			nodo.setElemento(formula[posRaiz]);
 		}else{
 			nodoAux = new Nodo(formula.substring(1, posRaiz-1));
 			nodo.setIzquierdo(nodoAux);
-			algoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
+			ejecutarAlgoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
 
 			nodoAux = new Nodo(formula.substring(posRaiz+2, formula.length-1));
 			nodo.setDerecho(nodoAux);
-			algoritmoDescomposicion(nodo.getDerecho(), nodoAux.getElemento());
+			ejecutarAlgoritmoDescomposicion(nodo.getDerecho(), nodoAux.getElemento());
 
 			nodo.setElemento(formula[posRaiz]);
 		}	
 	}
 }
+
 
 
 /**
@@ -559,4 +559,17 @@ function apilarYOperar(matriz, formulaPosOrden)
 			
 		}
 	}
+}
+
+/**
+ * Metodo que me dice si un operador es de tipo binario o no
+ * @param {String} operador 
+ */
+function isOperadorBinario(operador)
+{
+	if(operador == TipoOperadorString.OR || operador == TipoOperadorString.AND || operador == TipoOperadorString.COND || operador == TipoOperadorString.BICOND)
+	{
+		return true;
+	}
+	return false;
 }
