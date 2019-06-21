@@ -19,8 +19,8 @@ class ArbolView
         {
             this.altura= this.altura - 2;
         }
-        // createCanvas(pow(2, this.altura - 1) * (this.scale + (this.scale / 2)) , this.altura * this.scale * 2);
-        createCanvas(pow(2, this.altura) * (3*this.scale/4) , this.altura * this.scale * 1.5);
+        createCanvas(pow(2, this.altura) * (this.scale + (this.scale / 2)) , this.altura * this.scale * 2);
+        // createCanvas(pow(2, this.altura) * (3*this.scale/4) , this.altura * this.scale * 1.5);
         background(100);
         this.showNodes(this.arbol.getRaiz(), 0, width, null);
         this.drawLines(this.arbol.getRaiz());

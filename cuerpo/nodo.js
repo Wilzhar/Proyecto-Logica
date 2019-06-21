@@ -80,6 +80,22 @@ class Nodo
 	tieneUnHijo() {
 		return (this.__izquierdo != null && this.__derecho == null) || (this.__derecho != null && this.__izquierdo == null );
 	}
+
+	/**
+	 * Metodo para identificar si este nodo es un nodo derecho
+	 * @return
+	 */
+	esNodoDerecho(){
+		let flag = false;
+		if(this.__padre != null){
+			if(this.__padre.getDerecho() === this){
+				flag = true;
+			}else{
+				flag = false;
+			}
+		}
+		return flag;		
+	}
 	
 	/**
 	 * @return the izq

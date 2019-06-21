@@ -1,3 +1,8 @@
+/**
+ * Matriz que me guarda los valores de verdad de las formas atomicas encontradas
+ */
+var matrizValoresFormasAtomicas;
+
 function setup() {
   // put setup code here
 
@@ -20,6 +25,7 @@ function setup() {
 	// console.log(fbf); 
 	// algoritmoDescomposicion(arbol.getRaiz(), fbf);
 	// mostrarArbol(arbol);
+	test();
 }
 
 function draw() {
@@ -167,7 +173,7 @@ function construirArbol(strFormula)
 {
 	let arbol = new ArbolBinario();
 	arbol.setRaiz(new Nodo('', null));
-	algoritmoDescomposicion(arbol.getRaiz(),strFormula);
+	ejecutarAlgoritmoDescomposicion(arbol.getRaiz(),strFormula);
 	mostrarArbol(arbol);
 }
 
@@ -316,7 +322,6 @@ function guardarFormula()
 			{
 				document.getElementById("formulasValidas").innerHTML = fNueva;
 			}
-		
 		}
 	}
 	else{
@@ -497,6 +502,7 @@ function posicionRaiz(formula){
  * @param {*} nodo 
  * @param {*} formula 
  */
+
 function ejecutarAlgoritmoDescomposicion(nodo, formula){
 
 	if(formula.length > 1){		
@@ -504,24 +510,81 @@ function ejecutarAlgoritmoDescomposicion(nodo, formula){
 		let posRaiz = posicionRaiz(formula);
 
 		if(posRaiz == 0){
-			nodoAux = new Nodo(formula.substring(2, formula.length-1));
-			nodo.setIzquierdo(nodoAux);
-			ejecutarAlgoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
-
-			nodo.setElemento(formula[posRaiz]);
+			nodoAux = new Nodo(formula.substring(2, formula.length-1), nodo);
+			if(nodo.esNodoDerecho()){
+				nodo.setDerecho(nodoAux);
+			}else{
+				nodo.setIzquierdo(nodoAux);
+			}			
+			ejecutarAlgoritmoDescomposicion(nodoAux, nodoAux.getElemento());
 		}else{
-			nodoAux = new Nodo(formula.substring(1, posRaiz-1));
+			nodoAux = new Nodo(formula.substring(1, posRaiz-1), nodo);
 			nodo.setIzquierdo(nodoAux);
-			ejecutarAlgoritmoDescomposicion(nodo.getIzquierdo(), nodoAux.getElemento());
+			ejecutarAlgoritmoDescomposicion(nodoAux, nodoAux.getElemento());
 
-			nodoAux = new Nodo(formula.substring(posRaiz+2, formula.length-1));
+			nodoAux = new Nodo(formula.substring(posRaiz+2, formula.length-1), nodo);
 			nodo.setDerecho(nodoAux);
-			ejecutarAlgoritmoDescomposicion(nodo.getDerecho(), nodoAux.getElemento());
+			ejecutarAlgoritmoDescomposicion(nodoAux, nodoAux.getElemento());			
+		}
 
-			nodo.setElemento(formula[posRaiz]);
-		}	
+		nodo.setElemento(formula[posRaiz]);				
 	}
+
 }
+
+/**
+ * Metodo para verificar si una tomo se encuentra dentro de la lista actual de atomos encontrados en la cadena(formula en LP)
+ * @arregloFormas el arreglo de atomos
+ * @atomo el atomo a verificar en el arreglo
+ */
+function verificarAtomoRepetido(arregloFormas, atomo){
+
+	var flag = false;
+
+	arregloFormas.forEach(function(elemento){
+		if(elemento === atomo){
+			flag = true;
+ 		}
+	});
+	
+	return flag;
+}
+
+/**
+ * Metodo para crear una lista de atomos que esten en la cadena(formula en LP)
+ * @arregloFormas el arreglo de atomos
+ * @atomo el atomo a verificar en el arreglo
+ */
+function obtenerFormasAtomicas(formula){
+
+	let arregloFormas = new Array();
+	let posicionActual = 0;
+
+	for (let i = 0; i < formula.length; i++) {
+		
+		if(formula.charCodeAt(i) >= 'a'.charCodeAt(0) && formula.charCodeAt(i) <= 'z'.charCodeAt(0)){
+
+			if(verificarAtomoRepetido(arregloFormas, formula[i]) == false){
+				arregloFormas[posicionActual] = formula[i];
+				posicionActual++;				
+			}
+		}
+	}
+
+	return arregloFormas;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Metodo que me dice si un operador es de tipo binario o no
@@ -534,4 +597,78 @@ function isOperadorBinario(operador)
 		return true;
 	}
 	return false;
+}
+
+/**
+ * Veroifica si 
+ */
+function verificarPosicionCursorValida()
+{
+	console.log(event.keyCode);
+}
+
+function crearMatrizValoresFormasAtomicas(formasAtomicas)
+{
+	let columnas = formasAtomicas.length;
+	let nValoresVerdad = pow(2, formasAtomicas.length);
+	let filas = nValoresVerdad + 1;
+	matrizValoresFormasAtomicas = new Array(filas);
+	for (i = 0; i < filas; i++) {
+		matrizValoresFormasAtomicas[i] = new Array(columnas);
+	}
+	console.log(filas, columnas)
+
+	for(let i = 0; i < columnas; i++)
+	{
+		matrizValoresFormasAtomicas[0][i] = formasAtomicas[i];
+	}
+
+	let cont = 0;
+	let valor = 1;
+	nValoresVerdad = nValoresVerdad / 2;
+	for(let j = 0; j < columnas; j++)
+	{
+		for(let i = 1; i < filas; i++)
+		{
+			if(cont < nValoresVerdad)
+			{
+				matrizValoresFormasAtomicas[i][j] = valor;
+				cont++;
+			}
+			else
+			{
+				if(valor == 1)
+				{
+					valor = 0;
+				}
+				else
+				{
+					valor = 1;
+				}
+				matrizValoresFormasAtomicas[i][j] = valor;
+				cont = 1;
+			}
+		}
+		valor = 1;
+		cont = 0;
+		nValoresVerdad = nValoresVerdad / 2;
+	}
+}
+
+function test()
+{
+	formasAtomicas = ["p", "q", "r", "s", "t", "o", "p"];
+	crearMatrizValoresFormasAtomicas(formasAtomicas);
+	let msj = "";
+	for(let i = 0; i < matrizValoresFormasAtomicas.length; i++)
+	{
+		for(let j = 0; j < matrizValoresFormasAtomicas[0].length; j++)
+		{
+			msj += matrizValoresFormasAtomicas[i][j] + " ";
+		}
+		msj += "\n";
+	}
+
+	console.log(msj);
+
 }
