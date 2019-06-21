@@ -438,7 +438,7 @@ function operacionBinaria(arreglo1, arreglo2, operador){
   		throw new Error("Error al operar dos funciones");
   	}
 
-	var arregloSalida = new Array(arreglo1.length);
+	arregloSalida = new Array(arreglo1.length);
 
 	arreglo1.forEach(function(elemento, indice){
 		switch(operador){
@@ -546,30 +546,52 @@ function ejecutarAlgoritmoDescomposicion(nodo, formula){
 /**
  * Metodo en construccion que va a apilar lo que hay en el arbol
  * @param {*} matriz Matriz que contiene las combinaciones de 1 y 0 de todas las formas atomicas que hay en la fbf 
- * @param {String} formulaPosOrden 
+ * @param {String} formulaPostOrden 
  */
-function apilarYOperar(matriz, formulaPosOrden)
+function apilarYOperar(matriz, formulaPostOrden)
 {
-	for(let i = 0 ; i < formulaPosOrden.length ; i++)
+	arreglo1 = null;
+	arreglo2 = null;
+	
+	//Este for va a recorrer la formula postorden, agrega sus elementos uno por uno en una fila
+	for(let i = 0 ; i < formulaPostOrden.length ; i++)
 	{	
-		pila.push(formulaPosOrden[i]);
+		pila.push(formulaPostOrden[i]);
 		
-		if(pila.length == 3)
+		//Si el tamaño de la fila es de 3, primero buscará los arreglos de unos y ceros de las formas atomicas y posteriormente operará
+		if(pila.length == 3 && pila[2] != TipoOperadorString.NOT)
 		{	
-			operador = pila.pop();
-			arreglo1 = null;
-			arreglo2 = null;
+			operador = pila[2]; //Toma el ultimo elemento ingresado a la pila (debe ser un operador)
 			
-			for(let i = 0 ; i < matriz.length ; i++)
-			{
-				if(matriz[0][i] == pila.pop())
-				{
+			
+			if(buscarArregloEnMatriz(matriz,pila[0]) != null)
+				arreglo1 = buscarArregloEnMatriz(matriz,pila[0]);//El id es la letra 0 de la pila
 
-				}
-			}
+			
+			arreglo2 = buscarArregloEnMatriz(matriz,pila[1]);//El id es la letra 1 de la pila
+			
+			//Captura el arreglo resusltante de la operacion binaria
+			arreglo1 = operacionBinaria(arreglo1,arreglo2,operador); 
+			//Se lo asigna a la primer posicion de la fila para que en la siguiente iteracion
+			
+			pila.pop();				//Vacio la pila
+			pila.pop();				//Vacio la pila
+			pila.pop();				//Vacio la pila
 
-			operacionBinaria()
+			pila.push(arreglo1);	//Pongo la nueva posicion en la pila
+
 		}
+
+		if(pila.length == 3 && pila[2] == TipoOperadorString.NOT)
+		{	
+
+			operador = pila[2];
+			arreglo2 = buscarArregloEnMatriz(matriz,pila[1]); //Tiene que ser a2 porque el a1 ya tiene la informacion del arreglo anterior que no se puede perder
+			arreglo2 = operacionUnaria(arreglo2);
+
+
+		}
+
 		if(pila[1] == TipoOperadorString.NOT)
 		{
 			
@@ -578,6 +600,37 @@ function apilarYOperar(matriz, formulaPosOrden)
 }
 
 /**
+
+ * Este metodo busca en la matriz de unos y ceros si hay algun arreglo que tenga el 
+ * identificacdor deseado.
+ * Busca el arreglo de unos y ceros de una forma atomica indicada.
+ * @param {*} matriz 
+ * @param {*} identificador 
+ */
+function buscarArregloEnMatriz(matriz,identificador)
+{
+	arreglo = null;
+	//El deber de este for es encontrar el arreglo de 1 o 0 de cada forma atomica
+	//Va a buscar mientras no se haya recorrido toda la primera fila de la matriz y 
+	// mientras alguno de los dos arreglos continue siendo nulo.
+	for(let i = 0 ; i < matriz.length && arreglo == null ; i++) 
+	{
+		if(matriz[0][i] == identificador) // Busca(en la matriz) el arreglo identificado con el caracter del atomo 
+		{
+			arreglo = matriz[i];
+		}
+		
+	}
+
+	if(arreglo == null)
+	{
+		console.log("La letra "+identificador+" no se encuentra en la matriz");
+	}
+	return arreglo;		
+
+}
+
+/*
  * Metodo para verificar si una tomo se encuentra dentro de la lista actual de atomos encontrados en la cadena(formula en LP)
  * @arregloFormas el arreglo de atomos
  * @atomo el atomo a verificar en el arreglo
