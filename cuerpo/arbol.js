@@ -66,13 +66,18 @@ class ArbolBinario
     	
 		if(nodo == null) 
 		{
-			return;
+			return "";
 		}
 		else 
-		{	let aux = "";		
-			aux += this.postorden(nodo.getIzquierdo()) + "";
-			aux += this.postorden(nodo.getDerecho()) + "";
-			return aux + nodo.getElemento()+ "";
+		{
+		// {	let aux = "";		
+		// 	aux += this.postorden(nodo.getIzquierdo()) + "";
+		// 	aux += this.postorden(nodo.getDerecho()) + "";
+		// 	return aux + nodo.getElemento()+ "";
+		// this.postorden(nodo.getIzquierdo());
+		// this.postorden(nodo.getDerecho());
+		// console.log(nodo.getElemento());
+		return this.postorden(nodo.getIzquierdo()) + this.postorden(nodo.getDerecho()) + nodo.getElemento();
 		}
 	
     }

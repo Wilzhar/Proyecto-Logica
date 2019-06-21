@@ -21,7 +21,6 @@
         <form action="arbol_procedimientos.php">
         <div id = "cajaCentral">
           <input type = "text"   id = "textFormula" class="areasTexto" onkeypress="verificarPosicionCursorValida()"><br>
-          <input type = "text"   id = "textFormula" class="areasTexto"><br>
           <input type = "button" id = "btnGuardarFormula" class="boton" onclick = "guardarFormula()" value = "GUARDAR FORMULA"><br>
           <input type = "checkbox" id="cbConclusion">Seleccione esta casilla si desea ingresar la conclusion: </input>
         </div>
@@ -34,23 +33,16 @@
          <input type = "button" id = "btnFtBICOND" class="boton" onclick = "fijarEstructuraOperador(TipoOperador.BICOND)" value = &#8596><br>
          
          <input type = "button" id = "btnManual" class="boton" onclick = "location.href='./manualAyuda.html';" value = "MANUAL"><br>
-
         </div>
        </form>
       </div>
-
       <div id="informacionDerecha">
-
         <h1>FORMULAS VALIDADAS</h1>
         <p id ="formulasValidas"></p>
         <hr></hr>
         <p id ="conclusion"></p>
-
         <input type = "button" id = "btnValidar" class="boton" onclick = "inicializarArgumento()" value = "VALIDAR ARGUMENTO"><br>
-
       </div>
-
-    
     </container>
   </body>
 </html>

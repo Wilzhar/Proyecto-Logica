@@ -1,10 +1,10 @@
 class ArbolView
 {
-    constructor(arbol, scale)
+    constructor(arbol)
     {
         this.arbol = arbol;
         this.altura = this.arbol.calcularAltura(this.arbol.getRaiz(), 0, 0);;
-        this.scale = scale;
+        this.scale = 80;
         
     }
     
@@ -46,7 +46,11 @@ class ArbolView
             padre = nodoActual.getPadre();
             if(padre != null)
             {
-                if(padre.getElemento() == TipoOperadorString.NOT && isOperadorBinario(nodoActual.getElemento()))
+                if(padre.getElemento() == TipoOperadorString.NOT && padre.getPadre() == null)
+                {
+                    nodoActual.x = padre.x;
+                }
+                else if(padre.getElemento() == TipoOperadorString.NOT && isOperadorBinario(nodoActual.getElemento()))
                 {
                     nodoActual.x = padre.x;
                 }

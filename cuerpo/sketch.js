@@ -12,8 +12,8 @@ function setup() {
 //   //var x = operacionBinaria(x1, x2, TipoOperador.BICOND);
 //   let y = operacionUnaria(x2);
 
-//   let arbol = new ArbolBinario();
-//   arbol.setRaiz(new Nodo('', null));
+  let arbol = new ArbolBinario();
+  arbol.setRaiz(new Nodo('', null));
 
 //   algoritmoDescomposicion(arbol.getRaiz(), '((p)'+TipoOperadorString.COND+'(q))'+TipoOperadorString.AND+'(r)');
 
@@ -21,11 +21,15 @@ function setup() {
 	
   
 	// algoritmoDescomposicion(arbol.getRaiz(), '('+TipoOperadorString.NOT+'((p)'+TipoOperadorString.COND+'(q)))'+TipoOperadorString.AND+'(r)');
-	// let fbf = "¬((((p)↔((¬(¬(p)))→((p)V(p))))Ʌ(¬((p)V(p))))V(¬(p)))"
+	let fbf = "¬((((p)↔((¬(¬(q)))→((r)V(s))))Ʌ(¬((t)V(u))))V(¬(x)))";
 	// console.log(fbf); 
-	// algoritmoDescomposicion(arbol.getRaiz(), fbf);
+	ejecutarAlgoritmoDescomposicion(arbol.getRaiz(), fbf);
 	// mostrarArbol(arbol);
-	test();
+	// test();
+	console.log(arbol.postorden(arbol.getRaiz()));
+	arbolView = new ArbolView(arbol);
+	arbolView.show();
+	// genera_tabla();
 }
 
 function draw() {
@@ -103,6 +107,7 @@ function inicializarArgumento()
 
 	console.log(strFormulaCorolario);
 
+
 	construirArbol(strFormulaCorolario);
 }
 
@@ -175,6 +180,8 @@ function construirArbol(strFormula)
 	arbol.setRaiz(new Nodo('', null));
 	ejecutarAlgoritmoDescomposicion(arbol.getRaiz(),strFormula);
 	mostrarArbol(arbol);
+	console.log("El arbol en postorden es")
+	console.log(arbol.postorden(arbol.getRaiz()));
 }
 
 
@@ -710,3 +717,38 @@ function test()
 	console.log(msj);
 
 }
+
+function genera_tabla(matriz) {
+	// Obtener la referencia del elemento body
+	var body = document.getElementsByTagName("body")[0];
+   
+	// Crea un elemento <table> y un elemento <tbody>
+	var tabla   = document.createElement("table");
+	var tblBody = document.createElement("tbody");
+   
+	// Crea las celdas
+	for (var i = 0; i < matriz.length; i++) {
+	  // Crea las hileras de la tabla
+	  var hilera = document.createElement("tr");
+   
+	  for (var j = 0; j < matriz[0].length; j++) {
+		// Crea un elemento <td> y un nodo de texto, haz que el nodo de
+		// texto sea el contenido de <td>, ubica el elemento <td> al final
+		// de la hilera de la tabla
+		var celda = document.createElement("td");
+		var textoCelda = document.createTextNode("celda en la hilera "+i+", columna "+j);
+		celda.appendChild(textoCelda);
+		hilera.appendChild(celda);
+	  }
+   
+	  // agrega la hilera al final de la tabla (al final del elemento tblbody)
+	  tblBody.appendChild(hilera);
+	}
+   
+	// posiciona el <tbody> debajo del elemento <table>
+	tabla.appendChild(tblBody);
+	// appends <table> into <body>
+	body.appendChild(tabla);
+	// modifica el atributo "border" de la tabla y lo fija a "2";
+	tabla.setAttribute("border", "2");
+  }
