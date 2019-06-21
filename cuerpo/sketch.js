@@ -21,15 +21,31 @@ function setup() {
 	
   
 	// algoritmoDescomposicion(arbol.getRaiz(), '('+TipoOperadorString.NOT+'((p)'+TipoOperadorString.COND+'(q)))'+TipoOperadorString.AND+'(r)');
-	let fbf = "¬((((p)↔((¬(¬(q)))→((r)V(s))))Ʌ(¬((t)V(u))))V(¬(x)))";
-	// console.log(fbf); 
-	ejecutarAlgoritmoDescomposicion(arbol.getRaiz(), fbf);
-	// mostrarArbol(arbol);
-	// test();
-	console.log(arbol.postorden(arbol.getRaiz()));
-	arbolView = new ArbolView(arbol);
-	arbolView.show();
-	// genera_tabla();
+	// let fbf = "¬((((p)↔((¬(¬(q)))→((r)V(s))))Ʌ(¬((t)V(u))))V(¬(x)))";
+	// let fbf = "(((p)Ʌ(q))Ʌ(p))Ʌ(¬((p)↔(q)))";
+	// let fbf = "((((p)→(¬(q)))Ʌ((¬(q))→((¬(r))V(s))))Ʌ((p)Ʌ(r)))Ʌ(¬(s))"
+	// // console.log(fbf); 
+	// formasAtomicas = obtenerFormasAtomicas(fbf);
+	// crearMatrizValoresFormasAtomicas(formasAtomicas);
+	// ejecutarAlgoritmoDescomposicion(arbol.getRaiz(), fbf);
+	// // mostrarArbol(arbol);
+	// // test();
+	// console.log("formas atomicas", formasAtomicas);
+	// let msj = "";
+	// for(let i = 0; i < matrizValoresFormasAtomicas.length; i++)
+	// {
+	// 	for(let j = 0; j < matrizValoresFormasAtomicas[0].length; j++)
+	// 	{
+	// 		msj += matrizValoresFormasAtomicas[i][j] + " ";
+	// 	}
+	// 	msj += "\n";
+	// }
+	// console.log(msj);
+	// formulaPostOrden = arbol.postorden(arbol.getRaiz());
+	// apilarYOperar(formulaPostOrden);
+	// arbolView = new ArbolView(arbol);
+	// arbolView.show();
+	// // genera_tabla();
 }
 
 function draw() {
@@ -57,14 +73,6 @@ const TipoOperadorString = {
 	COND: '\u2192',
 	BICOND: '\u2194',
 };
-
-function sumar()
-{
-	let a = parseInt(document.getElementById("numA").value, 10);
-	let b = parseInt(document.getElementById("numB").value, 10);
-	let res = a + b;
-	document.getElementById('result').value = res;
-}
 
 /**
  * Este metodo busca los parrafos que estan en el html. EL de premisas y el de conclusion. Una vez los tiene, 
@@ -108,7 +116,36 @@ function inicializarArgumento()
 	console.log(strFormulaCorolario);
 
 
-	construirArbol(strFormulaCorolario);
+	arbol = construirArbol(strFormulaCorolario);
+
+	console.log("El arbol en postorden es")
+	console.log(arbol.postorden(arbol.getRaiz()));
+	let formulaPostOrden = arbol.postorden(arbol.getRaiz());
+	formasAtomicas = obtenerFormasAtomicas(formulaPostOrden);
+	crearMatrizValoresFormasAtomicas(formasAtomicas);
+	let res = validarArgumento(formulaPostOrden);
+	if(res)
+	{
+		console.log("el argumento es valido");
+	}
+	else
+	{
+		console.log("el argumento es invalido");
+	}
+	
+}
+
+function validarArgumento(formulaPostOrden)
+{
+	result = apilarYOperar(formulaPostOrden);
+	for(let i = 0; i < formulaPostOrden.length; i++)
+	{
+		if(result[i] == 1)
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 /**
@@ -180,8 +217,7 @@ function construirArbol(strFormula)
 	arbol.setRaiz(new Nodo('', null));
 	ejecutarAlgoritmoDescomposicion(arbol.getRaiz(),strFormula);
 	mostrarArbol(arbol);
-	console.log("El arbol en postorden es")
-	console.log(arbol.postorden(arbol.getRaiz()));
+	return arbol;
 }
 
 
@@ -383,8 +419,10 @@ function openCity(evt, cityName) {
   function operarAtomosAnd(atomo1, atomo2){
 
   	if(atomo1 == atomo2 && atomo1 == 1){
+		  console.log("retorno 1");
   		return 1;
   	}else{
+		  console.log("retorno 0");
   		return 0;
   	}
 
@@ -434,27 +472,31 @@ function openCity(evt, cityName) {
   */
 function operacionBinaria(arreglo1, arreglo2, operador){
 
+	console.log("tam1", arreglo1.length, "tam2", arreglo2.length);
+	console.log("elemento1", arreglo1, "elemento2", arreglo2);
 	if(arreglo1.length != arreglo2.length){
   		throw new Error("Error al operar dos funciones");
   	}
 
-	arregloSalida = new Array(arreglo1.length);
-
-	arreglo1.forEach(function(elemento, indice){
-		switch(operador){
-			case TipoOperador.AND : arregloSalida[indice] = (operarAtomosAnd(elemento, arreglo2[indice]));
+	arregloSalida = new Array();
+	arregloSalida.push("result");
+	for(let i = 1; i < arreglo1.length; i++)
+	{
+		switch(operador)
+		{
+			case TipoOperadorString.AND : arregloSalida.push(operarAtomosAnd(arreglo1[i], arreglo2[i]));
 			break;
 
-			case TipoOperador.OR : arregloSalida[indice] = (operarAtomosOr(elemento, arreglo2[indice]));
+			case TipoOperadorString.OR : arregloSalida.push(operarAtomosOr(arreglo1[i], arreglo2[i]));
 			break;
 
-			case TipoOperador.COND : arregloSalida[indice] = (operarAtomoCond(elemento, arreglo2[indice]));
+			case TipoOperadorString.COND : arregloSalida.push(operarAtomoCond(arreglo1[i], arreglo2[i]));
 			break;
 
-			case TipoOperador.BICOND : arregloSalida[indice] = (operarAtomosBicon(elemento, arreglo2[indice]));
+			case TipoOperadorString.BICOND : arregloSalida.push(operarAtomosBicon(arreglo1[i], arreglo2[i]));
 			break;
 		}
-	});
+	}
 
 	return arregloSalida;
 }
@@ -464,15 +506,18 @@ function operacionBinaria(arreglo1, arreglo2, operador){
   */
 function operacionUnaria(arreglo){
 
-	let arregloSalida = new Array(arreglo.length);
+	let arregloSalida = new Array();
+	arregloSalida.push("result");
 
-	arreglo.forEach(function(elemento, indice){
+	for(let i = 1; i< arreglo.length; i++)
+	{
+		let elemento = arreglo[i];
 		if(elemento == 1){
 			arregloSalida.push(0);
 		}else{
 			arregloSalida.push(1);
 		}
-	});
+	}
 
 	return arregloSalida;
 }
@@ -545,58 +590,53 @@ function ejecutarAlgoritmoDescomposicion(nodo, formula){
 
 /**
  * Metodo en construccion que va a apilar lo que hay en el arbol
- * @param {*} matriz Matriz que contiene las combinaciones de 1 y 0 de todas las formas atomicas que hay en la fbf 
  * @param {String} formulaPostOrden 
  */
-function apilarYOperar(matriz, formulaPostOrden)
+function apilarYOperar(formulaPostOrden)
 {
 	arreglo1 = null;
 	arreglo2 = null;
+	let pila = new Array();
 	
+	console.log("la formula en postorden es", formulaPostOrden);
 	//Este for va a recorrer la formula postorden, agrega sus elementos uno por uno en una fila
 	for(let i = 0 ; i < formulaPostOrden.length ; i++)
 	{	
-		pila.push(formulaPostOrden[i]);
-		
-		//Si el tamaño de la fila es de 3, primero buscará los arreglos de unos y ceros de las formas atomicas y posteriormente operará
-		if(pila.length == 3 && pila[2] != TipoOperadorString.NOT)
-		{	
-			operador = pila[2]; //Toma el ultimo elemento ingresado a la pila (debe ser un operador)
-			
-			
-			if(buscarArregloEnMatriz(matriz,pila[0]) != null)
-				arreglo1 = buscarArregloEnMatriz(matriz,pila[0]);//El id es la letra 0 de la pila
-
-			
-			arreglo2 = buscarArregloEnMatriz(matriz,pila[1]);//El id es la letra 1 de la pila
-			
-			//Captura el arreglo resusltante de la operacion binaria
-			arreglo1 = operacionBinaria(arreglo1,arreglo2,operador); 
-			//Se lo asigna a la primer posicion de la fila para que en la siguiente iteracion
-			
-			pila.pop();				//Vacio la pila
-			pila.pop();				//Vacio la pila
-			pila.pop();				//Vacio la pila
-
-			pila.push(arreglo1);	//Pongo la nueva posicion en la pila
-
-		}
-
-		if(pila.length == 3 && pila[2] == TipoOperadorString.NOT)
-		{	
-
-			operador = pila[2];
-			arreglo2 = buscarArregloEnMatriz(matriz,pila[1]); //Tiene que ser a2 porque el a1 ya tiene la informacion del arreglo anterior que no se puede perder
-			arreglo2 = operacionUnaria(arreglo2);
-
-
-		}
-
-		if(pila[1] == TipoOperadorString.NOT)
+		let elementoActual = formulaPostOrden[i];
+		console.log("El elemento actual es", elementoActual);
+		if(isOperador(elementoActual))
 		{
-			
+			console.log("es un operador");
+			let atomo1 = pila.pop();
+			console.log("sacar el elemento", atomo1);
+			let arregloResult;
+			if(isOperadorBinario(elementoActual))
+			{
+				console.log("binario");
+				console.log("pila vieja", pila);
+				console.log("sacar elemento");
+				let atomo2 = pila.pop();
+				console.log("pila nueva", pila);
+				console.log("sacar el elemento", atomo2);
+				arregloResult = operacionBinaria(atomo2, atomo1, elementoActual);
+			}
+			else
+			{
+				console.log("unario");
+				arregloResult = operacionUnaria(atomo1);
+			}
+			console.log("el resultado es", arregloResult)
+			pila.push(arregloResult);
+		}
+		else
+		{
+			console.log(elementoActual, "es un atomo, agreguelo");
+			let valorVerdad = buscarArregloEnMatriz(elementoActual);
+			console.log(valorVerdad);
+			pila.push(valorVerdad);
 		}
 	}
+	return pila.pop();
 }
 
 /**
@@ -607,17 +647,35 @@ function apilarYOperar(matriz, formulaPostOrden)
  * @param {*} matriz 
  * @param {*} identificador 
  */
-function buscarArregloEnMatriz(matriz,identificador)
+function buscarArregloEnMatriz(identificador)
 {
+	console.log("verfifiquemos la", identificador);
 	arreglo = null;
 	//El deber de este for es encontrar el arreglo de 1 o 0 de cada forma atomica
 	//Va a buscar mientras no se haya recorrido toda la primera fila de la matriz y 
 	// mientras alguno de los dos arreglos continue siendo nulo.
-	for(let i = 0 ; i < matriz.length && arreglo == null ; i++) 
+	console.log("la matriz de valores es");
+	console.log(matrizValoresFormasAtomicas)
+	let msj = "";
+	for(let i = 0; i < matrizValoresFormasAtomicas.length; i++)
 	{
-		if(matriz[0][i] == identificador) // Busca(en la matriz) el arreglo identificado con el caracter del atomo 
+		for(let j = 0; j < matrizValoresFormasAtomicas[0].length; j++)
 		{
-			arreglo = matriz[i];
+			msj += matrizValoresFormasAtomicas[i][j] + " ";
+		}
+		msj += "\n";
+	}
+	console.log(msj);
+	for(let i = 0 ; i < matrizValoresFormasAtomicas[0].length && arreglo == null ; i++) 
+	{
+		console.log("pos", i, matrizValoresFormasAtomicas[0][i], "ide", identificador);
+		if(matrizValoresFormasAtomicas[0][i] == identificador) // Busca(en la matriz) el arreglo identificado con el caracter del atomo 
+		{
+			arreglo = new Array();
+			for(let j = 0; j < matrizValoresFormasAtomicas.length; j++)
+			{
+				arreglo[j] = matrizValoresFormasAtomicas[j][i];
+			}
 		}
 		
 	}
@@ -672,18 +730,6 @@ function obtenerFormasAtomicas(formula){
 	return arregloFormas;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * Metodo que me dice si un operador es de tipo binario o no
  * @param {String} operador 
@@ -691,6 +737,19 @@ function obtenerFormasAtomicas(formula){
 function isOperadorBinario(operador)
 {
 	if(operador == TipoOperadorString.OR || operador == TipoOperadorString.AND || operador == TipoOperadorString.COND || operador == TipoOperadorString.BICOND)
+	{
+		return true;
+	}
+	return false;
+}
+
+/**
+ * si es un operador
+ * @param {String} operador 
+ */
+function isOperador(operador)
+{
+	if(operador == TipoOperadorString.OR || operador == TipoOperadorString.AND || operador == TipoOperadorString.COND || operador == TipoOperadorString.BICOND || operador == TipoOperadorString.NOT)
 	{
 		return true;
 	}
