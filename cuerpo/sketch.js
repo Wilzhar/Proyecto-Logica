@@ -46,6 +46,9 @@ function setup() {
 	// arbolView = new ArbolView(arbol);
 	// arbolView.show();
 	// // genera_tabla();
+	test();
+	fa = "p";
+console.log("Forma atomica"+fa+" es: "+validarFormasAtomicas(fa));
 }
 
 function draw() {
@@ -84,37 +87,48 @@ function inicializarArgumento()
 {
 	
 	strPremisas = document.getElementById("formulasValidas").innerHTML;
-	strConsecuencia = document.getElementById("conclusion").innerHTML;
+	strConclusion = document.getElementById("conclusion").innerHTML;
 	arregloFormulas = strPremisas.split("<br>");
+	arregloFormulas.push(TipoOperadorString.NOT+"("+strConclusion+")");
 	strFormulaCorolario = "";
-	console.log(strPremisas);
+	console.log("CONCLUSION: "+strConclusion);
 
-	for(var premisaTemp of arregloFormulas)
+	if(arregloFormulas.length >= 2 && strConclusion != "") //Si hay minimo dos premisas y una conclusion
 	{
-		if(premisaTemp.length == 1 || premisaTemp[0] == TipoOperadorString.NOT )
-		{
-			strFormulaCorolario += "("+premisaTemp+")"+'\u0245';
-		}
-		else
-		{
-			strFormulaCorolario+= premisaTemp+'\u0245';
-		}
-
 		
+		
+		
+		strFormulaCorolario = construirFormulaPremisas(arregloFormulas,"",0);
+		console.log("Fbf completa: "+strFormulaCorolario);
+		construirArbol(strFormulaCorolario);
+
 	}
-	
-	console.log(strFormulaCorolario);
+	else
+	{
+		alert("Deben haber minimo 2 premisas y una conclusion para construir un argumento.")
+	}	
+}
 
-	strFormulaCorolario = construirFormulaPremisas(strFormulaCorolario);
+/**
+ * Este metodo verifica que la formula no tenga subcadenas tipo : "pp", "pppp",...etc
+ * Si las tiene, pues arroja un error.
+ * @param {*} strFormula 
+ */
+function validarFormasAtomicas(strFormula)
+{
+	chActual = null;
+	chSiguiente = null;
 
-	console.log(strFormulaCorolario);
+	for(let i = 0 ; i < strFormula.length ; i++)
+	{
+		chActual = strFormula[i];
+		chSiguiente = strFormula[i+1];
 
-	strFormulaCorolario+= "("+'\u00AC'+"("+strConsecuencia+"))";
-	
-	strFormulaCorolario = strFormulaCorolario.substring(1,strFormulaCorolario.length)
-
-	console.log(strFormulaCorolario);
-
+		if(chActual > 96 && chActual < 123 && chSiguiente > 96 && chSiguiente < 123 )
+		{
+			return false;
+		}
+	}
 
 	arbol = construirArbol(strFormulaCorolario);
 
@@ -148,62 +162,38 @@ function validarArgumento(formulaPostOrden)
 	return true;
 }
 
+
 /**
  * Este metodo recibe la formula de solo premisas y hace parejas de subformulas (las proteje con parentesis), ya que
  * el metodo ejecutarAlgoritmoDescomposicion solo opera de a dos subformulas por vez.
  * @param {*} formula 
  */
-function construirFormulaPremisas(formula)
+function construirFormulaPremisas(arregloPremisas, solucion, i)
 {
-	let posicion = 0;
-	segundoUno = 0;
-	formula = "("+formula;
-	tamVariable = formula.length;
-	console.log("Formula antes del for: "+formula+" su tamanio: "+tamVariable);
-	for(let i=0; i<tamVariable; i++){
-	
-		
-
-		if(formula[i] == '('){
-			console.log('sumo');
-			posicion++;
-			
-		}else if(formula[i] == ')'){
-			console.log('resto');
-			posicion--;
-
-			if(posicion == 1)
-			{
-				segundoUno+=1;
-				console.log("parentesis con 1 "+ segundoUno );
-			}
+	if(i == arregloPremisas.length)
+	{
+		return solucion;
+	}
+	else
+	{
+		if(i == 0)
+		{
+			solucion = "("+arregloPremisas[i]+")"+TipoOperadorString.AND+"("+arregloPremisas[i+1]+")";
+			console.log("Primera "+solucion);
+			i+=2;
+			return construirFormulaPremisas(arregloPremisas,solucion,i);
 		}
+		else{
 
-		
+			solucion = "("+solucion+")"+TipoOperadorString.AND+"("+arregloPremisas[i]+")";
+			console.log("Siguiente "+solucion);
+			i++;
+			return construirFormulaPremisas(arregloPremisas,solucion,i);
 
-		if(posicion == 1 && segundoUno == 2){
-
-			console.log("ENTRO!!!!");
-			console.log("Posicion: "+posicion);
-			console.log("Segundo uno"+segundoUno);
-			//Aca se toma la formula y se dividira en tres partes, se agregara un parentesis de cierre a la primera parte
-			//y se agregara un parentesis de apertura antes de la segunda parte
-			parte1Formula = formula.substring(0,i+1);	//Captura de la primera parte (hasta el segundo uno) y el Op principal
-			
-			parte2Formula = formula.substring(i+1,formula.length+1);
-			console.log("parte1: "+parte1Formula+" parte2: "+parte2Formula);
-
-			formula = "("+parte1Formula+")"+parte2Formula;
-
-			console.log(formula);
-			i = 0;
-			tamVariable+=2;
-			segundoUno = 0;
 		}
-		
 	}
 
-	return formula;
+
 }
 
 /**
@@ -688,10 +678,8 @@ function buscarArregloEnMatriz(identificador)
 
 }
 
-/*
- * Metodo para verificar si una tomo se encuentra dentro de la lista actual de atomos encontrados en la cadena(formula en LP)
- * @arregloFormas el arreglo de atomos
- * @atomo el atomo a verificar en el arreglo
+/**
+ * Veridfica si hay un atomo repetido en el arreglo 
  */
 function verificarAtomoRepetido(arregloFormas, atomo){
 
@@ -705,7 +693,6 @@ function verificarAtomoRepetido(arregloFormas, atomo){
 	
 	return flag;
 }
-
 /**
  * Metodo para crear una lista de atomos que esten en la cadena(formula en LP)
  * @arregloFormas el arreglo de atomos
@@ -729,8 +716,8 @@ function obtenerFormasAtomicas(formula){
 
 	return arregloFormas;
 }
-
 /**
+ * 
  * Metodo que me dice si un operador es de tipo binario o no
  * @param {String} operador 
  */
