@@ -33,6 +33,7 @@ body{
 	padding-left:5%;
 	padding-right:5%;
 	padding-top: 20px;
+	min-height: 280px;
 	float: right;
 	text-align: center;
 	background-color: #38800F;

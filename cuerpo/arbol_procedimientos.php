@@ -15,13 +15,11 @@
     <script src="arbolGrafico.js"></script>
   </head>
   <body>
-    <container>
       <p>
         <?php 
             echo "Hola mundo";
         ?>
       </p>
     
-    </container>
   </body>
 </html>
