@@ -61,6 +61,21 @@ class ArbolBinario
 			this.preorden(nodo.getDerecho());
 		}
 	}
+
+	postorden(nodo){
+    	
+		if(nodo == null) 
+		{
+			return;
+		}
+		else 
+		{	let aux = "";		
+			aux += this.postorden(nodo.getIzquierdo()) + "";
+			aux += this.postorden(nodo.getDerecho()) + "";
+			return aux + nodo.getElemento()+ "";
+		}
+	
+    }
 	
 	obtenerMenorRec(nodo) 
 	{
