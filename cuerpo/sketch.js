@@ -78,38 +78,15 @@ const TipoOperadorString = {
 };
 
 /**
- * Este metodo busca los parrafos que estan en el html. EL de premisas y el de conclusion. Una vez los tiene, 
- * hace split a la cadena de premisas, estas quedan en un arreglo de premisas. Se unen por medio de disyunciones y al final se 
- * une por medio de una disyuncion la negacion de la conclusion.
- * Para quedar una formula con exceso de parentesis.
+ * Ejecuta la aplicacion
  */
-function inicializarArgumento()
+function desplegarAplicacion()
 {
+	strFormulaCorolario = splitPremisas();
 	
-	strPremisas = document.getElementById("formulasValidas").innerHTML;
-	strConclusion = document.getElementById("conclusion").innerHTML;
-	arregloFormulas = strPremisas.split("<br>");
-	arregloFormulas.push(TipoOperadorString.NOT+"("+strConclusion+")");
-	strFormulaCorolario = "";
-	console.log("CONCLUSION: "+strConclusion);
-
-	if(arregloFormulas.length >= 2 && strConclusion != "") //Si hay minimo dos premisas y una conclusion
-	{
-		
-		
-		
-		strFormulaCorolario = construirFormulaPremisas(arregloFormulas,"",0);
-		console.log("Fbf completa: "+strFormulaCorolario);
-		construirArbol(strFormulaCorolario);
-
-	}
-	else
-	{
-		alert("Deben haber minimo 2 premisas y una conclusion para construir un argumento.")
-	}
-
+	
 	arbol = construirArbol(strFormulaCorolario);
-
+	
 	console.log("El arbol en postorden es")
 	console.log(arbol.postorden(arbol.getRaiz()));
 	let formulaPostOrden = arbol.postorden(arbol.getRaiz());
@@ -124,7 +101,38 @@ function inicializarArgumento()
 	{
 		console.log("el argumento es invalido");
 	}
+	
+}
 
+/**
+ * Metodo para particionar las premisas en arreglos
+ * Concatena las premisas por medio de AND y la negacion de la conclusion usando del colorario
+ */
+function splitPremisas()
+{
+	strPremisas = document.getElementById("formulasValidas").innerHTML;
+	strConclusion = document.getElementById("conclusion").innerHTML;
+	arregloFormulas = strPremisas.split("<br>");
+	arregloFormulas.push(TipoOperadorString.NOT+"("+strConclusion+")");
+	console.log("CONCLUSION: "+strConclusion);
+	strFormulaCorolario = "";
+	
+	if(arregloFormulas.length >= 2 && strConclusion != "") //Si hay minimo dos premisas y una conclusion
+	{
+		
+		
+		
+		strFormulaCorolario = construirFormulaPremisas(arregloFormulas,"",0);
+		console.log("Fbf completa: "+strFormulaCorolario);
+		construirArbol(strFormulaCorolario);
+		
+	}
+	else
+	{
+		alert("Deben haber minimo 2 premisas y una conclusion para construir un argumento.")
+	}
+
+	return strFormulaCorolario;
 }
 
 /**
