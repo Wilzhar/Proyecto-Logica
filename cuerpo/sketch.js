@@ -106,7 +106,25 @@ function inicializarArgumento()
 	else
 	{
 		alert("Deben haber minimo 2 premisas y una conclusion para construir un argumento.")
-	}	
+	}
+
+	arbol = construirArbol(strFormulaCorolario);
+
+	console.log("El arbol en postorden es")
+	console.log(arbol.postorden(arbol.getRaiz()));
+	let formulaPostOrden = arbol.postorden(arbol.getRaiz());
+	formasAtomicas = obtenerFormasAtomicas(formulaPostOrden);
+	crearMatrizValoresFormasAtomicas(formasAtomicas);
+	let res = validarArgumento(formulaPostOrden);
+	if(res)
+	{
+		console.log("el argumento es valido");
+	}
+	else
+	{
+		console.log("el argumento es invalido");
+	}
+
 }
 
 /**
@@ -130,31 +148,15 @@ function validarFormasAtomicas(strFormula)
 		}
 	}
 
-	arbol = construirArbol(strFormulaCorolario);
-
-	console.log("El arbol en postorden es")
-	console.log(arbol.postorden(arbol.getRaiz()));
-	let formulaPostOrden = arbol.postorden(arbol.getRaiz());
-	formasAtomicas = obtenerFormasAtomicas(formulaPostOrden);
-	crearMatrizValoresFormasAtomicas(formasAtomicas);
-	let res = validarArgumento(formulaPostOrden);
-	if(res)
-	{
-		console.log("el argumento es valido");
-	}
-	else
-	{
-		console.log("el argumento es invalido");
-	}
+	
 	
 }
 
-function validarArgumento(formulaPostOrden)
+function validarArgumento(arregloFormulaPostOrden)
 {
-	result = apilarYOperar(formulaPostOrden);
-	for(let i = 0; i < formulaPostOrden.length; i++)
+	for(let i = 0; i < arregloFormulaPostOrden.length; i++)
 	{
-		if(result[i] == 1)
+		if(arregloFormulaPostOrden[i] == 1)
 		{
 			return false;
 		}
