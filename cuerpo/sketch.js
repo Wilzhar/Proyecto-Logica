@@ -48,9 +48,11 @@ function setup() {
 	// arbolView = new ArbolView(arbol);
 	// arbolView.show();
 	// // genera_tabla();
-	// test();
-	fa = "p";
-console.log("Forma atomica"+fa+" es: "+validarFormasAtomicas(fa));
+
+	test();
+	//fa = "p";
+	//console.log("Forma atomica"+fa+" es: "+validarFormasAtomicas(fa));
+
 }
 
 function draw() {
@@ -86,7 +88,6 @@ function desplegarAplicacion()
 {
 	strFormulaCorolario = splitPremisas();
 	
-	
 	arbol = construirArbol(strFormulaCorolario);
 	mostrarArbol(arbol);
 	
@@ -100,10 +101,12 @@ function desplegarAplicacion()
 	let res = validarArgumento(finalResult);
 	if(res)
 	{
+		document.getElementById("argumentoValido").innerHTML = "El argumento es válido.";
 		console.log("el argumento es valido");
 	}
 	else
 	{
+		document.getElementById("argumentoValido").innerHTML = "El argumento no es valido";
 		console.log("el argumento es invalido");
 	}
 
@@ -158,12 +161,14 @@ function splitPremisas()
 	strPremisas = document.getElementById("formulasValidas").innerHTML;
 	strConclusion = document.getElementById("conclusion").innerHTML;
 	arregloFormulas = strPremisas.split("<br>");
-	arregloFormulas.push(TipoOperadorString.NOT+"("+strConclusion+")");
-	console.log("CONCLUSION: "+strConclusion);
-	strFormulaCorolario = "";
+	
 	
 	if(arregloFormulas.length >= 2 && strConclusion != "") //Si hay minimo dos premisas y una conclusion
 	{
+
+		arregloFormulas.push(TipoOperadorString.NOT+"("+strConclusion+")");
+		strFormulaCorolario = "";
+
 		strFormulaCorolario = construirFormulaPremisas(arregloFormulas,"",0);
 		console.log("Fbf completa: "+strFormulaCorolario);
 		construirArbol(strFormulaCorolario);
@@ -183,20 +188,35 @@ function splitPremisas()
  * @param {*} strFormula 
  */
 function validarFormasAtomicas(strFormula)
-{
+{	
 	chActual = null;
 	chSiguiente = null;
 
 	for(let i = 0 ; i < strFormula.length ; i++)
 	{
-		chActual = strFormula[i];
-		chSiguiente = strFormula[i+1];
+		chActual = strFormula.charCodeAt(i);
+		chSiguiente = strFormula.charCodeAt(i+1);
 
 		if(chActual > 96 && chActual < 123 && chSiguiente > 96 && chSiguiente < 123 )
 		{
+			alert("La formula "+strFormula+" no es valida." )
+			return false;
+		}
+
+		if(chActual == 41 && chSiguiente > 96 && chSiguiente < 123 )
+		{
+			alert("La formula "+strFormula+" no es valida." )
+			return false;
+		}
+
+		if(chActual > 96 && chActual < 123 && chSiguiente == 40 )
+		{
+			alert("La formula "+strFormula+" no es valida." )
 			return false;
 		}
 	}
+
+	return true;
 
 	
 	
@@ -388,9 +408,10 @@ function verificarPosicionCursor(textField)
  */
 function guardarFormula()
 {
+	
 	let fNueva = document.getElementById("textFormula").value;
 	let antigua =  document.getElementById("formulasValidas").innerHTML;
-	if(fNueva!="")
+	if(fNueva!="" && validarFormasAtomicas(fNueva))
 	{
 		if(document.getElementById("cbConclusion").checked)
 		{
@@ -412,6 +433,7 @@ function guardarFormula()
 	}
 	else{
 		alert("Por favor ingrese una formula correcta.");
+		document.getElementById("textFormula").value = "";
 	}
 	
 }
@@ -875,7 +897,7 @@ function generarTabla(matriz) {
 
 	console.log("((((((((((((((((((((((((((((((((((", tablaValores.length, tablaValores[0].length)
 	// Obtener la referencia del elemento body
-	let body = document.getElementsByTagName("body")[0];
+	let body = document.getElementById("argumentoValido");
    
 	// Crea un elemento <table> y un elemento <tbody>
 	let tabla   = document.createElement("table");
@@ -904,8 +926,7 @@ function generarTabla(matriz) {
 	tabla.appendChild(tblBody);
 	// appends <table> into <body>
 	body.appendChild(tabla);
-	// modifica el atributo "border" de la tabla y lo fija a "2";
-	tabla.setAttribute("border", "2");
+	
   }
 
   /**

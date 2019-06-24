@@ -1,5 +1,5 @@
 body{
-	background-color: #66E61C;
+	background-color: rgba(98, 197, 17, 0.884);
 	padding: 5%;
 }
 
@@ -7,7 +7,8 @@ body{
 	padding:20px;
 	margin:auto;
 	text-align: center;
-	background-color: #38800F;
+	
+	background-image: linear-gradient(to right, rgb(42, 189, 54) , rgb(94, 190, 4));
 	border-style: solid;
 	border-width: 4px;
 	border-radius: 15px;
@@ -21,7 +22,7 @@ body{
 	padding-right: 1%;
 	padding-top: 20px;
 	float: left;
-	background-color: #38800F;
+	background-image: linear-gradient(to right, #237518 , rgb(86, 170, 8));
 	border-style: solid;
 	border-width: 4px;
 	border-radius: 15px;
@@ -33,10 +34,10 @@ body{
 	padding-left:5%;
 	padding-right:5%;
 	padding-top: 20px;
-	min-height: 280px;
+	min-height: 350px;
 	float: right;
 	text-align: center;
-	background-color: #38800F;
+	background-image: linear-gradient(to right,  #237518 , rgb(86, 170, 8));
 	border-style: solid;
 	border-width: 4px;
 	border-radius: 15px;
@@ -46,6 +47,20 @@ body{
 #cajaCentral{
 
 	text-align: center;
+	float: center;
+}
+
+table{
+	border-collapse: collapse;
+	float: center;
+	width: 100%;
+}
+
+table,th,td,tr{
+	border-style: solid;
+	border-color: rgb(23, 58, 3);
+	border-width: 3px;
+	
 }
 
 .panelBotones{
@@ -53,9 +68,10 @@ body{
 	padding: 20 px;
 	margin: 30px;
 	text-align: center;
-	border-style: double;
-	border-width: 4px;
+	border-style: solid;
+	border-width: 2px;
 	border-color: rgb(0,0,0);
+	border-radius: 10px;
 
 }
 
@@ -63,12 +79,17 @@ body{
 .boton{
 
 	display: inline-block;
-	background-color: rgb(138, 241, 78);
+	background-color: rgb(168, 255, 128);
+	padding: 10px;
 	border:solid 1px transparent;
 	min-width: 50px;
 	margin: 5px;
-	border: 1px solid rgb(12, 29, 3);
-
+	border: 3px solid rgb(12, 29, 3);
+	border-radius: 10px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #119100;
+	text-shadow: 1px 0 0 rgb(0, 66, 0);
 }
 
 .clear{
@@ -78,8 +99,14 @@ body{
 .areasTexto{
  	width: 90%;
 	border-radius: 10px;
+	font-size: 30px;
 	height: 30px;
 	text-align: center;
+}
+
+p{
+	text-transform: lowercase;
+	font-size: 20px;
 }
 
 /* Style the tab */
@@ -127,9 +154,9 @@ body{
 
   h1{
 	  text-align: center;
-	  color: rgb(108, 214, 38);
+	  color: rgb(22, 48, 4);
 	  font-family: serif;
-	  text-shadow: 2px 0 0 rgb(0, 0, 0);
+	  text-shadow: 1px 0 0 rgb(0, 255, 0);
 	 
   }
 
