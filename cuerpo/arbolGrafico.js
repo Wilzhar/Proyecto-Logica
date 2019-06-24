@@ -13,11 +13,11 @@ class ArbolView
         this.altura = this.arbol.calcularAltura(this.arbol.getRaiz(), 0, 0);
         if(this.arbol.getRaiz() == TipoOperadorString.NOT)
         {
-            this.altura= this.altura - 3;
+            this.altura= this.altura - 2.5;
         }
         else
         {
-            this.altura= this.altura - 2;
+            this.altura= this.altura - 1.5;
         }
         createCanvas(pow(2, this.altura) * (this.scale + (this.scale / 2)) , this.altura * this.scale * 2);
         // createCanvas(pow(2, this.altura) * (3*this.scale/4) , this.altura * this.scale * 1.5);

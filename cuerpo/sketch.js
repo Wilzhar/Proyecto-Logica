@@ -2,6 +2,8 @@
  * Matriz que me guarda los valores de verdad de las formas atomicas encontradas
  */
 var matrizValoresFormasAtomicas;
+var tablaValores;
+var contCol;
 
 function setup() {
   // put setup code here
@@ -46,9 +48,11 @@ function setup() {
 	// arbolView = new ArbolView(arbol);
 	// arbolView.show();
 	// // genera_tabla();
+
 	test();
 	//fa = "p";
 	//console.log("Forma atomica"+fa+" es: "+validarFormasAtomicas(fa));
+
 }
 
 function draw() {
@@ -85,13 +89,16 @@ function desplegarAplicacion()
 	strFormulaCorolario = splitPremisas();
 	
 	arbol = construirArbol(strFormulaCorolario);
+	mostrarArbol(arbol);
 	
 	console.log("El arbol en postorden es")
 	console.log(arbol.postorden(arbol.getRaiz()));
 	let formulaPostOrden = arbol.postorden(arbol.getRaiz());
 	formasAtomicas = obtenerFormasAtomicas(formulaPostOrden);
 	crearMatrizValoresFormasAtomicas(formasAtomicas);
-	let res = validarArgumento(formulaPostOrden);
+	generarTablaVerdad(formulaPostOrden);
+	let finalResult = apilarYOperar(formulaPostOrden);
+	let res = validarArgumento(finalResult);
 	if(res)
 	{
 		document.getElementById("argumentoValido").innerHTML = "El argumento es válido.";
@@ -102,12 +109,52 @@ function desplegarAplicacion()
 		document.getElementById("argumentoValido").innerHTML = "El argumento no es valido";
 		console.log("el argumento es invalido");
 	}
+
+	generarTabla(tablaValores);
 	
+}
+
+
+function generarTablaVerdad(formulaPostOrden)
+{
+	let nOperadores = contarNumeroOperadores(formulaPostOrden);
+	console.log("operadores en la FORMULA", nOperadores, matrizValoresFormasAtomicas[0].length)
+	let filas = matrizValoresFormasAtomicas.length;
+	
+	let columnas = nOperadores + matrizValoresFormasAtomicas[0].length;
+	tablaValores = new Array(filas);
+	for(let i = 0; i < filas; i++)
+	{
+		tablaValores[i] = new Array(columnas)
+		for(let j = 0; j < columnas; j++)
+		{
+			tablaValores[i][j] = 0;
+		}
+	}
+	
+	let flag = true;
+	contCol = 0;
+	for(let j = 0; j < columnas && flag; j++)
+	{
+		for(let i = 0; i < filas && flag; i++)
+		{
+			if(contCol < matrizValoresFormasAtomicas[0].length)
+			{
+				tablaValores[i][j] = matrizValoresFormasAtomicas[i][j];
+			}
+			else{
+				flag = false;
+			}
+		}
+		contCol++;
+	}
+
+	contCol--;
 }
 
 /**
  * Metodo para particionar las premisas en arreglos
- * Concatena las premisas por medio de AND y la negacion de la conclusion usando del colorario
+ * Concatena las premisas por medio de AND y la negacion de la conclusion usando el colorario
  */
 function splitPremisas()
 {
@@ -118,8 +165,10 @@ function splitPremisas()
 	
 	if(arregloFormulas.length >= 2 && strConclusion != "") //Si hay minimo dos premisas y una conclusion
 	{
+
 		arregloFormulas.push(TipoOperadorString.NOT+"("+strConclusion+")");
 		strFormulaCorolario = "";
+
 		strFormulaCorolario = construirFormulaPremisas(arregloFormulas,"",0);
 		console.log("Fbf completa: "+strFormulaCorolario);
 		construirArbol(strFormulaCorolario);
@@ -229,7 +278,6 @@ function construirArbol(strFormula)
 	let arbol = new ArbolBinario();
 	arbol.setRaiz(new Nodo('', null));
 	ejecutarAlgoritmoDescomposicion(arbol.getRaiz(),strFormula);
-	mostrarArbol(arbol);
 	return arbol;
 }
 
@@ -424,7 +472,7 @@ function openCity(evt, cityName) {
   */ 
   function mostrarArbol(arbol)
   {
-	arbolView = new ArbolView(arbol, 80);
+	arbolView = new ArbolView(arbol);
 	arbolView.show();
   }
 
@@ -485,7 +533,7 @@ function openCity(evt, cityName) {
 /**
   *	Metodo para operar dos arreglos de unos (valor de verdad) y ceros (valor de falsedad)
   */
-function operacionBinaria(arreglo1, arreglo2, operador){
+function operacionBinaria(arreglo1, arreglo2, operador, title){
 
 	console.log("tam1", arreglo1.length, "tam2", arreglo2.length);
 	console.log("elemento1", arreglo1, "elemento2", arreglo2);
@@ -494,7 +542,7 @@ function operacionBinaria(arreglo1, arreglo2, operador){
   	}
 
 	arregloSalida = new Array();
-	arregloSalida.push("result");
+	arregloSalida.push(title);
 	for(let i = 1; i < arreglo1.length; i++)
 	{
 		switch(operador)
@@ -519,10 +567,10 @@ function operacionBinaria(arreglo1, arreglo2, operador){
 /**
   *	Metodo obtener la negacion de un arreglo de unos (valor de verdad) y ceros (valor de falsedad) 
   */
-function operacionUnaria(arreglo){
+function operacionUnaria(arreglo, title){
 
 	let arregloSalida = new Array();
-	arregloSalida.push("result");
+	arregloSalida.push(title);
 
 	for(let i = 1; i< arreglo.length; i++)
 	{
@@ -625,6 +673,7 @@ function apilarYOperar(formulaPostOrden)
 			let atomo1 = pila.pop();
 			console.log("sacar el elemento", atomo1);
 			let arregloResult;
+			let title;
 			if(isOperadorBinario(elementoActual))
 			{
 				console.log("binario");
@@ -633,14 +682,17 @@ function apilarYOperar(formulaPostOrden)
 				let atomo2 = pila.pop();
 				console.log("pila nueva", pila);
 				console.log("sacar el elemento", atomo2);
-				arregloResult = operacionBinaria(atomo2, atomo1, elementoActual);
+				title = "(" + atomo2[0] + elementoActual + atomo1[0] + ")";
+				arregloResult = operacionBinaria(atomo2, atomo1, elementoActual, title);
 			}
 			else
 			{
 				console.log("unario");
-				arregloResult = operacionUnaria(atomo1);
+				title = elementoActual + "(" + atomo1[0] + ")";
+				arregloResult = operacionUnaria(atomo1, title);
 			}
 			console.log("el resultado es", arregloResult)
+			agregarALaTabla(arregloResult);
 			pila.push(arregloResult);
 		}
 		else
@@ -785,7 +837,6 @@ function crearMatrizValoresFormasAtomicas(formasAtomicas)
 	for (i = 0; i < filas; i++) {
 		matrizValoresFormasAtomicas[i] = new Array(columnas);
 	}
-	console.log(filas, columnas)
 
 	for(let i = 0; i < columnas; i++)
 	{
@@ -842,25 +893,27 @@ function test()
 
 }
 
-function genera_tabla(matriz) {
+function generarTabla(matriz) {
+
+	console.log("((((((((((((((((((((((((((((((((((", tablaValores.length, tablaValores[0].length)
 	// Obtener la referencia del elemento body
-	var body = document.getElementsByTagName("body")[0];
+	let body = document.getElementsByTagName("body")[0];
    
 	// Crea un elemento <table> y un elemento <tbody>
-	var tabla   = document.createElement("table");
-	var tblBody = document.createElement("tbody");
+	let tabla   = document.createElement("table");
+	let tblBody = document.createElement("tbody");
    
 	// Crea las celdas
-	for (var i = 0; i < matriz.length; i++) {
+	for (let i = 0; i < matriz.length; i++) {
 	  // Crea las hileras de la tabla
-	  var hilera = document.createElement("tr");
+	  let hilera = document.createElement("tr");
    
-	  for (var j = 0; j < matriz[0].length; j++) {
+	  for (let j = 0; j < matriz[0].length; j++) {
 		// Crea un elemento <td> y un nodo de texto, haz que el nodo de
 		// texto sea el contenido de <td>, ubica el elemento <td> al final
 		// de la hilera de la tabla
-		var celda = document.createElement("td");
-		var textoCelda = document.createTextNode("celda en la hilera "+i+", columna "+j);
+		let celda = document.createElement("td");
+		let textoCelda = document.createTextNode(matriz[i][j]);
 		celda.appendChild(textoCelda);
 		hilera.appendChild(celda);
 	  }
@@ -875,4 +928,31 @@ function genera_tabla(matriz) {
 	body.appendChild(tabla);
 	// modifica el atributo "border" de la tabla y lo fija a "2";
 	tabla.setAttribute("border", "2");
+  }
+
+  /**
+   * Agregua un valor de verdad a al tabla para que se muestre graficamente
+   */
+  function agregarALaTabla(arreglo)
+  {
+	  for(let i = 0; i < arreglo.length; i++)
+	  {
+		  tablaValores[i][contCol] = arreglo[i];
+	  }
+	  contCol++;
+  }
+
+  function contarNumeroOperadores(formulaPostOrden)
+  {
+	  let cont = 0;
+	  for(let i = 0 ; i < formulaPostOrden.length; i++)
+	  {
+		  let elementoActual = formulaPostOrden[i]
+		  if(isOperador(elementoActual))
+		  {
+			  cont++;
+		  }
+	  }
+
+	  return cont;
   }
