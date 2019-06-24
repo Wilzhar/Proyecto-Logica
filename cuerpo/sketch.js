@@ -897,7 +897,7 @@ function generarTabla(matriz) {
 
 	console.log("((((((((((((((((((((((((((((((((((", tablaValores.length, tablaValores[0].length)
 	// Obtener la referencia del elemento body
-	let body = document.getElementsByTagName("body")[0];
+	let body = document.getElementById("argumentoValido");
    
 	// Crea un elemento <table> y un elemento <tbody>
 	let tabla   = document.createElement("table");
@@ -926,8 +926,7 @@ function generarTabla(matriz) {
 	tabla.appendChild(tblBody);
 	// appends <table> into <body>
 	body.appendChild(tabla);
-	// modifica el atributo "border" de la tabla y lo fija a "2";
-	tabla.setAttribute("border", "2");
+	
   }
 
   /**
