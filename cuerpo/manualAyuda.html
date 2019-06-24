@@ -1,50 +1,560 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>p5.js example</title>
-    <style> body {padding: 0; margin: 0;} </style>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="../p5.min.js"></script>
-    <script src="../addons/p5.dom.min.js"></script>
-    <script src="../addons/p5.sound.min.js"></script>
-    <script src="sketch.js"></script>
-    <script src="arbol.js"></script>
-    <script src="nodo.js"></script>
-    <script src="arbolGrafico.js"></script>
 
-  </head>
-  <body>
-    <container>
-     <content>
-      <div id = "informacionCentral">
-        
-         <!-- Tab links -->
-         <div class="tab">
-          <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-          <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-          <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>p5.js example</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="../p5.min.js"></script>
+  <script src="../addons/p5.dom.min.js"></script>
+  <script src="../addons/p5.sound.min.js"></script>
+  <script src="sketch.js"></script>
+  <script src="arbol.js"></script>
+  <script src="nodo.js"></script>
+  <script src="arbolGrafico.js"></script>
+
+</head>
+
+<body>
+  <container>
+    <content>
+      <div id="informacionCentral">
+
+        <!-- Tab links -->
+        <div class="tab">
+          <button class="tablinks" onclick="abrirManual(event, 'marcoTeorico')">Marco Teórico</button>
+          <button class="tablinks" onclick="abrirManual(event, 'comoFunciona')">¿Cómo Funciona?</button>
+          <button class="tablinks" onclick="abrirManual(event, 'comoUsarlo')">¿Cómo Usarlo?</button>
         </div>
-        
+
         <!-- Tab content -->
-        <div id="London" class="tabcontent">
-          <h3>London</h3>
-          <p>London is the capital city of England.</p>
-        </div>
-        
-        <div id="Paris" class="tabcontent">
-          <h3>Paris</h3>
+        <div id="marcoTeorico" class="tabcontent">
+          <h3 class="title">Introducción</h3>
+          <p>El ser humano en sus actividades cotidianas debe comunicarse, esta comunicación puede
+            realizarse de diversas maneras, una de ellas es la comunicación por medio de un lenguaje el
+            cual puede estar constituido entre otras por frases interrogativas, imperativas y frases declarativas.
+            Sólo a través de estas últimas es posible una descripción del conocimiento.<br /><br />
+            La lógica provee los elementos necesarios para representar el conocimiento a través de
+            métodos de formalización de las frases declarativas. En este capítulo se trabajará la lógica
+            proposicional desde las frases declarativas simples (enunciados o proposiciones) que son los
+            elementos básicos de transmisión del conocimiento humano.
+          </p>
+          <h3 class="title">Proposiciones</h3>
+          <p>
+            Una proposición matemática es un enunciado o expresiones que tienen un significado determinado y que
+            mediante un criterio definido
+            puede ser clasificada inequivocamente como verdadera o falsa. Una proposición es una frase o enunciado que
+            puede ser evaluada con
+            un valor de verdadero o falso. En lenguajes naturales tales como el español, alemán, inglés,
+            entre otros, las proposiciones no pueden ser imperativas o interrogativas, únicamente pueden
+            ser declarativas.
+          </p>
+          <h3>Ejemplos:</h3>
+          <p> De acuerdo a lo anterior los siguientes enunciados son proposiciones:<br />
+            - Los estudiantes van a la marcha.<br />
+            - Los domingos se descansa.<br />
+            - El que madruga se lleva lo mejor.<br />
+            - Java es un lenguaje de programación.<br />
+            - 5 es un número impar.<br />
+            - 9 es un número compuesto.<br /><br />
+            Hay algunos enunciados que no son proposiciones:<br />
+            - ¿Quién soy?<br />
+            - ¡Hola amigo!<br />
+            - ¿Qué hora es?<br /><br />
+
+            Las proposiciones de forma tradicional se representan con letras minúsculas del alfabeto
+            p, q, r, s, t, ..., cada una de estas letras puede recibir el nombre de átomo. La forma de representación
+            será la siguiente:<br />
+            - p : enunciado o proposición.<br />
+            - p : 2 × 3 = 6.<br />
+            - q : 3x + 4z = 8.<br />
+            - r : 7
+            < 3.<br />
+            - t : Egipto está ubicado en Asia.<br />
+            - u : Las leonas no son las campeonas.<br />
+            - v : Java es un lenguaje de programación orientado a objetos.<br />
+          </p>
+          <h3 class="title">Negación de una Proposición</h3>
+          <p>Negar una proposición matemática es convertirla en falsa si es verdadera o en verdadera,
+            si es falsa, el símbolo de la negación es "&not;".</p>
+          <h3>Ejemplos:</h3>
+          <p>
+            Algunos ejemplos de frases en las que aparece la negación son los siguientes:</p>
+          - No p.<br />
+          - Es falso p.<br />
+          - No es cierto p.<br /><br />
+          El símbolo de la negación (&not;) es un operador unario, inicialmente lo aplicaremos a los átomos, pero después
+          se mostrara como aplicarlo a una expresión compuesta. A continuación se
+          muestran ejemplos en los cuales se aplica la negación de una proposición a los átomos.
+          </p>
+          <table style="width:100%">
+            <tr>
+              <th>Valor de verdad de la proposición</th>
+              <th>Valor de verdad de la negación de la proposición</th>
+            </tr>
+            <tr>
+              <td>v(q) = Falso</td>
+              <td>v(¬q) = Verdadero</td>
+            </tr>
+            <tr>
+              <td>v(¬p) = Verdadero</td>
+              <td>v(p) = Falso</td>
+            </tr>
+            <tr>
+              <td>v(s) = Verdadero</td>
+              <td>v(¬s) = Falso</td>
+            </tr>
+          </table>
+
+
+
+          <h3 class="title">Conectivos Lógicos</h3>
+          <p>
+            Las proposiciones compuestas se unen por medio de conectivos lógicos, los cuales son
+            operadores que permiten combinar proposiciones para formar otras. Las proposiciones compuestas tienen mucha
+            capacidad de expresión dentro de la lógica. A continuación se muestran
+            los conectivos lógicos principales.
+          </p>
+
+          <table style="width:100%">
+            <tr>
+              <th>NOMBRE</th>
+              <th>CONECTIVO LÓGICO</th>
+              <th>SÍMBOLO</th>
+            </tr>
+            <tr>
+              <td>Conjunción</td>
+              <td>y</td>
+              <td>&#94;</td>
+            </tr>
+            <tr>
+              <td>Disyunción</td>
+              <td>o</td>
+              <td>v</td>
+            </tr>
+            <tr>
+              <td>Condicional</td>
+              <td>si... entonces</td>
+              <td>&#8594;</td>
+            </tr>
+            <tr>
+              <td>BIcondicional</td>
+              <td>si y sólo si</td>
+              <td>&#8596;</td>
+            </tr>
+          </table>
+
+          <h3 class="title">Argumentos en lógica</h3>
+          <p>
+            Por un argumento se entiende un razonamiento utilizado para defender una idea(tesis o conclusión) o para
+            convencer
+            a otros de la verdad de un enunciado.
+          </p>
+          <h3>Definición:</h3>
+          <p>Es una secuencia finita de enunciados. El ultimo enunciado es la conclusión(cuando se encuentra en forma
+            estándar)
+            mientras que los demas son premisas del argumento.
+          </p>
+          <h3>Ejemplo:</h3>
+          <p>
+            Si pedro estudia logica, entonces pedro es capaz de argumentar.<br />
+            Pedro estudia logica.<br />
+            ______________________________________________________________<br />
+            Pedro es capaz de argumentar<br /><br />
+
+            Traducido al lenguaje proposicional usando formas atomicas y los conectores lógicos:<br /><br />
+            p : pedro estudia logica.<br />
+            q : pedro es capaz de argumentar.<br /><br />
+            Quedará de la siguiente manera<br /><br />
+            p&#8594;q<br />
+            p<br />
+            ______<br />
+            q
+
+          </p>
+          <h3 class="title">Tablas de verdad</h3>
+          <p>A continuación se muestran las tablas de verdad de los conectivos lógicos mensionados anteriormente.</p>
+          <h3>Notación de las tablas</h3>
+          <p>En las siguientes tablas se colocará 1 para refererirse al valor de verdad Verdadero(V) y 0 para
+            refererirse al valor de verdad Falso(F)</p>
+          <h3 class="title">Negación</h3>
+          <table align="center">
+            <tr>
+              <th>p</th>
+              <th>&not;p</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+          </table>
+          <h3 class="title">Conjunción</h3>
+          <table align="center">
+            <tr>
+              <th>p</th>
+              <th>q</th>
+              <th>p&#94;q</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </table>
+          <h3 class="title">Disyunción</h3>
+          <table align="center">
+            <tr>
+              <th>p</th>
+              <th>q</th>
+              <th>pvq</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </table>
+          <h3 class="title">Condicional</h3>
+          <table align="center">
+            <tr>
+              <th>p</th>
+              <th>q</th>
+              <th>p&#8594;q</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+          </table>
+          <h3 class="title">Bicondicional</h3>
+          <table align="center">
+            <tr>
+              <th>p</th>
+              <th>q</th>
+              <th>p&#8596;q</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+          </table>
+
+          <h3 class="title">Clasificación de las formulas de acuerdo al resultado de sus tablas de verdad</h3>
+          <h3>Tautología</h3>
+          <p>Es una proposición compuesta cuya tabla de verdad es siempre verdadera (V o 1),
+            independientemente de los valores de verdad de las proposiciones simples que la componen.
+          </p>
+          <h3>Ejemplo:</h3>
+          <p>&not;(p &#94; q) &#8596; (&not;p ∨ &not;q)</p>
+          <table align="center">
+            <tr>
+              <th>&not; </th>
+              <th>(p</th>
+              <th>&#94;</th>
+              <th>q)</th>
+              <th>&#8596;</th>
+              <th>(&not;p</th>
+              <th>v</th>
+              <th>&not;q)</th>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td class="resaltadoCelda">1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td class="resaltadoCelda">1</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td class="resaltadoCelda">1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td class="resaltadoCelda">1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+          </table>
+          <h3>Contradicción</h3>
+          <p>Una proposición cuya tabla de verdad es toda falsa (F o 0), independientemente de los valores
+            de verdad de las proposiciones simples que la componen.
+          </p>
+          <h3>Ejemplo:</h3>
+          <p>&not;(p v q) &#8596; (p v q)</p>
+          <table align="center">
+            <tr>
+              <th>&not;</th>
+              <th>(p</th>
+              <th>v</th>
+              <th>q)</th>
+              <th>&#8596;</th>
+              <th>(p</th>
+              <th>v</th>
+              <th>q)</th>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td class="resaltadoCelda">0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td class="resaltadoCelda">0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td class="resaltadoCelda">0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td class="resaltadoCelda">0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </table>
+
+          <h3>Indeterminación</h3>
+          <p>Es una proposición compuesta cuya tabla de verdad siempre posee falsedad (F o 0) y verdad (V o 1)
+          </p>
+          <h3>Ejemplo:</h3>
+          <p>(p v q) &#8594; p</p>
+          <table align="center">
+            <tr>
+              <th>(p</th>
+              <th>v</th>
+              <th>q)</th>
+              <th>&#8594;</th>
+              <th>p</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td class="resaltadoCelda">1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td class="resaltadoCelda">1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td class="resaltadoCelda">0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td class="resaltadoCelda">1</td>
+              <td>0</td>
+            </tr>
+          </table>
+          <h3 class="title">Satisfacibilidad y consecuencia lógica</h3>
+          <h3>Interpretación</h3>
+          <p>Es una asignación de valores de verdad de los atomos(variables) de una molecula &alpha;(es una linea de la
+            tabla de verdad, se denota I)</p>
+          <table align="center">
+            <tr>
+              <th></th>
+              <th>p</th>
+              <th>v</th>
+              <th>q</th>
+            </tr>
+            <tr>
+              <td class="resaltadoCelda">I1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td class="resaltadoCelda">I2</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td class="resaltadoCelda">I3</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td class="resaltadoCelda">I4</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </table>
+          <h3>Modelo</h3>
+          <p>Una Interpretación I&alpha; es un modelo si cumple<br />
+            VI(&alpha;) = 1
+          </p>
+          <h3>Satisfacible</h3>
+          <p>Una formula &alpha; es satisfacible se existe un interpretación I tal que:<br />
+            VI(&alpha;) = 1
+          </p>
+          <h3 class = "title">Validez de un argumento usando consecuencia lógica</h3>
+          <h3>Consecuencia lógica</h3>
+          <p>Una formula B es consecuencia lógica de un conjunto A = {A1, A2, A3, ... , An} si toda interpretacion que satisfaga a A tambien satisface a B<br/>
+            La consecuencia lógica se denota (A|=B) y esta relacionado con la validez de un argumento siendo B la conclusión y A un conjunto de premisas.
+            </p>
+            <p>La anterior definición es para hallar la validez de un argumento usando la definición de consecuencia lógica<br/>
+            Pero existen otras resultados que permiten mostrar consecuencia logica diferentes a la definición</p>
+            <h3>Teorema de consecuencia lógica 1(TCL1)</h3>
+            <p>
+              Sea A = {A1, A2, A3, ... , An} un conjunto de premisas, y B la conclusión.<br/>
+              Si A|=B entonces (A1 &#94; A2 &#94; A3 &#94; ... &#94; An) &#8594; B es una Tautología.
+            </p>
+            <h3>Teorema de consecuencia lógica 2(TCL2)</h3>
+            <p>
+              Sea A = {A1, A2, A3, ... , An} un conjunto de premisas, y B la conclusión.<br/>
+              A|=B si y solo si A U {&not;B} es insatisfacible.
+            </p>
+            <h3>Colorario de consecuencia lógica</h3>
+            <p>
+              Sea A = {A1, A2, A3, ... , An} un conjunto de premisas, y B la conclusión.<br/>
+              A|=B si y solo si (A1 &#94; A2 &#94; A3 &#94; ... &#94; An &#94; &not;B) es insatisfacible.
+            </p>
+          </div>
+
+        <div id="comoFunciona" class="tabcontent">
+          <h3>¿Cómo Funciona?</h3>
           <p>Paris is the capital of France.</p>
         </div>
-        
-        <div id="Tokyo" class="tabcontent">
+
+        <div id="comoUsarlo" class="tabcontent">
           <h3>Tokyo</h3>
           <p>Tokyo is the capital of Japan.</p>
         </div>
 
+
+
       </div>
-     </content> 
-    </container>
-  </body>
+    </content>
+  </container>
+</body>
+
 </html>

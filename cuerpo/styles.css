@@ -116,7 +116,13 @@ body{
 	padding: 6px 12px;
 	border: 1px solid #ccc;
 	border-top: none;
+	text-align: justify;
 
+  }
+
+  .title
+  {
+	  text-align: center;
   }
 
   h1{
@@ -130,5 +136,16 @@ body{
 hr{
 	color: rgb(128, 88, 15);
 }
+
+table, th, td {
+	border: 1px solid black;
+  }
+.resaltadoCelda
+{
+	border: 3px solid black;
+}
+
+
+
 
 
