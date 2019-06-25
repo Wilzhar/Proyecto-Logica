@@ -139,6 +139,7 @@ function desplegarAplicacion()
 	}
 
 	generarTabla(tablaValores);
+	document.getElementById("btnValidar").disabled = true;
 	
 }
 
@@ -846,14 +847,6 @@ function isOperador(operador)
 		return true;
 	}
 	return false;
-}
-
-/**
- * Veroifica si 
- */
-function verificarPosicionCursorValida()
-{
-	console.log(event.keyCode);
 }
 
 function crearMatrizValoresFormasAtomicas(formasAtomicas)
