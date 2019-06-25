@@ -4,6 +4,11 @@
 var matrizValoresFormasAtomicas;
 var tablaValores;
 var contCol;
+var alerta1 = "";
+var alerta2 = "";
+var alerta3 = "";
+var alerta4 = "";
+var alerta5 = "";
 
 function setup() {
   // put setup code here
@@ -53,10 +58,27 @@ function setup() {
 	//fa = "p";
 	//console.log("Forma atomica"+fa+" es: "+validarFormasAtomicas(fa));
 
+	traducirAlertas('Espaniol');
 }
 
 function draw() {
 	// put drawing code here
+}
+
+function traducirAlertas(idioma){
+	if(idioma === 'Espaniol'){
+		alerta1 = 'Deben haber minimo 2 premisas y una conclusion para construir un argumento.';
+		alerta2 = 'La formula ';
+		alerta3 = ' no es valida.';
+		alerta4 = 'Posicion no valida, por favor seleccione otra';
+		alerta5 = 'Por favor ingrese una formula correcta.';
+	}else if(idioma === 'English'){
+		alerta1 = 'There must be at least 2 premises and a conclusion to build an argument.';
+		alerta2 = 'The formula ';
+		alerta3 = ' is not valid.';
+		alerta4 = 'Position not valid, please select another.';
+		alerta5 = 'Please enter a correct formula.';
+	}
 }
 
 /**
@@ -176,7 +198,7 @@ function splitPremisas()
 	}
 	else
 	{
-		alert("Deben haber minimo 2 premisas y una conclusion para construir un argumento.")
+		alert(alerta1)
 	}
 
 	return strFormulaCorolario;
@@ -199,19 +221,19 @@ function validarFormasAtomicas(strFormula)
 
 		if(chActual > 96 && chActual < 123 && chSiguiente > 96 && chSiguiente < 123 )
 		{
-			alert("La formula "+strFormula+" no es valida." )
+			alert(alerta2 + strFormula + alerta3 )
 			return false;
 		}
 
 		if(chActual == 41 && chSiguiente > 96 && chSiguiente < 123 )
 		{
-			alert("La formula "+strFormula+" no es valida." )
+			alert(alerta2 + strFormula + alerta3 )
 			return false;
 		}
 
 		if(chActual > 96 && chActual < 123 && chSiguiente == 40 )
 		{
-			alert("La formula "+strFormula+" no es valida." )
+			alert(alerta2 + strFormula + alerta3 )
 			return false;
 		}
 	}
@@ -338,7 +360,7 @@ function fijarEstructuraOperador(operador)
 	}	
 	else
 	{
-		alert("Posicion no valida, por favor seleccione otra");
+		alert(alerta4);
 	}	
 
 }
@@ -432,7 +454,7 @@ function guardarFormula()
 		document.getElementById("textFormula").value = "";
 	}
 	else{
-		alert("Por favor ingrese una formula correcta.");
+		alert(alerta5);
 		document.getElementById("textFormula").value = "";
 	}
 	
