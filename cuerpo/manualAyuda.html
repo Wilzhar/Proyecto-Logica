@@ -124,7 +124,7 @@
             los conectivos lógicos principales.
           </p>
 
-          <table >
+          <table>
             <tr>
               <th>NOMBRE</th>
               <th>CONECTIVO LÓGICO</th>
@@ -186,7 +186,7 @@
           <p>En las siguientes tablas se colocará 1 para refererirse al valor de verdad Verdadero(V) y 0 para
             refererirse al valor de verdad Falso(F)</p>
           <h3 class="title">Negación</h3>
-          <table >
+          <table>
             <tr>
               <th>p</th>
               <th>&not;p</th>
@@ -201,7 +201,7 @@
             </tr>
           </table>
           <h3 class="title">Conjunción</h3>
-          <table >
+          <table>
             <tr>
               <th>p</th>
               <th>q</th>
@@ -229,7 +229,7 @@
             </tr>
           </table>
           <h3 class="title">Disyunción</h3>
-          <table >
+          <table>
             <tr>
               <th>p</th>
               <th>q</th>
@@ -285,7 +285,7 @@
             </tr>
           </table>
           <h3 class="title">Bicondicional</h3>
-          <table >
+          <table>
             <tr>
               <th>p</th>
               <th>q</th>
@@ -320,7 +320,7 @@
           </p>
           <h3>Ejemplo:</h3>
           <p>&not;(p &#94; q) &#8596; (&not;p ∨ &not;q)</p>
-          <table >
+          <table>
             <tr>
               <th>&not; </th>
               <th>(p</th>
@@ -436,7 +436,7 @@
           </p>
           <h3>Ejemplo:</h3>
           <p>(p v q) &#8594; p</p>
-          <table >
+          <table>
             <tr>
               <th>(p</th>
               <th>v</th>
@@ -477,7 +477,7 @@
           <h3>Interpretación</h3>
           <p>Es una asignación de valores de verdad de los atomos(variables) de una molecula &alpha;(es una linea de la
             tabla de verdad, se denota I)</p>
-          <table >
+          <table>
             <tr>
               <th></th>
               <th>p</th>
@@ -545,17 +545,74 @@
         </div>
 
         <div id="comoFunciona" class="tabcontent">
-          <h3>¿Cómo Funciona?</h3>
-          <p>Paris is the capital of France.</p>
+          <h3 class="title">Exceso de parantesis</h3>
+          <p>Para poder aplicar algoritmos y operaciones logicas en los argumentos, estos deben de tener exceso de
+            parentesis.<br />
+            los excesos de parentesis no son necesarios para hacer ejercicios de logica proposicional, tan solo basta
+            con un par de parentesis para dejar clara
+            la precedencia de los operadores.<br />
+            Pero tener una formula con excesos de parentesis, son claves para poder aplicar el algoritmo de
+            descomposición para la creacion del arbol.<br />
+            A continuación se muestra como se ven las formulas aplicando exceso de parentesis.
+          </p>
+          <table>
+            <tr>
+              <th>Formula con los parentesis necesarios</th>
+              <th>Formula con exceso de parentesis</th>
+            </tr>
+            <tr>
+              <td>p</td>
+              <td>p</td>
+            </tr>
+            <tr>
+              <td>&not;p</td>
+              <td>&not;(p)</td>
+            </tr>
+            <tr>
+                <td>p&#8594;q</td>
+                <td>(p)&#8594;(q)</td>
+            </tr>
+            <tr>
+              <td>(p&#94;q)&#8594;r</td>
+              <td>((p)&#94;(q))&#8594;(r)</td>
+            </tr>
+            <tr>
+                <td>pvqvr</td>
+                <td>((p)v(q))v(r)</td>
+            </tr>
+          </table>
+          <h3 class="title">Algoritmo de descomposición</h3>
+          <p>Este algoritmo se usa para la creación de un árbol que muestra la precedencia de operadores para operar la formula.<br/>
+            Consiste en ir descomponiendo la formula buscando los operadores principales, y a su vez añadiendolos a un arbol.<br/>
+            El algoritmo de descomposición se usa sobre una formula con exceso de parentesis.
+          </p>
+          <h3>Ejemplo:</h3>
+          <p>
+            (((p)→(q))Ʌ(p))Ʌ(¬(q))<br/>
+            El árbol para la formula anterior luego de aplicar el algoritmo de descomponiendo se muestra a continuación.
+          </p>
+          <img src="arbolEjm.png">
+          <br/>
+          <h3>Formula en notacion postfija</h3>
+          <p>La notación postfija es usada para poder operar la formula de manera mas sencilla<br/>
+          Para poder escribir la formula en esta notación, se debe recorrer el árbol de la siguiente manera:<br/>
+            - Atraviese el sub-árbol izquierdo.<br/>
+            - Atraviese el sub-árbol derecho.<br/>
+            - Visite la raíz.<br/>
+          </p>
+          <h3>Ejemplo:</h3>
+          <p>Dado el árbol anterior recorriendolo en postorden, la formula en notacion postfija seria la siguiente:<br/>
+               - "pq&#8594;p&#94;q&not;p&#94;"<br/><br/> 
+          </p>
+          <h3 class = "title">Determinando validez de los argumentos</h3>
+          <p>Para determinar si un argumento es valido, se utilizó el Colorario de consecuencia lógica.(ver marco teórico)</p>
+
         </div>
 
         <div id="comoUsarlo" class="tabcontent">
           <h3>Tokyo</h3>
           <p>Tokyo is the capital of Japan.</p>
         </div>
-
-
-
       </div>
     </content>
   </container>
