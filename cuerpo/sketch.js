@@ -87,6 +87,8 @@ function traducirAlertas(idioma){
 	}
 }
 
+
+
 /**
  * Esta enumeracion contiene los operadores binarios y unarios.
  */

@@ -19,6 +19,193 @@
   <script src="arbol.js"></script>
   <script src="nodo.js"></script>
   <script src="arbolGrafico.js"></script>
+  <script type="text/javascript">
+  
+  function cambiarIdiomaEspaniolManual(){
+
+  traducirAlertas('Espaniol');
+
+  location.reload(true);
+
+}
+
+function cambiarIdiomaEnglishManual(){
+
+document.getElementById('marcoTeorico').textContent = "theoretical framework";
+document.getElementById('comoFunciona').textContent = "How it works?";
+document.getElementById('comoUsarlo').textContent = "How use it?";
+document.getElementById('tituloIntroduccion').textContent = "Introduction";
+document.getElementById('introduccion').textContent = 'The human being in his daily activities must communicate, this communication can'+
+             'be done in different ways, one of them is communication through a language the'+
+             'which can be constituted among others by interrogative phrases, imperatives and declarative phrases.'+
+             'Only through the latter is a description of knowledge possible. <br /> <br />'+
+             'Logic provides the necessary elements to represent knowledge through'+
+            'methods of formalization of declarative phrases. In this chapter the logic will be worked'+
+             'propositional from the simple declarative sentences (statements or propositions) that are the'+
+             'basic elements of transmission of human knowledge.';
+document.getElementById('tituloProposiciones').textContent = "Propositions";
+document.getElementById('ejemplos').textContent = "Examples: ";
+document.getElementById('ejemplo1').textContent = 'According to the above, the following statements are propositions: <br />'+
+            '- Students go to the march. <br />'+
+            '- On Sundays he rests. <br />'+
+            '- The early bird gets the best. <br />'+
+            '- Java is a programming language. <br />'+
+            '- 5 is an odd number. <br />'+
+            '- 9 is a composite number. <br /> <br />'+
+            'There are some statements that are not propositions: <br />'+
+            '- Who am I? <br />'+
+            '- Hello friend! <br />'+
+            '- What time is it? <br /> <br />'+
+
+            'The propositions of traditional form are represented with lowercase letters of the alphabet'+
+            'p, q, r, s, t, ..., each of these letters can receive the name of atom. The form of representation'+
+            'It will be the following: <br />'+
+            '- p: statement or proposition. <br />'+
+            '- p: 2 × 3 = 6. <br />'+
+            '- q: 3x + 4z = 8. <br />'+
+            '- r: 7'+
+            ' 3. <br />'+
+            '- t: Egypt is located in Asia. <br />'+
+            '- u: The lionesses are not the champions. <br />'+
+            '- v: Java is an object-oriented programming language. <br />';
+document.getElementById('x1').textContent = "Denial of a Proposition";
+document.getElementById('x2').textContent = "";
+document.getElementById('x3').textContent = "Examples: ";
+document.getElementById('x4').textContent = 'Some examples of phrases in which the denial appears are the following: </ p>'+
+           '- No p. <br />'+
+           '- Its false p. <br />'+
+           '- Not true p. <br /> <br />'+
+           'The symbol of negation (& not;) is a unary operator, initially we will apply it to atoms, but'+
+           'after'+
+           'It will show how to apply it to a compound expression. Next,'+
+           'show examples in which the denial of a proposition to atoms is applied.';
+document.getElementById('x5').textContent = "Truth value of the proposition";
+document.getElementById('x6').textContent = "Value of truth of the denial of the proposition";
+document.getElementById('x7').textContent = "v(q) = False";
+document.getElementById('x8').textContent = "v(¬q) = True";
+document.getElementById('x9').textContent = "v(¬p) = True";
+document.getElementById('x10').textContent = "v(p) = False";
+document.getElementById('x11').textContent = "v(s) = True";
+document.getElementById('x12').textContent = "v(¬s) = False";
+document.getElementById('x13').textContent = "Logical connectives";
+document.getElementById('x14').textContent = 'Compound propositions are joined by logical connectives, which are'+
+             'operators that allow to combine propositions to form others. Compound propositions have a lot'+
+             'ability of expression within logic. Below are shown'+
+             'the main logical connectives.';
+document.getElementById('x15').textContent = "NAME";
+document.getElementById('x16').textContent = "LOGICAL CONECTIVE";
+document.getElementById('x17').textContent = "SYMBOL";
+document.getElementById('x18').textContent = "conjunction";
+document.getElementById('x19').textContent = "and";
+document.getElementById('x20').textContent = "Disjunction";
+document.getElementById('x21').textContent = "Conditional";
+document.getElementById('x22').textContent = "yes... then";
+document.getElementById('x23').textContent = "Biconditional";
+document.getElementById('x24').textContent = "if and only if";
+document.getElementById('x25').textContent = "Arguments in logic";
+document.getElementById('x26').textContent = 'By an argument is meant a reasoning used to defend an idea (thesis or conclusion) or to'+
+             'to convince'+
+             'to others of the truth of a statement.';
+document.getElementById('x27').textContent = "Definition: ";
+document.getElementById('x28').textContent = 'It is a finite sequence of statements. The last statement is the conclusion (when you are in shape'+
+             'standard)'+
+             'while the others are premises of the argument.';
+document.getElementById('x29').textContent = "Example: ";
+document.getElementById('x30').textContent = 'Si pedro estudia logica, entonces pedro es capaz de argumentar.<br />'+
+            'Pedro estudia logica.<br />'+
+            '______________________________________________________________<br />'+
+            'Pedro es capaz de argumentar<br /><br />'+
+
+            'Traducido al lenguaje proposicional usando formas atomicas y los conectores lógicos:<br /><br />'+
+            'p : pedro estudia logica.<br />'+
+            'q : pedro es capaz de argumentar.<br /><br />'+
+            'Quedará de la siguiente manera<br /><br />'+
+            'p&#8594;q<br />'+
+            'p<br />'+
+            '______<br />'+
+            'q';
+document.getElementById('x31').textContent = "Truth tables";
+document.getElementById('x32').textContent = "Below are the truth tables of the logical connectives mentioned above.";
+document.getElementById('x33').textContent = "Notation of tables";
+document.getElementById('x34').textContent = 'En las siguientes tablas se colocará 1 para refererirse al valor de verdad Verdadero(V) y 0 para'+
+            'refererirse al valor de verdad Falso(F)';
+document.getElementById('x35').textContent = "Negation";
+document.getElementById('x36').textContent = "Conjunction";
+document.getElementById('x37').textContent = "Disjunction";
+document.getElementById('x38').textContent = "Conditional";
+document.getElementById('x39').textContent = "Biconditional";
+document.getElementById('x40').textContent = "Classification of the formulas according to the result of their truth tables";
+document.getElementById('x41').textContent = "Tautology";
+document.getElementById('x42').textContent = 'It is a composite proposition whose truth table is always true (V or 1),'+
+'independently of the values of the truth of the simple propositions that make up.';
+document.getElementById('x43').textContent = "Example: ";
+document.getElementById('x44').textContent = "Contradiction";
+document.getElementById('x45').textContent = 'A proposition whose truth table is all false (F or 0), regardless of the values'+
+             'of truth of the simple propositions that compose it.';
+document.getElementById('x46').textContent = "Example: ";
+document.getElementById('x47').textContent = "Indetermination";
+document.getElementById('x48').textContent = "It is a composite proposition whose truth table always has falsehood (F or 0) and truth (V or 1)";
+document.getElementById('x49').textContent = "Example: ";
+document.getElementById('x50').textContent = "Satisfaction and logical consequence";
+document.getElementById('x51').textContent = "Interpretation";
+document.getElementById('x52').textContent = 'It is an assignment of truth values of the atoms (variables) of a molecule & alpha; (it is a line of the'+
+             'truth table, it is denoted I)';
+document.getElementById('x53').textContent = "Model";
+document.getElementById('x54').textContent = 'An I & alpha Interpretation; its a model if it meets <br />'+
+             'VI (& alpha;) = 1';
+document.getElementById('x55').textContent = "Satisfactory";
+document.getElementById('x56').textContent = 'A formula & alpha; It is satisfying there is an interpretation I such that: <br />'+
+             'VI (& alpha;) = 1';
+document.getElementById('x57').textContent = "Logical consequence";
+document.getElementById('x58').textContent = 'A formula B is the logical consequence of a set A = {A1, A2, A3, ..., An} if any interpretation that'+
+             'satisfy A also satisfies B <br />'+
+             'The logical consequence is denoted (A | = B) and is related to the validity of an argument being B the'+
+             'conclusion and A set of premises.';
+document.getElementById('x59').textContent = 'The above definition is to find the validity of an argument using the definition of consequence'+
+             'logic <br />'+
+             'But there are other results that allow to show logical consequence different from the definition';
+document.getElementById('x60').textContent = "Logical consequence theorem 1 (TCL1)";
+document.getElementById('x61').textContent = "Let A = {A1, A2, A3, ..., An} a set of premises, and B the conclusion. <br />+"
+             "If A | = B then (A1 & # 94; A2 & # 94; A3 & # 94; ... & # 94; An) & # 8594; B is a Tautology.";
+document.getElementById('x62').textContent = "Logical consequence theorem 2 (TCL2)";
+document.getElementById('x63').textContent = "Let A = {A1, A2, A3, ..., An} a set of premises, and B the conclusion. <br />"+
+             "A | = B if and only if A U {& not; B} is unsatisfiable.";
+document.getElementById('x64').textContent = "Corollary of logical consequence";
+document.getElementById('x65').textContent = "Let A = {A1, A2, A3, ..., An} a set of premises, and B the conclusion. <br />"+
+             "A | = B if and only if (A1 ^ A2 ^ A3 ^ ... ^ An ^ & not; B) is unsatisfiable.";
+document.getElementById('x66').textContent = "Excess parenthesis";
+document.getElementById('x67').textContent = "In order to apply algorithms and logical operations in the arguments, they must have excess of"+
+             "parenthesis. <br />"+
+             "the excesses of parentheses are not necessary to make propositional logic exercises, just enough"+
+             "with a couple of parentheses to make clear"+
+             "the precedence of the operators. <br />"+
+             "But having a formula with excess parentheses, are key to be able to apply the algorithm of"+
+             "decomposition for the creation of the tree. <br />"+
+             "The following shows how the formulas look by applying excess parenthesis.";
+document.getElementById('x68').textContent = "Form with the necessary parentheses";
+document.getElementById('x69').textContent = "Formula with excessive parentheses";
+document.getElementById('x70').textContent = "Algoritmo de descomposición";
+document.getElementById('x71').textContent = "Este algoritmo se usa para la creación de un árbol que muestra la precedencia de operadores para operar la formula.<br/>"+
+            "Consiste en ir descomponiendo la formula buscando los operadores principales, y a su vez añadiendolos a un arbol.<br/>"+
+            "El algoritmo de descomposición se usa sobre una formula con exceso de parentesis.";
+document.getElementById('x72').textContent = "Example: ";
+document.getElementById('x73').textContent = "(((p) → (q)) Ʌ (p)) Ʌ (¬ (q)) <br/>"+
+             "The tree for the previous formula after applying the decomposing algorithm is shown below.";
+document.getElementById('x74').textContent = "Formula in postfix notation";
+document.getElementById('x75').textContent = "Postfix notation is used to operate the formula more easily <br/>"+
+           "In order to write the formula in this notation, you must go through the tree in the following way: <br/>"+
+             "- Cross the left sub-tree. <br/>"+
+             "- Cross the right sub-tree. <br/>"+
+             "- Visit the root. <br/>";
+document.getElementById('x76').textContent = "Example: ";
+document.getElementById('x77').textContent = "Given the previous tree traversing it in postorden, the formula in postfix notation would be the following: <br/>"+
+                "- \"pq → p ^ q & not; p ^\" <br/> <br/>";
+document.getElementById('x78').textContent = "Determining the validity of the arguments";
+document.getElementById('x79').textContent = "To determine if an argument is valid, the logical consequence Colorarium was used (see theoretical framework)";
+
+}
+  
+  </script>
 
 </head>
 
@@ -29,15 +216,15 @@
 
         <!-- Tab links -->
         <div class="tab">
-          <button class="tablinks" onclick="abrirManual(event, 'marcoTeorico')">Marco Teórico</button>
-          <button class="tablinks" onclick="abrirManual(event, 'comoFunciona')">¿Cómo Funciona?</button>
-          <button class="tablinks" onclick="abrirManual(event, 'comoUsarlo')">¿Cómo Usarlo?</button>
+          <button class="tablinks" id="tabMarcoTeorico" onclick="abrirManual(event, 'marcoTeorico')">Marco Teórico</button>
+          <button class="tablinks" id="tabComoFunciona" onclick="abrirManual(event, 'comoFunciona')">¿Cómo Funciona?</button>
+          <button class="tablinks" id="tabComoUsarlo" onclick="abrirManual(event, 'comoUsarlo')">¿Cómo Usarlo?</button>
         </div>
 
         <!-- Tab content -->
         <div id="marcoTeorico" class="tabcontent">
-          <h3 class="title">Introducción</h3>
-          <p>El ser humano en sus actividades cotidianas debe comunicarse, esta comunicación puede
+          <h3 class="title" id="tituloIntroduccion">Introducción</h3>
+          <p id="introduccion">El ser humano en sus actividades cotidianas debe comunicarse, esta comunicación puede
             realizarse de diversas maneras, una de ellas es la comunicación por medio de un lenguaje el
             cual puede estar constituido entre otras por frases interrogativas, imperativas y frases declarativas.
             Sólo a través de estas últimas es posible una descripción del conocimiento.<br /><br />
@@ -46,7 +233,7 @@
             proposicional desde las frases declarativas simples (enunciados o proposiciones) que son los
             elementos básicos de transmisión del conocimiento humano.
           </p>
-          <h3 class="title">Proposiciones</h3>
+          <h3 class="title" id="tituloProposiciones">Proposiciones</h3>
           <p>
             Una proposición matemática es un enunciado o expresiones que tienen un significado determinado y que
             mediante un criterio definido
@@ -56,8 +243,8 @@
             entre otros, las proposiciones no pueden ser imperativas o interrogativas, únicamente pueden
             ser declarativas.
           </p>
-          <h3>Ejemplos:</h3>
-          <p> De acuerdo a lo anterior los siguientes enunciados son proposiciones:<br />
+          <h3 id="ejemplos">Ejemplos:</h3>
+          <p id="ejemplo1"> De acuerdo a lo anterior los siguientes enunciados son proposiciones:<br />
             - Los estudiantes van a la marcha.<br />
             - Los domingos se descansa.<br />
             - El que madruga se lleva lo mejor.<br />
@@ -76,16 +263,16 @@
             - p : 2 × 3 = 6.<br />
             - q : 3x + 4z = 8.<br />
             - r : 7
-            < 3.<br />
+             3.<br />
             - t : Egipto está ubicado en Asia.<br />
             - u : Las leonas no son las campeonas.<br />
             - v : Java es un lenguaje de programación orientado a objetos.<br />
           </p>
-          <h3 class="title">Negación de una Proposición</h3>
-          <p>Negar una proposición matemática es convertirla en falsa si es verdadera o en verdadera,
+          <h3 class="title" id="x1">Negación de una Proposición</h3>
+          <p id="x2">Negar una proposición matemática es convertirla en falsa si es verdadera o en verdadera,
             si es falsa, el símbolo de la negación es "&not;".</p>
-          <h3>Ejemplos:</h3>
-          <p>
+          <h3 id="x3">Ejemplos:</h3>
+          <p id="x4">
             Algunos ejemplos de frases en las que aparece la negación son los siguientes:</p>
           - No p.<br />
           - Es falso p.<br />
@@ -97,27 +284,27 @@
           </p>
           <table>
             <tr>
-              <th>Valor de verdad de la proposición</th>
-              <th>Valor de verdad de la negación de la proposición</th>
+              <th id="x5">Valor de verdad de la proposición</th>
+              <th id="x6">Valor de verdad de la negación de la proposición</th>
             </tr>
             <tr>
-              <td>v(q) = Falso</td>
-              <td>v(¬q) = Verdadero</td>
+              <td id="x7">v(q) = Falso</td>
+              <td id="x8">v(¬q) = Verdadero</td>
             </tr>
             <tr>
-              <td>v(¬p) = Verdadero</td>
-              <td>v(p) = Falso</td>
+              <td id="x9">v(¬p) = Verdadero</td>
+              <td id="x10">v(p) = Falso</td>
             </tr>
             <tr>
-              <td>v(s) = Verdadero</td>
-              <td>v(¬s) = Falso</td>
+              <td id="x11">v(s) = Verdadero</td>
+              <td id="x12">v(¬s) = Falso</td>
             </tr>
           </table>
 
 
 
-          <h3 class="title">Conectivos Lógicos</h3>
-          <p>
+          <h3 class="title" id="x13">Conectivos Lógicos</h3>
+          <p id="x14">
             Las proposiciones compuestas se unen por medio de conectivos lógicos, los cuales son
             operadores que permiten combinar proposiciones para formar otras. Las proposiciones compuestas tienen mucha
             capacidad de expresión dentro de la lógica. A continuación se muestran
@@ -126,47 +313,47 @@
 
           <table>
             <tr>
-              <th>NOMBRE</th>
-              <th>CONECTIVO LÓGICO</th>
-              <th>SÍMBOLO</th>
+              <th id="x15">NOMBRE</th>
+              <th id="x16">CONECTIVO LÓGICO</th>
+              <th id="x17">SÍMBOLO</th>
             </tr>
             <tr>
-              <td>Conjunción</td>
-              <td>y</td>
+              <td id="x18">Conjunción</td>
+              <td id="x19">y</td>
               <td>&#94;</td>
             </tr>
             <tr>
-              <td>Disyunción</td>
+              <td id="x20">Disyunción</td>
               <td>o</td>
               <td>v</td>
             </tr>
             <tr>
-              <td>Condicional</td>
-              <td>si... entonces</td>
+              <td id="x21">Condicional</td>
+              <td id="x22">si... entonces</td>
               <td>&#8594;</td>
             </tr>
             <tr>
-              <td>BIcondicional</td>
-              <td>si y sólo si</td>
+              <td id="x23">BIcondicional</td>
+              <td id="x24">si y sólo si</td>
               <td>&#8596;</td>
             </tr>
           </table>
 
-          <h3 class="title">Argumentos en lógica</h3>
-          <p>
+          <h3 class="title" id="x25">Argumentos en lógica</h3>
+          <p id="x26">
             Por un argumento se entiende un razonamiento utilizado para defender una idea(tesis o conclusión) o para
             convencer
             a otros de la verdad de un enunciado.
           </p>
-          <h3>Definición:</h3>
-          <p>Es una secuencia finita de enunciados. El ultimo enunciado es la conclusión(cuando se encuentra en forma
+          <h3 id="x27">Definición:</h3>
+          <p id="x28">Es una secuencia finita de enunciados. El ultimo enunciado es la conclusión(cuando se encuentra en forma
             estándar)
             mientras que los demas son premisas del argumento.
           </p>
-          <h3>Ejemplo:</h3>
-          <p>
-            Si pedro estudia lógica, entonces pedro es capaz de argumentar.<br />
-            Pedro estudia lógica.<br />
+          <h3 id="x29">Ejemplo:</h3>
+          <p id="x30">
+            Si pedro estudia logica, entonces pedro es capaz de argumentar.<br />
+            Pedro estudia logica.<br />
             ______________________________________________________________<br />
             Pedro es capaz de argumentar<br /><br />
 
@@ -180,12 +367,12 @@
             q
 
           </p>
-          <h3 class="title">Tablas de verdad</h3>
-          <p>A continuación se muestran las tablas de verdad de los conectivos lógicos mensionados anteriormente.</p>
-          <h3>Notación de las tablas</h3>
-          <p>En las siguientes tablas se colocará 1 para refererirse al valor de verdad Verdadero(V) y 0 para
+          <h3 class="title" id="x31">Tablas de verdad</h3>
+          <p id="x32">A continuación se muestran las tablas de verdad de los conectivos lógicos mensionados anteriormente.</p>
+          <h3 id="x33">Notación de las tablas</h3>
+          <p id="x34">En las siguientes tablas se colocará 1 para refererirse al valor de verdad Verdadero(V) y 0 para
             refererirse al valor de verdad Falso(F)</p>
-          <h3 class="title">Negación</h3>
+          <h3 class="title" id="x35">Negación</h3>
           <table>
             <tr>
               <th>p</th>
@@ -200,7 +387,7 @@
               <td>1</td>
             </tr>
           </table>
-          <h3 class="title">Conjunción</h3>
+          <h3 class="title" id="x36">Conjunción</h3>
           <table>
             <tr>
               <th>p</th>
@@ -228,7 +415,7 @@
               <td>0</td>
             </tr>
           </table>
-          <h3 class="title">Disyunción</h3>
+          <h3 class="title" id="x37">Disyunción</h3>
           <table>
             <tr>
               <th>p</th>
@@ -256,7 +443,7 @@
               <td>0</td>
             </tr>
           </table>
-          <h3 class="title">Condicional</h3>
+          <h3 class="title" id="x38">Condicional</h3>
           <table>
             <tr>
               <th>p</th>
@@ -284,7 +471,7 @@
               <td>1</td>
             </tr>
           </table>
-          <h3 class="title">Bicondicional</h3>
+          <h3 class="title" id="x39">Bicondicional</h3>
           <table>
             <tr>
               <th>p</th>
@@ -313,12 +500,13 @@
             </tr>
           </table>
 
-          <h3 class="title">Clasificación de las fórmulas de acuerdo al resultado de sus tablas de verdad</h3>
-          <h3>Tautología</h3>
-          <p>Es una proposición compuesta cuya tabla de verdad es siempre verdadera (V o 1),
+          <h3 class="title" id="x40">Clasificación de las formulas de acuerdo al resultado de sus tablas de verdad</h3>
+          <h3 id="x41">Tautología</h3>
+          <p id="x42">Es una proposición compuesta cuya tabla de verdad es siempre verdadera (V o 1),
+
             independientemente de los valores de verdad de las proposiciones simples que la componen.
           </p>
-          <h3>Ejemplo:</h3>
+          <h3 id="x43">Ejemplo:</h3>
           <p>&not;(p &#94; q) &#8596; (&not;p ∨ &not;q)</p>
           <table>
             <tr>
@@ -372,11 +560,11 @@
               <td>1</td>
             </tr>
           </table>
-          <h3>Contradicción</h3>
-          <p>Una proposición cuya tabla de verdad es toda falsa (F o 0), independientemente de los valores
+          <h3 id="x44">Contradicción</h3>
+          <p id="x45">Una proposición cuya tabla de verdad es toda falsa (F o 0), independientemente de los valores
             de verdad de las proposiciones simples que la componen.
           </p>
-          <h3>Ejemplo:</h3>
+          <h3 id="x46">Ejemplo:</h3>
           <p>&not;(p v q) &#8596; (p v q)</p>
           <table>
             <tr>
@@ -431,10 +619,10 @@
             </tr>
           </table>
 
-          <h3>Indeterminación</h3>
-          <p>Es una proposición compuesta cuya tabla de verdad siempre posee falsedad (F o 0) y verdad (V o 1)
+          <h3 id="x47">Indeterminación</h3>
+          <p id="x48">Es una proposición compuesta cuya tabla de verdad siempre posee falsedad (F o 0) y verdad (V o 1)
           </p>
-          <h3>Ejemplo:</h3>
+          <h3 id="x49">Ejemplo:</h3>
           <p>(p v q) &#8594; p</p>
           <table>
             <tr>
@@ -473,9 +661,9 @@
               <td>0</td>
             </tr>
           </table>
-          <h3 class="title">Satisfacibilidad y consecuencia lógica</h3>
-          <h3>Interpretación</h3>
-          <p>Es una asignación de valores de verdad de los atomos(variables) de una molecula &alpha;(es una linea de la
+          <h3 class="title" id="x50">Satisfacibilidad y consecuencia lógica</h3>
+          <h3 id="x51">Interpretación</h3>
+          <p id="x52">Es una asignación de valores de verdad de los atomos(variables) de una molecula &alpha;(es una linea de la
             tabla de verdad, se denota I)</p>
           <table>
             <tr>
@@ -509,44 +697,47 @@
               <td>0</td>
             </tr>
           </table>
-          <h3>Modelo</h3>
-          <p>Una Interpretación I&alpha; es un modelo si cumple<br />
+          <h3 id="x53">Modelo</h3>
+          <p id="x54">Una Interpretación I&alpha; es un modelo si cumple<br />
             VI(&alpha;) = 1
           </p>
-          <h3>Satisfacible</h3>
-          <p>Una fórmula &alpha; es satisfacible se existe un interpretación I tal que:<br />
+          <h3 id="x55">Satisfacible</h3>
+          <p id="x56">Una formula &alpha; es satisfacible se existe un interpretación I tal que:<br />
             VI(&alpha;) = 1
           </p>
-          <h3 class="title">Validez de un argumento usando consecuencia lógica</h3>
-          <h3>Consecuencia lógica</h3>
-          <p>Una fórmula B es consecuencia lógica de un conjunto A = {A1, A2, A3, ... , An} si toda interpretación que
+          <h3 class="title" id="x53">Validez de un argumento usando consecuencia lógica</h3>
+          <h3 id="x57">Consecuencia lógica</h3>
+          <p id="x58">Una formula B es consecuencia lógica de un conjunto A = {A1, A2, A3, ... , An} si toda interpretacion que
+
             satisfaga a A tambien satisface a B<br />
             La consecuencia lógica se denota (A|=B) y esta relacionado con la validez de un argumento siendo B la
             conclusión y A un conjunto de premisas.
           </p>
-          <p>La anterior definición es para hallar la validez de un argumento usando la definición de consecuencia
+          <p id="x59">La anterior definición es para hallar la validez de un argumento usando la definición de consecuencia
             lógica<br />
-            Pero existen otras resultados que permiten mostrar consecuencia lógica diferentes a la definición</p>
-          <h3>Teorema de consecuencia lógica 1(TCL1)</h3>
-          <p>
+            Pero existen otras resultados que permiten mostrar consecuencia logica diferentes a la definición</p>
+          <h3 id="x60">Teorema de consecuencia lógica 1(TCL1)</h3>
+          <p id="x61">
+
             Sea A = {A1, A2, A3, ... , An} un conjunto de premisas, y B la conclusión.<br />
             Si A|=B entonces (A1 &#94; A2 &#94; A3 &#94; ... &#94; An) &#8594; B es una Tautología.
           </p>
-          <h3>Teorema de consecuencia lógica 2(TCL2)</h3>
-          <p>
+          <h3 id="x62">Teorema de consecuencia lógica 2(TCL2)</h3>
+          <p id="x63">
             Sea A = {A1, A2, A3, ... , An} un conjunto de premisas, y B la conclusión.<br />
             A|=B si y solo si A U {&not;B} es insatisfacible.
           </p>
-          <h3>Colorario de consecuencia lógica</h3>
-          <p>
+          <h3 id="x64">Colorario de consecuencia lógica</h3>
+          <p id="x65">
             Sea A = {A1, A2, A3, ... , An} un conjunto de premisas, y B la conclusión.<br />
             A|=B si y solo si (A1 &#94; A2 &#94; A3 &#94; ... &#94; An &#94; &not;B) es insatisfacible.
           </p>
         </div>
 
         <div id="comoFunciona" class="tabcontent">
-          <h3 class="title">Exceso de parantesis</h3>
-          <p>Para poder aplicar algoritmos y operaciones lógicas en los argumentos, estos deben de tener exceso de
+          <h3 class="title" id="x66">Exceso de parantesis</h3>
+          <p id="x67">Para poder aplicar algoritmos y operaciones logicas en los argumentos, estos deben de tener exceso de
+
             parentesis.<br />
             los excesos de parentesis no son necesarios para hacer ejercicios de lógica proposicional, tan solo basta
             con un par de parentesis para dejar clara
@@ -557,8 +748,9 @@
           </p>
           <table>
             <tr>
-              <th>fórmula con los parentesis necesarios</th>
-              <th>fórmula con exceso de parentesis</th>
+              <th id="x68">Formula con los parentesis necesarios</th>
+              <th id="x69">Formula con exceso de parentesis</th>
+
             </tr>
             <tr>
               <td>p</td>
@@ -581,35 +773,33 @@
               <td>((p)v(q))v(r)</td>
             </tr>
           </table>
-          <h3 class="title">Algoritmo de descomposición</h3>
-          <p>Este algoritmo se usa para la creación de un árbol que muestra la precedencia de operadores para operar la
-            fórmula.<br />
-            Consiste en ir descomponiendo la fórmula buscando los operadores principales, y a su vez añadiendolos a un
-            arbol.<br />
-            El algoritmo de descomposición se usa sobre una fórmula con exceso de parentesis.
+
+          <h3 class="title" id="x70">Algoritmo de descomposición</h3>
+          <p id="x71">Este algoritmo se usa para la creación de un árbol que muestra la precedencia de operadores para operar la formula.<br/>
+            Consiste en ir descomponiendo la formula buscando los operadores principales, y a su vez añadiendolos a un arbol.<br/>
+            El algoritmo de descomposición se usa sobre una formula con exceso de parentesis.
           </p>
-          <h3>Ejemplo:</h3>
-          <p>
-            (((p)→(q))Ʌ(p))Ʌ(¬(q))<br />
-            El árbol para la fórmula anterior luego de aplicar el algoritmo de descomponiendo se muestra a continuación.
+          <h3 id="x72">Ejemplo:</h3>
+          <p id="x73">
+            (((p)→(q))Ʌ(p))Ʌ(¬(q))<br/>
+            El árbol para la formula anterior luego de aplicar el algoritmo de descomponiendo se muestra a continuación.
           </p>
-          <img src="img/arbolEjm.png">
-          <br />
-          <h3>fórmula en notación postfija</h3>
-          <p>La notación postfija es usada para poder operar la fórmula de manera mas sencilla<br />
-            Para poder escribir la fórmula en esta notación, se debe recorrer el árbol de la siguiente manera:<br />
-            - Atraviese el sub-árbol izquierdo.<br />
-            - Atraviese el sub-árbol derecho.<br />
-            - Visite la raíz.<br />
+          <img src="arbolEjm.png">
+          <br/>
+          <h3 id="x74">Formula en notacion postfija</h3>
+          <p id="x75">La notación postfija es usada para poder operar la formula de manera mas sencilla<br/>
+          Para poder escribir la formula en esta notación, se debe recorrer el árbol de la siguiente manera:<br/>
+            - Atraviese el sub-árbol izquierdo.<br/>
+            - Atraviese el sub-árbol derecho.<br/>
+            - Visite la raíz.<br/>
           </p>
-          <h3>Ejemplo:</h3>
-          <p>Dado el árbol anterior recorriendolo en postorden, la fórmula en notación postfija seria la
-            siguiente:<br />
-            - "pq&#8594;p&#94;q&not;p&#94;"<br /><br />
+          <h3 id="x76">Ejemplo:</h3>
+          <p id="x77">Dado el árbol anterior recorriendolo en postorden, la formula en notacion postfija seria la siguiente:<br/>
+               - "pq&#8594;p&#94;q&not;p&#94;"<br/><br/> 
           </p>
-          <h3 class="title">Determinando validez de los argumentos</h3>
-          <p>Para determinar si un argumento es valido, se utilizó el Colorario de consecuencia lógica.(ver marco
-            teórico)</p>
+          <h3 class = "title" id="x78">Determinando validez de los argumentos</h3>
+          <p id="x79">Para determinar si un argumento es valido, se utilizó el Colorario de consecuencia lógica.(ver marco teórico)</p>
+
 
         </div>
 
