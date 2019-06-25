@@ -465,7 +465,7 @@ function guardarFormula()
  * @param {*} evt 
  * @param {*} cityName 
  */
-function openCity(evt, cityName) {
+function abrirManual(evt, cityName) {
 	// Declare all variables
 
 	let i, tabcontent, tablinks;
@@ -963,6 +963,10 @@ function generarTabla(matriz) {
 	  contCol++;
   }
 
+  /**
+   * Metodo para contar el numero de operadores en la formula
+   * @param {String} formulaPostOrden 
+   */
   function contarNumeroOperadores(formulaPostOrden)
   {
 	  let cont = 0;

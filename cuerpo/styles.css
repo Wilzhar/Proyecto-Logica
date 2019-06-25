@@ -104,8 +104,14 @@ table,th,td,tr{
 	text-align: center;
 }
 
-p{
+#parrafos
+{
 	text-transform: lowercase;
+
+}
+
+p{
+	
 	font-size: 20px;
 }
 
@@ -129,12 +135,12 @@ p{
   
   /* Change background color of buttons on hover */
   .tab button:hover {
-	background-color: #ddd;
+	background-color: rgb(91, 219, 32);
   }
   
   /* Create an active/current tablink class */
   .tab button.active {
-	background-color: #ccc;
+	background-color: rgb(204, 204, 204);
   }
   
   /* Style the tab content */
@@ -143,7 +149,15 @@ p{
 	padding: 6px 12px;
 	border: 1px solid #ccc;
 	border-top: none;
+	text-align: justify;
 
+  }
+
+
+  .title
+  {
+	  text-align: center;
+	  font-size: 30px;
   }
 
   h1{
@@ -157,5 +171,18 @@ p{
 hr{
 	color: rgb(128, 88, 15);
 }
+
+table, th, td {
+	border: 1px solid black;
+	text-align: center;
+	font-size: 20px;
+  }
+.resaltadoCelda
+{
+	border: 3px solid black;
+}
+
+
+
 
 
