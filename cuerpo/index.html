@@ -13,20 +13,52 @@
     <script src="arbol.js"></script>
     <script src="nodo.js"></script>
     <script src="arbolGrafico.js"></script>
+    <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+      
+      function cambiarIdiomaEspaniol(){
+
+        traducirAlertas('Espaniol');
+
+        document.getElementById('txtValidacionArgumentos').textContent = "VALIDACIÓN DE ARGUMENTOS";
+        document.getElementById('txtIngresoFormulas').textContent = "INGRESO DE FORMULAS";
+        document.getElementById('txtFormulasValidadas').textContent = "FORMULAS VALIDADAS";
+        document.getElementById('btnGuardarFormula').value = "GUARDAR FORMULA";
+        document.getElementById('btnValidar').value = "VALIDAR ARGUMENTO";
+        document.getElementById('cbConclusion').text = "Seleccione esta casilla si desea ingresar la conclusion: ";
+
+      }
+
+      function cambiarIdiomaEnglish(){
+
+        traducirAlertas('English');
+
+        document.getElementById('txtValidacionArgumentos').textContent = "ARGUMENT VALIDATION";
+        document.getElementById('txtIngresoFormulas').textContent = "FORMUAS ENTRY";
+        document.getElementById('txtFormulasValidadas').textContent = "VALIDATED FORMULAS";
+        document.getElementById('btnGuardarFormula').value = "SAVE FORMULA";
+        document.getElementById('btnValidar').value = "VALIDATE ARGUMENT";
+        document.getElementById('cbConclusion').text = "Check this box if you want to enter the conclusion: ";
+
+      }
+    </script>
   </head>
   <body>
     <container>
+      <button type="button" id="es" onclick="cambiarIdiomaEspaniol()">Español</button>
+      <button type="button" id="en" onclick="cambiarIdiomaEnglish()">English</button>     
+
       <div id ="cajaCentral">
-        <h1>VALIDACIÓN DE ARGUMENTOS</h1>
+        <h1 id="txtValidacionArgumentos">VALIDACIÓN DE ARGUMENTOS</h1>
       </div>
       <div class="clear"></div>
       <div id = "informacionIzquierda">
-        <h1>INGRESO DE FORMULAS</h1>
+        <h1 id="txtIngresoFormulas">INGRESO DE FORMULAS</h1>
         <form action="arbol_procedimientos.php">
         <div id = "cajaCentral">
           <input type = "text"   id = "textFormula" class="areasTexto" onkeypress="verificarPosicionCursorValida()"><br>
-          <input type = "button" id = "btnGuardarFormula" class="boton" onclick = "guardarFormula()" value = "GUARDAR FORMULA"><br>
-          <input type = "checkbox" id="cbConclusion">Seleccione esta casilla si desea ingresar la conclusion: </input>
+          <input type = "button" id = "btnGuardarFormula" key="keyGuardarFormula" class="button" onclick = "guardarFormula()" value = "GUARDAR FORMULA"><br>
+          <input type = "checkbox" id="cbConclusion">Seleccione esta casilla si desea ingresar la conclusion: </input><br>
         </div>
          <div class="clear"></div>
          <div class="panelBotones">
@@ -41,7 +73,7 @@
        </form>
       </div>
       <div id="informacionDerecha">
-        <h1>FORMULAS VALIDADAS</h1>
+        <h1 id="txtFormulasValidadas">FORMULAS VALIDADAS</h1>
         <p id ="formulasValidas"></p>
         <hr></hr>
         <p id ="conclusion"></p>
@@ -50,8 +82,7 @@
       <div class="clear"></div>
       <div id="cajaCentral">
         <h2 id = "argumentoValido"></h2>
-        
-      </div>
+      </div>      
     </container>
   </body>
 </html>
