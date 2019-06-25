@@ -358,7 +358,7 @@ document.getElementById('x79').textContent = "To determine if an argument is val
             Pedro es capaz de argumentar<br /><br />
 
             Traducido al lenguaje proposicional usando formas atomicas y los conectores lógicos:<br /><br />
-            p : pedro estudia logica.<br />
+            p : pedro estudia lógica.<br />
             q : pedro es capaz de argumentar.<br /><br />
             Quedará de la siguiente manera<br /><br />
             p&#8594;q<br />
@@ -503,6 +503,7 @@ document.getElementById('x79').textContent = "To determine if an argument is val
           <h3 class="title" id="x40">Clasificación de las formulas de acuerdo al resultado de sus tablas de verdad</h3>
           <h3 id="x41">Tautología</h3>
           <p id="x42">Es una proposición compuesta cuya tabla de verdad es siempre verdadera (V o 1),
+
             independientemente de los valores de verdad de las proposiciones simples que la componen.
           </p>
           <h3 id="x43">Ejemplo:</h3>
@@ -707,6 +708,7 @@ document.getElementById('x79').textContent = "To determine if an argument is val
           <h3 class="title" id="x53">Validez de un argumento usando consecuencia lógica</h3>
           <h3 id="x57">Consecuencia lógica</h3>
           <p id="x58">Una formula B es consecuencia lógica de un conjunto A = {A1, A2, A3, ... , An} si toda interpretacion que
+
             satisfaga a A tambien satisface a B<br />
             La consecuencia lógica se denota (A|=B) y esta relacionado con la validez de un argumento siendo B la
             conclusión y A un conjunto de premisas.
@@ -716,6 +718,7 @@ document.getElementById('x79').textContent = "To determine if an argument is val
             Pero existen otras resultados que permiten mostrar consecuencia logica diferentes a la definición</p>
           <h3 id="x60">Teorema de consecuencia lógica 1(TCL1)</h3>
           <p id="x61">
+
             Sea A = {A1, A2, A3, ... , An} un conjunto de premisas, y B la conclusión.<br />
             Si A|=B entonces (A1 &#94; A2 &#94; A3 &#94; ... &#94; An) &#8594; B es una Tautología.
           </p>
@@ -734,18 +737,20 @@ document.getElementById('x79').textContent = "To determine if an argument is val
         <div id="comoFunciona" class="tabcontent">
           <h3 class="title" id="x66">Exceso de parantesis</h3>
           <p id="x67">Para poder aplicar algoritmos y operaciones logicas en los argumentos, estos deben de tener exceso de
+
             parentesis.<br />
-            los excesos de parentesis no son necesarios para hacer ejercicios de logica proposicional, tan solo basta
+            los excesos de parentesis no son necesarios para hacer ejercicios de lógica proposicional, tan solo basta
             con un par de parentesis para dejar clara
             la precedencia de los operadores.<br />
-            Pero tener una formula con excesos de parentesis, son claves para poder aplicar el algoritmo de
-            descomposición para la creacion del arbol.<br />
-            A continuación se muestra como se ven las formulas aplicando exceso de parentesis.
+            Pero tener una fórmula con excesos de parentesis, son claves para poder aplicar el algoritmo de
+            descomposición para la creación del arbol.<br />
+            A continuación se muestra como se ven las fórmulas aplicando exceso de parentesis.
           </p>
           <table>
             <tr>
               <th id="x68">Formula con los parentesis necesarios</th>
               <th id="x69">Formula con exceso de parentesis</th>
+
             </tr>
             <tr>
               <td>p</td>
@@ -756,18 +761,19 @@ document.getElementById('x79').textContent = "To determine if an argument is val
               <td>&not;(p)</td>
             </tr>
             <tr>
-                <td>p&#8594;q</td>
-                <td>(p)&#8594;(q)</td>
+              <td>p&#8594;q</td>
+              <td>(p)&#8594;(q)</td>
             </tr>
             <tr>
               <td>(p&#94;q)&#8594;r</td>
               <td>((p)&#94;(q))&#8594;(r)</td>
             </tr>
             <tr>
-                <td>pvqvr</td>
-                <td>((p)v(q))v(r)</td>
+              <td>pvqvr</td>
+              <td>((p)v(q))v(r)</td>
             </tr>
           </table>
+
           <h3 class="title" id="x70">Algoritmo de descomposición</h3>
           <p id="x71">Este algoritmo se usa para la creación de un árbol que muestra la precedencia de operadores para operar la formula.<br/>
             Consiste en ir descomponiendo la formula buscando los operadores principales, y a su vez añadiendolos a un arbol.<br/>
@@ -794,12 +800,40 @@ document.getElementById('x79').textContent = "To determine if an argument is val
           <h3 class = "title" id="x78">Determinando validez de los argumentos</h3>
           <p id="x79">Para determinar si un argumento es valido, se utilizó el Colorario de consecuencia lógica.(ver marco teórico)</p>
 
+
         </div>
 
         <div id="comoUsarlo" class="tabcontent">
-          <h3>Tokyo</h3>
-          <p>Tokyo is the capital of Japan.</p>
+          <p>En este apartado, haremos un paso a paso para el ingreso de argumentos para su validación.<br/>
+            para ello usaremos el siguiente argumento como ejemplo:<br/>
+            p&#8594;q<br/>
+            r&#8594;s<br/>
+            pvr<br/>
+            ____________<br/>
+            qvs<br/><br/>
+            1) Nos posicionamos en el campo de ingreso de fórmulas y procedemos a escribir la fórmula 
+            empezando por el operador principal a través de los botones, dependiendo del operador necesitado.<br/>
+            Si queremos añadir mas operadores solo tenemos que posicionarnos entre un par de parentesis vacios y continuar con el ingreso de la fórmula.
+          </p>
+          <img src="img/paso1.png">
+          <p>2) Una vez terminado de poner todos los operadores, nos posicionamos dentro de un par de parentesis vacios y colocamos 
+            la foma atómica o letra proposional que necesitemos
+          </p>
+          <img src="img/paso2.png">
+          <p>3) Al terminar de ingresar una de las premisas presionamos el boton de validar argumento, y si todo va bien aparecerá en la parte de fórmulas validadas.<br/>
+            Repetimos estos pasos hasta terminar de ingresar nuestrar premisas.
+          </p>
+          <img src="img/paso3.png" width="1017" height="339">
+          <img src="img/paso4.png">
+          <p>4) Cuando vayamos a ingresar la conclusión, seguimos los pasos 1 y 2, pero esta vez antes de pasar al paso 3 seleccionamos la casilla para indicar que esa será la conclusión</p>
+          <img src="img/paso5.png">
+          <img src="img/paso6.png">
+          <p>Por último, presionamos el boton validar argumento</p>
+          <img src="img/paso7.png">
+          <p>Una vez hecho esto, nos aparecerá un mensaje informandonos si el arguemnto es válido o inválido con su respectivo procedimiento</p>
+          <img src="img/paso8.png"width="988" height="475"> 
         </div>
+        <button onclick="location.href='./index.html';">Regresar</button>
       </div>
     </content>
   </container>
