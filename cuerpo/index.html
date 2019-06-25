@@ -16,13 +16,13 @@
   </head>
   <body>
     <container>
-      <div id ="cajaCentral">
+      <div id =cajaCentral>
         <h1>VALIDACIÓN DE ARGUMENTOS</h1>
       </div>
-      <div class="clear"></div>
+      <div class="clear"><div></div>
       <div id = "informacionIzquierda">
         <h1>INGRESO DE FORMULAS</h1>
-        <form>
+        <form action="arbol_procedimientos.php">
         <div id = "cajaCentral">
           <input type = "text"   id = "textFormula" class="areasTexto" onkeypress="verificarPosicionCursorValida()"><br>
           <input type = "button" id = "btnGuardarFormula" class="boton" onclick = "guardarFormula()" value = "GUARDAR FORMULA"><br>
@@ -42,9 +42,11 @@
       </div>
       <div id="informacionDerecha">
         <h1>FORMULAS VALIDADAS</h1>
+      <div id = "parrafos">
         <p id ="formulasValidas"></p>
         <hr></hr>
         <p id ="conclusion"></p>
+      </div>
         <input type = "button" id = "btnValidar" class="boton" onclick = "desplegarAplicacion()" value = "VALIDAR ARGUMENTO"><br>
       </div>
       <div class="clear"></div>
