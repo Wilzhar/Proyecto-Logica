@@ -9,6 +9,8 @@ var alerta2 = "";
 var alerta3 = "";
 var alerta4 = "";
 var alerta5 = "";
+var argumentoValido = "";
+var argumentoInvalido = "";
 
 function setup() {
   // put setup code here
@@ -72,12 +74,16 @@ function traducirAlertas(idioma){
 		alerta3 = ' no es valida.';
 		alerta4 = 'Posicion no valida, por favor seleccione otra';
 		alerta5 = 'Por favor ingrese una formula correcta.';
+		argumentoValido = 'El argumento es válido.';
+		argumentoInvalido = 'El argumento no es valido';
 	}else if(idioma === 'English'){
 		alerta1 = 'There must be at least 2 premises and a conclusion to build an argument.';
 		alerta2 = 'The formula ';
 		alerta3 = ' is not valid.';
 		alerta4 = 'Position not valid, please select another.';
 		alerta5 = 'Please enter a correct formula.';
+		argumentoValido = 'The argument is valid.';
+		argumentoInvalido = 'The argument is invalid.';
 	}
 }
 
@@ -123,12 +129,12 @@ function desplegarAplicacion()
 	let res = validarArgumento(finalResult);
 	if(res)
 	{
-		document.getElementById("argumentoValido").innerHTML = "El argumento es válido.";
+		document.getElementById("argumentoValido").innerHTML = argumentoValido;
 		console.log("el argumento es valido");
 	}
 	else
 	{
-		document.getElementById("argumentoValido").innerHTML = "El argumento no es valido";
+		document.getElementById("argumentoValido").innerHTML = argumentoInvalido;
 		console.log("el argumento es invalido");
 	}
 

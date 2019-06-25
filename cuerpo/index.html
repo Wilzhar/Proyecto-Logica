@@ -25,7 +25,7 @@
         document.getElementById('txtFormulasValidadas').textContent = "FORMULAS VALIDADAS";
         document.getElementById('btnGuardarFormula').value = "GUARDAR FORMULA";
         document.getElementById('btnValidar').value = "VALIDAR ARGUMENTO";
-        document.getElementById('cbConclusion').text = "Seleccione esta casilla si desea ingresar la conclusion: ";
+        document.getElementById('cbConclusion').value = "Seleccione esta casilla si desea ingresar la conclusion: ";
 
       }
 
@@ -38,7 +38,7 @@
         document.getElementById('txtFormulasValidadas').textContent = "VALIDATED FORMULAS";
         document.getElementById('btnGuardarFormula').value = "SAVE FORMULA";
         document.getElementById('btnValidar').value = "VALIDATE ARGUMENT";
-        document.getElementById('cbConclusion').text = "Check this box if you want to enter the conclusion: ";
+        document.getElementById('cbConclusion').value = "Check this box if you want to enter the conclusion: ";
 
       }
     </script>
@@ -57,8 +57,8 @@
         <form action="arbol_procedimientos.php">
         <div id = "cajaCentral">
           <input type = "text"   id = "textFormula" class="areasTexto" onkeypress="verificarPosicionCursorValida()"><br>
-          <input type = "button" id = "btnGuardarFormula" key="keyGuardarFormula" class="button" onclick = "guardarFormula()" value = "GUARDAR FORMULA"><br>
-          <input type = "checkbox" id="cbConclusion">Seleccione esta casilla si desea ingresar la conclusion: </input><br>
+          <input type = "button" id = "btnGuardarFormula" class="button" onclick = "guardarFormula()" value = "GUARDAR FORMULA"><br>
+          <input type = "checkbox" class="checkbox" id="cbConclusion" name="Seleccione esta casilla si desea ingresar la conclusion: ">Seleccione esta casilla si desea ingresar la conclusion: </input><br>
         </div>
          <div class="clear"></div>
          <div class="panelBotones">
