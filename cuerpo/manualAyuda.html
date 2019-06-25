@@ -165,13 +165,13 @@
           </p>
           <h3>Ejemplo:</h3>
           <p>
-            Si pedro estudia logica, entonces pedro es capaz de argumentar.<br />
-            Pedro estudia logica.<br />
+            Si pedro estudia lógica, entonces pedro es capaz de argumentar.<br />
+            Pedro estudia lógica.<br />
             ______________________________________________________________<br />
             Pedro es capaz de argumentar<br /><br />
 
             Traducido al lenguaje proposicional usando formas atomicas y los conectores lógicos:<br /><br />
-            p : pedro estudia logica.<br />
+            p : pedro estudia lógica.<br />
             q : pedro es capaz de argumentar.<br /><br />
             Quedará de la siguiente manera<br /><br />
             p&#8594;q<br />
@@ -313,7 +313,7 @@
             </tr>
           </table>
 
-          <h3 class="title">Clasificación de las formulas de acuerdo al resultado de sus tablas de verdad</h3>
+          <h3 class="title">Clasificación de las fórmulas de acuerdo al resultado de sus tablas de verdad</h3>
           <h3>Tautología</h3>
           <p>Es una proposición compuesta cuya tabla de verdad es siempre verdadera (V o 1),
             independientemente de los valores de verdad de las proposiciones simples que la componen.
@@ -514,19 +514,19 @@
             VI(&alpha;) = 1
           </p>
           <h3>Satisfacible</h3>
-          <p>Una formula &alpha; es satisfacible se existe un interpretación I tal que:<br />
+          <p>Una fórmula &alpha; es satisfacible se existe un interpretación I tal que:<br />
             VI(&alpha;) = 1
           </p>
           <h3 class="title">Validez de un argumento usando consecuencia lógica</h3>
           <h3>Consecuencia lógica</h3>
-          <p>Una formula B es consecuencia lógica de un conjunto A = {A1, A2, A3, ... , An} si toda interpretacion que
+          <p>Una fórmula B es consecuencia lógica de un conjunto A = {A1, A2, A3, ... , An} si toda interpretación que
             satisfaga a A tambien satisface a B<br />
             La consecuencia lógica se denota (A|=B) y esta relacionado con la validez de un argumento siendo B la
             conclusión y A un conjunto de premisas.
           </p>
           <p>La anterior definición es para hallar la validez de un argumento usando la definición de consecuencia
             lógica<br />
-            Pero existen otras resultados que permiten mostrar consecuencia logica diferentes a la definición</p>
+            Pero existen otras resultados que permiten mostrar consecuencia lógica diferentes a la definición</p>
           <h3>Teorema de consecuencia lógica 1(TCL1)</h3>
           <p>
             Sea A = {A1, A2, A3, ... , An} un conjunto de premisas, y B la conclusión.<br />
@@ -546,19 +546,19 @@
 
         <div id="comoFunciona" class="tabcontent">
           <h3 class="title">Exceso de parantesis</h3>
-          <p>Para poder aplicar algoritmos y operaciones logicas en los argumentos, estos deben de tener exceso de
+          <p>Para poder aplicar algoritmos y operaciones lógicas en los argumentos, estos deben de tener exceso de
             parentesis.<br />
-            los excesos de parentesis no son necesarios para hacer ejercicios de logica proposicional, tan solo basta
+            los excesos de parentesis no son necesarios para hacer ejercicios de lógica proposicional, tan solo basta
             con un par de parentesis para dejar clara
             la precedencia de los operadores.<br />
-            Pero tener una formula con excesos de parentesis, son claves para poder aplicar el algoritmo de
-            descomposición para la creacion del arbol.<br />
-            A continuación se muestra como se ven las formulas aplicando exceso de parentesis.
+            Pero tener una fórmula con excesos de parentesis, son claves para poder aplicar el algoritmo de
+            descomposición para la creación del arbol.<br />
+            A continuación se muestra como se ven las fórmulas aplicando exceso de parentesis.
           </p>
           <table>
             <tr>
-              <th>Formula con los parentesis necesarios</th>
-              <th>Formula con exceso de parentesis</th>
+              <th>fórmula con los parentesis necesarios</th>
+              <th>fórmula con exceso de parentesis</th>
             </tr>
             <tr>
               <td>p</td>
@@ -569,49 +569,79 @@
               <td>&not;(p)</td>
             </tr>
             <tr>
-                <td>p&#8594;q</td>
-                <td>(p)&#8594;(q)</td>
+              <td>p&#8594;q</td>
+              <td>(p)&#8594;(q)</td>
             </tr>
             <tr>
               <td>(p&#94;q)&#8594;r</td>
               <td>((p)&#94;(q))&#8594;(r)</td>
             </tr>
             <tr>
-                <td>pvqvr</td>
-                <td>((p)v(q))v(r)</td>
+              <td>pvqvr</td>
+              <td>((p)v(q))v(r)</td>
             </tr>
           </table>
           <h3 class="title">Algoritmo de descomposición</h3>
-          <p>Este algoritmo se usa para la creación de un árbol que muestra la precedencia de operadores para operar la formula.<br/>
-            Consiste en ir descomponiendo la formula buscando los operadores principales, y a su vez añadiendolos a un arbol.<br/>
-            El algoritmo de descomposición se usa sobre una formula con exceso de parentesis.
+          <p>Este algoritmo se usa para la creación de un árbol que muestra la precedencia de operadores para operar la
+            fórmula.<br />
+            Consiste en ir descomponiendo la fórmula buscando los operadores principales, y a su vez añadiendolos a un
+            arbol.<br />
+            El algoritmo de descomposición se usa sobre una fórmula con exceso de parentesis.
           </p>
           <h3>Ejemplo:</h3>
           <p>
-            (((p)→(q))Ʌ(p))Ʌ(¬(q))<br/>
-            El árbol para la formula anterior luego de aplicar el algoritmo de descomponiendo se muestra a continuación.
+            (((p)→(q))Ʌ(p))Ʌ(¬(q))<br />
+            El árbol para la fórmula anterior luego de aplicar el algoritmo de descomponiendo se muestra a continuación.
           </p>
-          <img src="arbolEjm.png">
-          <br/>
-          <h3>Formula en notacion postfija</h3>
-          <p>La notación postfija es usada para poder operar la formula de manera mas sencilla<br/>
-          Para poder escribir la formula en esta notación, se debe recorrer el árbol de la siguiente manera:<br/>
-            - Atraviese el sub-árbol izquierdo.<br/>
-            - Atraviese el sub-árbol derecho.<br/>
-            - Visite la raíz.<br/>
+          <img src="img/arbolEjm.png">
+          <br />
+          <h3>fórmula en notación postfija</h3>
+          <p>La notación postfija es usada para poder operar la fórmula de manera mas sencilla<br />
+            Para poder escribir la fórmula en esta notación, se debe recorrer el árbol de la siguiente manera:<br />
+            - Atraviese el sub-árbol izquierdo.<br />
+            - Atraviese el sub-árbol derecho.<br />
+            - Visite la raíz.<br />
           </p>
           <h3>Ejemplo:</h3>
-          <p>Dado el árbol anterior recorriendolo en postorden, la formula en notacion postfija seria la siguiente:<br/>
-               - "pq&#8594;p&#94;q&not;p&#94;"<br/><br/> 
+          <p>Dado el árbol anterior recorriendolo en postorden, la fórmula en notación postfija seria la
+            siguiente:<br />
+            - "pq&#8594;p&#94;q&not;p&#94;"<br /><br />
           </p>
-          <h3 class = "title">Determinando validez de los argumentos</h3>
-          <p>Para determinar si un argumento es valido, se utilizó el Colorario de consecuencia lógica.(ver marco teórico)</p>
+          <h3 class="title">Determinando validez de los argumentos</h3>
+          <p>Para determinar si un argumento es valido, se utilizó el Colorario de consecuencia lógica.(ver marco
+            teórico)</p>
 
         </div>
 
         <div id="comoUsarlo" class="tabcontent">
-          <h3>Tokyo</h3>
-          <p>Tokyo is the capital of Japan.</p>
+          <p>En este apartado, haremos un paso a paso para el ingreso de argumentos para su validación.<br/>
+            para ello usaremos el siguiente argumento como ejemplo:<br/>
+            p&#8594;q<br/>
+            r&#8594;s<br/>
+            pvr<br/>
+            ____________<br/>
+            qvs<br/><br/>
+            1) Nos posicionamos en el campo de ingreso de fórmulas y procedemos a escribir la fórmula 
+            empezando por el operador principal a través de los botones, dependiendo del operador necesitado.<br/>
+            Si queremos añadir mas operadores solo tenemos que posicionarnos entre un par de parentesis vacios y continuar con el ingreso de la fórmula.
+          </p>
+          <img src="img/paso1.png">
+          <p>2) Una vez terminado de poner todos los operadores, nos posicionamos dentro de un par de parentesis vacios y colocamos 
+            la foma atómica o letra proposional que necesitemos
+          </p>
+          <img src="img/paso2.png">
+          <p>3) Al terminar de ingresar una de las premisas presionamos el boton de validar argumento, y si todo va bien aparecerá en la parte de fórmulas validadas.<br/>
+            Repetimos estos pasos hasta terminar de ingresar nuestrar premisas.
+          </p>
+          <img src="img/paso3.png" width="1017" height="339">
+          <img src="img/paso4.png">
+          <p>4) Cuando vayamos a ingresar la conclusión, seguimos los pasos 1 y 2, pero esta vez antes de pasar al paso 3 seleccionamos la casilla para indicar que esa será la conclusión</p>
+          <img src="img/paso5.png">
+          <img src="img/paso6.png">
+          <p>Por último, presionamos el boton validar argumento</p>
+          <img src="img/paso7.png">
+          <p>Una vez hecho esto, nos aparecerá un mensaje informandonos si el arguemnto es válido o inválido con su respectivo procedimiento</p>
+          <img src="img/paso8.png"width="988" height="475">
         </div>
       </div>
     </content>
