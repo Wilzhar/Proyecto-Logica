@@ -1,3 +1,54 @@
+/**
+ * Guarda el mensaje traducido de la alerta1
+ */
+var alerta1 = "";
+
+/**
+ * Guarda el mensaje traducido de la alerta2
+ */
+var alerta2 = "";
+
+/**
+ * Guarda el mensaje traducido de la alerta3
+ */
+var alerta3 = "";
+
+/**
+ * Guarda el mensaje traducido de la alerta4
+ */
+var alerta4 = "";
+
+/**
+ * Guarda el mensaje tradcido para los argumentos valido
+ */
+var argumentoValido = "";
+
+/**
+ *  Guarda el mensaje traducido para los argumentos invalidos
+ */
+var argumentoInvalido = "";
+
+/**
+ * Metodo para traducir las alertas
+ * @param {String} idioma 
+ */
+function traducirAlertas(idioma){
+	if(idioma === 'Espaniol'){
+		alerta1 = 'Deben haber minimo 2 premisas y una conclusion para construir un argumento.';
+		alerta2 = 'La formula no es valida.';
+		alerta3 = 'Por favor ingrese una formula correcta.';
+		alerta4 = 'Posicion no valida, por favor seleccione otra';
+		argumentoValido = 'El argumento es válido.';
+		argumentoInvalido = 'El argumento no es valido';
+	}else if(idioma === 'English'){
+		alerta1 = 'There must be at least 2 premises and a conclusion to build an argument.';
+		alerta2 = 'The formula is not valid.';
+		alerta3 = 'Please enter a correct formula.';
+		alerta4 = 'Position not valid, please select another.';
+		argumentoValido = 'The argument is valid.';
+		argumentoInvalido = 'The argument is invalid.';
+	}
+}
 
 /*
  * Traduce la pagina pricipal a español recargando la pagina
