@@ -174,21 +174,29 @@ function validarFormasAtomicas(strFormula)
 
 		if(chActual > 96 && chActual < 123 && chSiguiente > 96 && chSiguiente < 123 )
 		{
-			alert(alerta2)
+
+			alert(alerta2);
 			return false;
 		}
 
 		if(chActual == 41 && chSiguiente > 96 && chSiguiente < 123 )
 		{
-			alert(alerta2)
+
+			alert(alerta2);
 			return false;
 		}
 
 		if(chActual > 96 && chActual < 123 && chSiguiente == 40 )
 		{
-			alert(alerta2)
+			alert(alerta2);
 			return false;
 		}
+
+		if(chActual == 40 && chSiguiente == 41)
+		{
+			alert(alerta2+strFormula+alerta3);
+			return false;
+		}	
 	}
 
 	return true;
@@ -197,6 +205,13 @@ function validarFormasAtomicas(strFormula)
 	
 }
 
+
+/**
+ * Este metodo permite determinar la validez de un argumento por medio de un arrego de 1 y 0.
+ * Todo en 0 significa que el argumento es valido 
+ * Con un solo 1 el argumento ya no es valido.
+ * @param {*} arregloFormulaPostOrden 
+ */
 function validarArgumento(arregloFormulaPostOrden)
 {
 	for(let i = 0; i < arregloFormulaPostOrden.length; i++)
@@ -384,7 +399,7 @@ function guardarFormula()
 	
 	let fNueva = document.getElementById("textFormula").value;
 	let antigua =  document.getElementById("formulasValidas").innerHTML;
-	if(fNueva!="" && validarFormasAtomicas(fNueva))
+	if(fNueva!="" && validarFormasAtomicas(fNueva) )
 	{
 		if(document.getElementById("cbConclusion").checked)
 		{
