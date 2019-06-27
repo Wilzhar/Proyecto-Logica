@@ -20,24 +20,8 @@
   <script src="nodo.js"></script>
   <script src="arbolGrafico.js"></script>
   <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
-  <script type="text/javascript">
-
-    function cambiarIdiomaEspaniol() {
-      location.reload(true);
-    }
-    function cambiarIdiomaEnglish() {
-
-      traducirAlertas('English');
-
-      document.getElementById('txtValidacionArgumentos').textContent = "ARGUMENT VALIDATION";
-      document.getElementById('txtIngresoFormulas').textContent = "FORMUAS ENTRY";
-      document.getElementById('txtFormulasValidadas').textContent = "VALIDATED FORMULAS";
-      document.getElementById('btnGuardarFormula').value = "SAVE FORMULA";
-      document.getElementById('btnValidar').value = "VALIDATE ARGUMENT";
-      document.getElementById('cbConclusion').value = "Check this box if you want to enter the conclusion: ";
-
-    }
-  </script>
+  <script src="traductor.js"></script>
+  
 </head>
 
 <body>
@@ -57,9 +41,7 @@
             <input type="text" id="textFormula" class="areasTexto"><br><br>
             <input type="button" id="btnGuardarFormula" class="boton" onclick="guardarFormula()"
               value="GUARDAR FORMULA"><br>
-            <input type="checkbox" class="checkbox" id="cbConclusion"
-              name="Seleccione esta casilla si desea ingresar la conclusion: ">Seleccione esta casilla si desea ingresar
-            la conclusión: </input><br>
+            <input type="checkbox" class="checkbox" id="cbConclusion"><label id="chbConclusion">Seleccione esta casilla si desea ingresar la conclusión: </label></input><br>
           </div>
           <div class="clear"></div>
           <div class="panelBotones">

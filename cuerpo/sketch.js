@@ -2,89 +2,23 @@
  * Matriz que me guarda los valores de verdad de las formas atomicas encontradas
  */
 var matrizValoresFormasAtomicas;
+
+/**
+ * Matriz que me guarda los valores de verdad del conjunto de subformulas del argumento
+ */
 var tablaValores;
+
+/**
+ * Contador para determinar que columna de la matriz de tablaValores va a utilizarse
+ */
 var contCol;
-var alerta1 = "";
-var alerta2 = "";
-var alerta3 = "";
-var alerta4 = "";
-var alerta5 = "";
-var argumentoValido = "";
-var argumentoInvalido = "";
 
+
+/**
+ * Metodo de inicializacion
+ */
 function setup() {
-  // put setup code here
-
-//   let x1 = [1, 1, 0, 1, 0, 0, 1];
-//   let x2 = [1, 0, 0, 0, 1, 1, 1, 1];
-
-//   //var x = operacionBinaria(x1, x2, TipoOperador.BICOND);
-//   let y = operacionUnaria(x2);
-
-  let arbol = new ArbolBinario();
-  arbol.setRaiz(new Nodo('', null));
-
-//   algoritmoDescomposicion(arbol.getRaiz(), '((p)'+TipoOperadorString.COND+'(q))'+TipoOperadorString.AND+'(r)');
-
-//   console.log(arbol.getRaiz().getElemento())
-	
-  
-	// algoritmoDescomposicion(arbol.getRaiz(), '('+TipoOperadorString.NOT+'((p)'+TipoOperadorString.COND+'(q)))'+TipoOperadorString.AND+'(r)');
-	// let fbf = "¬((((p)↔((¬(¬(q)))→((r)V(s))))Ʌ(¬((t)V(u))))V(¬(x)))";
-	// let fbf = "(((p)Ʌ(q))Ʌ(p))Ʌ(¬((p)↔(q)))";
-	// let fbf = "((((p)→(¬(q)))Ʌ((¬(q))→((¬(r))V(s))))Ʌ((p)Ʌ(r)))Ʌ(¬(s))"
-	// // console.log(fbf); 
-	// formasAtomicas = obtenerFormasAtomicas(fbf);
-	// crearMatrizValoresFormasAtomicas(formasAtomicas);
-	// ejecutarAlgoritmoDescomposicion(arbol.getRaiz(), fbf);
-	// // mostrarArbol(arbol);
-	// // test();
-	// console.log("formas atomicas", formasAtomicas);
-	// let msj = "";
-	// for(let i = 0; i < matrizValoresFormasAtomicas.length; i++)
-	// {
-	// 	for(let j = 0; j < matrizValoresFormasAtomicas[0].length; j++)
-	// 	{
-	// 		msj += matrizValoresFormasAtomicas[i][j] + " ";
-	// 	}
-	// 	msj += "\n";
-	// }
-	// console.log(msj);
-	// formulaPostOrden = arbol.postorden(arbol.getRaiz());
-	// apilarYOperar(formulaPostOrden);
-	// arbolView = new ArbolView(arbol);
-	// arbolView.show();
-	// // genera_tabla();
-
-	test();
-	//fa = "p";
-	//console.log("Forma atomica"+fa+" es: "+validarFormasAtomicas(fa));
-
 	traducirAlertas('Espaniol');
-}
-
-function draw() {
-	// put drawing code here
-}
-
-function traducirAlertas(idioma){
-	if(idioma === 'Espaniol'){
-		alerta1 = 'Deben haber minimo 2 premisas y una conclusion para construir un argumento.';
-		alerta2 = 'La formula ';
-		alerta3 = ' no es valida.';
-		alerta4 = 'Posicion no valida, por favor seleccione otra';
-		alerta5 = 'Por favor ingrese una formula correcta.';
-		argumentoValido = 'El argumento es válido.';
-		argumentoInvalido = 'El argumento no es valido';
-	}else if(idioma === 'English'){
-		alerta1 = 'There must be at least 2 premises and a conclusion to build an argument.';
-		alerta2 = 'The formula ';
-		alerta3 = ' is not valid.';
-		alerta4 = 'Position not valid, please select another.';
-		alerta5 = 'Please enter a correct formula.';
-		argumentoValido = 'The argument is valid.';
-		argumentoInvalido = 'The argument is invalid.';
-	}
 }
 
 
@@ -116,44 +50,53 @@ const TipoOperadorString = {
  */
 function desplegarAplicacion()
 {
-	strFormulaCorolario = splitPremisas();
-	
-	arbol = construirArbol(strFormulaCorolario);
-	mostrarArbol(arbol);
-	
-	console.log("El arbol en postorden es")
-	console.log(arbol.postorden(arbol.getRaiz()));
-	let formulaPostOrden = arbol.postorden(arbol.getRaiz());
-	formasAtomicas = obtenerFormasAtomicas(formulaPostOrden);
-	crearMatrizValoresFormasAtomicas(formasAtomicas);
-	generarTablaVerdad(formulaPostOrden);
-	let finalResult = apilarYOperar(formulaPostOrden);
-	let res = validarArgumento(finalResult);
-	if(res)
+	//Parte las presmisas y la conclusion y concatenarlas con AND usando el colorario
+	strFormulaCorolario = splitPremisas();	
+	//Ejecuta el algoritmo de descomposicion
+	if(strFormulaCorolario != null)
 	{
-		document.getElementById("argumentoValido").innerHTML = argumentoValido;
-		console.log("el argumento es valido");
+		arbol = construirArbol(strFormulaCorolario);
+		//muestra el arbol
+		mostrarArbol(arbol);
+		//Escribe la fomula en postorden
+		let formulaPostOrden = arbol.postorden(arbol.getRaiz());
+		//Obtiene los atomos de la formula
+		formasAtomicas = obtenerFormasAtomicas(formulaPostOrden);
+		//Crear matriz de valores de verdad de los atomoss
+		crearMatrizValoresFormasAtomicas(formasAtomicas);
+		//Genera la tabla de verdad de las subformulas
+		generarTablaVerdad(formulaPostOrden);
+		//Opera la formula en posorden
+		let finalResult = apilarYOperar(formulaPostOrden);
+		//Valida el argumento
+		let res = validarArgumento(finalResult);
+		if(res)
+		{
+			document.getElementById("argumentoValido").innerHTML = argumentoValido;
+		}
+		else
+		{
+			document.getElementById("argumentoValido").innerHTML = argumentoInvalido;
+		}
+		//Genera la tabla grafica de los valores de verdad de las subformulas
+		generarTablaGrafica(tablaValores);
+		document.getElementById("btnValidar").disabled = true;
 	}
-	else
-	{
-		document.getElementById("argumentoValido").innerHTML = argumentoInvalido;
-		console.log("el argumento es invalido");
-	}
-
-	generarTabla(tablaValores);
-	document.getElementById("btnValidar").disabled = true;
-	
 }
 
-
+/**
+ * Metodo para crear la tablaValores de acuerdo al numero de subformulas
+ * @param {String} formulaPostOrden 
+ */
 function generarTablaVerdad(formulaPostOrden)
 {
+	//Cuenta el numero de operadores en la formula
 	let nOperadores = contarNumeroOperadores(formulaPostOrden);
-	console.log("operadores en la FORMULA", nOperadores, matrizValoresFormasAtomicas[0].length)
 	let filas = matrizValoresFormasAtomicas.length;
 	
 	let columnas = nOperadores + matrizValoresFormasAtomicas[0].length;
 	tablaValores = new Array(filas);
+	//Define el numero de filas y columnas de la tabla de verdad de acuerdo al numero de operadores y formas atomicas
 	for(let i = 0; i < filas; i++)
 	{
 		tablaValores[i] = new Array(columnas)
@@ -163,6 +106,8 @@ function generarTablaVerdad(formulaPostOrden)
 		}
 	}
 	
+
+	//Llena las primeras columnas de la tabla de valores con las formas atomicas de la formula
 	let flag = true;
 	contCol = 0;
 	for(let j = 0; j < columnas && flag; j++)
@@ -185,14 +130,14 @@ function generarTablaVerdad(formulaPostOrden)
 
 /**
  * Metodo para particionar las premisas en arreglos
- * Concatena las premisas por medio de AND y la negacion de la conclusion usando el colorario
+ * Concatena las premisas por medio de AND y la negacion de la conclusion usando el colorario de consecuencia logica
  */
 function splitPremisas()
 {
 	strPremisas = document.getElementById("formulasValidas").innerHTML;
 	strConclusion = document.getElementById("conclusion").innerHTML;
 	arregloFormulas = strPremisas.split("<br>");
-	
+	let strFormulaCorolario;
 	
 	if(arregloFormulas.length >= 2 && strConclusion != "") //Si hay minimo dos premisas y una conclusion
 	{
@@ -201,7 +146,6 @@ function splitPremisas()
 		strFormulaCorolario = "";
 
 		strFormulaCorolario = construirFormulaPremisas(arregloFormulas,"",0);
-		console.log("Fbf completa: "+strFormulaCorolario);
 		construirArbol(strFormulaCorolario);
 		
 	}
@@ -230,19 +174,21 @@ function validarFormasAtomicas(strFormula)
 
 		if(chActual > 96 && chActual < 123 && chSiguiente > 96 && chSiguiente < 123 )
 		{
-			alert(alerta2 + strFormula + alerta3 );
+
+			alert(alerta2);
 			return false;
 		}
 
 		if(chActual == 41 && chSiguiente > 96 && chSiguiente < 123 )
 		{
-			alert(alerta2 + strFormula + alerta3 );
+
+			alert(alerta2);
 			return false;
 		}
 
 		if(chActual > 96 && chActual < 123 && chSiguiente == 40 )
 		{
-			alert(alerta2 + strFormula + alerta3 );
+			alert(alerta2);
 			return false;
 		}
 
@@ -295,14 +241,12 @@ function construirFormulaPremisas(arregloPremisas, solucion, i)
 		if(i == 0)
 		{
 			solucion = "("+arregloPremisas[i]+")"+TipoOperadorString.AND+"("+arregloPremisas[i+1]+")";
-			console.log("Primera "+solucion);
 			i+=2;
 			return construirFormulaPremisas(arregloPremisas,solucion,i);
 		}
 		else{
 
 			solucion = "("+solucion+")"+TipoOperadorString.AND+"("+arregloPremisas[i]+")";
-			console.log("Siguiente "+solucion);
 			i++;
 			return construirFormulaPremisas(arregloPremisas,solucion,i);
 
@@ -476,7 +420,7 @@ function guardarFormula()
 		document.getElementById("textFormula").value = "";
 	}
 	else{
-		alert(alerta5);
+		alert(alerta3);
 		document.getElementById("textFormula").value = "";
 	}
 	
@@ -526,10 +470,8 @@ function abrirManual(evt, cityName) {
   function operarAtomosAnd(atomo1, atomo2){
 
   	if(atomo1 == atomo2 && atomo1 == 1){
-		  console.log("retorno 1");
   		return 1;
   	}else{
-		  console.log("retorno 0");
   		return 0;
   	}
 
@@ -579,8 +521,6 @@ function abrirManual(evt, cityName) {
   */
 function operacionBinaria(arreglo1, arreglo2, operador, title){
 
-	console.log("tam1", arreglo1.length, "tam2", arreglo2.length);
-	console.log("elemento1", arreglo1, "elemento2", arreglo2);
 	if(arreglo1.length != arreglo2.length){
   		throw new Error("Error al operar dos funciones");
   	}
@@ -705,45 +645,32 @@ function apilarYOperar(formulaPostOrden)
 	arreglo2 = null;
 	let pila = new Array();
 	
-	console.log("la formula en postorden es", formulaPostOrden);
 	//Este for va a recorrer la formula postorden, agrega sus elementos uno por uno en una fila
 	for(let i = 0 ; i < formulaPostOrden.length ; i++)
 	{	
 		let elementoActual = formulaPostOrden[i];
-		console.log("El elemento actual es", elementoActual);
 		if(isOperador(elementoActual))
 		{
-			console.log("es un operador");
 			let atomo1 = pila.pop();
-			console.log("sacar el elemento", atomo1);
 			let arregloResult;
 			let title;
 			if(isOperadorBinario(elementoActual))
 			{
-				console.log("binario");
-				console.log("pila vieja", pila);
-				console.log("sacar elemento");
 				let atomo2 = pila.pop();
-				console.log("pila nueva", pila);
-				console.log("sacar el elemento", atomo2);
 				title = "(" + atomo2[0] + elementoActual + atomo1[0] + ")";
 				arregloResult = operacionBinaria(atomo2, atomo1, elementoActual, title);
 			}
 			else
 			{
-				console.log("unario");
 				title = elementoActual + "(" + atomo1[0] + ")";
 				arregloResult = operacionUnaria(atomo1, title);
 			}
-			console.log("el resultado es", arregloResult)
 			agregarALaTabla(arregloResult);
 			pila.push(arregloResult);
 		}
 		else
 		{
-			console.log(elementoActual, "es un atomo, agreguelo");
 			let valorVerdad = buscarArregloEnMatriz(elementoActual);
-			console.log(valorVerdad);
 			pila.push(valorVerdad);
 		}
 	}
@@ -760,13 +687,10 @@ function apilarYOperar(formulaPostOrden)
  */
 function buscarArregloEnMatriz(identificador)
 {
-	console.log("verfifiquemos la", identificador);
 	arreglo = null;
 	//El deber de este for es encontrar el arreglo de 1 o 0 de cada forma atomica
 	//Va a buscar mientras no se haya recorrido toda la primera fila de la matriz y 
 	// mientras alguno de los dos arreglos continue siendo nulo.
-	console.log("la matriz de valores es");
-	console.log(matrizValoresFormasAtomicas)
 	let msj = "";
 	for(let i = 0; i < matrizValoresFormasAtomicas.length; i++)
 	{
@@ -776,10 +700,8 @@ function buscarArregloEnMatriz(identificador)
 		}
 		msj += "\n";
 	}
-	console.log(msj);
 	for(let i = 0 ; i < matrizValoresFormasAtomicas[0].length && arreglo == null ; i++) 
 	{
-		console.log("pos", i, matrizValoresFormasAtomicas[0][i], "ide", identificador);
 		if(matrizValoresFormasAtomicas[0][i] == identificador) // Busca(en la matriz) el arreglo identificado con el caracter del atomo 
 		{
 			arreglo = new Array();
@@ -789,11 +711,6 @@ function buscarArregloEnMatriz(identificador)
 			}
 		}
 		
-	}
-
-	if(arreglo == null)
-	{
-		console.log("La letra "+identificador+" no se encuentra en la matriz");
 	}
 	return arreglo;		
 
@@ -839,7 +756,7 @@ function obtenerFormasAtomicas(formula){
 }
 /**
  * 
- * Metodo que me dice si un operador es de tipo binario o no
+ * Metodo que me dice si un operador es de tipo binario
  * @param {String} operador 
  */
 function isOperadorBinario(operador)
@@ -852,7 +769,7 @@ function isOperadorBinario(operador)
 }
 
 /**
- * si es un operador
+ * Metodo para definir si un elemento es un operador
  * @param {String} operador 
  */
 function isOperador(operador)
@@ -864,6 +781,10 @@ function isOperador(operador)
 	return false;
 }
 
+/**
+ * Genera la matriz con los valores de verdad dado las formas atomicas del argumento
+ * @param {*} formasAtomicas 
+ */
 function crearMatrizValoresFormasAtomicas(formasAtomicas)
 {
 	let columnas = formasAtomicas.length;
@@ -911,27 +832,12 @@ function crearMatrizValoresFormasAtomicas(formasAtomicas)
 	}
 }
 
-function test()
-{
-	formasAtomicas = ["p", "q", "r", "s", "t", "o", "p"];
-	crearMatrizValoresFormasAtomicas(formasAtomicas);
-	let msj = "";
-	for(let i = 0; i < matrizValoresFormasAtomicas.length; i++)
-	{
-		for(let j = 0; j < matrizValoresFormasAtomicas[0].length; j++)
-		{
-			msj += matrizValoresFormasAtomicas[i][j] + " ";
-		}
-		msj += "\n";
-	}
+/**
+ * Metodo que genera una tabla que se muestre graficamente al usuario segun los valores de una matriz
+ * @param {*} matriz 
+ */
+function generarTablaGrafica(matriz) {
 
-	console.log(msj);
-
-}
-
-function generarTabla(matriz) {
-
-	console.log("((((((((((((((((((((((((((((((((((", tablaValores.length, tablaValores[0].length)
 	// Obtener la referencia del elemento body
 	let body = document.getElementById("argumentoValido");
    
@@ -966,7 +872,7 @@ function generarTabla(matriz) {
   }
 
   /**
-   * Agregua un valor de verdad a al tabla para que se muestre graficamente
+   * Agregua un valor de verdad de una subformula
    */
   function agregarALaTabla(arreglo)
   {

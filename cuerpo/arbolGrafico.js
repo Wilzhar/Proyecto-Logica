@@ -1,5 +1,9 @@
 class ArbolView
 {
+    /**
+     * Constructor de la clase
+     * @param {} arbol
+     */
     constructor(arbol)
     {
         this.arbol = arbol;
@@ -8,6 +12,9 @@ class ArbolView
         
     }
     
+    /**
+     * Metodo para mostrar el arbol
+     */
     show()
     {
         this.altura = this.arbol.calcularAltura(this.arbol.getRaiz(), 0, 0);
@@ -20,13 +27,16 @@ class ArbolView
             this.altura= this.altura - 1.5;
         }
         createCanvas(pow(2, this.altura) * (this.scale + (this.scale / 2)) , this.altura * this.scale * 2);
-        // createCanvas(pow(2, this.altura) * (3*this.scale/4) , this.altura * this.scale * 1.5);
         background(100);
         this.showNodes(this.arbol.getRaiz(), 0, width, null);
         this.drawLines(this.arbol.getRaiz());
         this.showNodes(this.arbol.getRaiz(), 0, width, null);
     }
 
+    /**
+     * Metodo para dibujar las lineas que unen los nodos
+     * @param {*} nodoActual 
+     */
     drawLines(nodoActual)
     {
         if(nodoActual != null)
@@ -37,6 +47,13 @@ class ArbolView
         }
     }
 
+    /**
+     * Metodo para dinujar los nodos del arbol
+     * @param {*} nodoActual 
+     * @param {*} level 
+     * @param {*} ancho 
+     * @param {*} tipo 
+     */
     showNodes(nodoActual, level, ancho, tipo) 
     {
         if (nodoActual != null) 
