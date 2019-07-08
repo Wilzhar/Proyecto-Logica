@@ -19,6 +19,16 @@ var contCol;
  */
 function setup() {
 	traducirAlertas('Espaniol');
+	window.onkeyup = function(event) {
+		let key = event.keyCode;
+		
+	   if(key < 8 || (key < 37 && key > 8) || (key > 40 && key < 65) || key > 90 )
+	   {
+		   
+			alert("Caracter invalido."+key)
+	   }
+			 
+		}
 }
 
 
@@ -82,6 +92,8 @@ function desplegarAplicacion()
 		generarTablaGrafica(tablaValores);
 		document.getElementById("btnValidar").disabled = true;
 	}
+
+	
 }
 
 /**
@@ -172,29 +184,39 @@ function validarFormasAtomicas(strFormula)
 		chActual = strFormula.charCodeAt(i);
 		chSiguiente = strFormula.charCodeAt(i+1);
 
-		if(chActual > 96 && chActual < 123 && chSiguiente > 96 && chSiguiente < 123 )
+		if((chActual > 96 && chActual < 123) || chActual == 40||chActual == 41 || chActual == 8596 
+			|| chActual == 8594 || chActual == 581 || chActual == 86 || chActual == 172)	
 		{
 
-			alert(alerta2);
-			return false;
+			if(chActual > 96 && chActual < 123 && chSiguiente > 96 && chSiguiente < 123 )
+			{
+	
+				alert(alerta2);
+				return false;
+			}
+	
+			if(chActual == 41 && chSiguiente > 96 && chSiguiente < 123 )
+			{
+	
+				alert(alerta2);
+				return false;
+			}
+	
+			if(chActual > 96 && chActual < 123 && chSiguiente == 40 )
+			{
+				alert(alerta2);
+				return false;
+			}
+	
+			if(chActual == 40 && chSiguiente == 41)
+			{
+				alert(alerta2);
+				return false;
+			}	
 		}
-
-		if(chActual == 41 && chSiguiente > 96 && chSiguiente < 123 )
+		else
 		{
-
-			alert(alerta2);
-			return false;
-		}
-
-		if(chActual > 96 && chActual < 123 && chSiguiente == 40 )
-		{
-			alert(alerta2);
-			return false;
-		}
-
-		if(chActual == 40 && chSiguiente == 41)
-		{
-			alert(alerta2+strFormula+alerta3);
+			alert(alerta2+ " "+ chActual);
 			return false;
 		}	
 	}
